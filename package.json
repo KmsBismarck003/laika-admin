@@ -14,10 +14,12 @@
     "emoji-picker-react": "^4.18.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.2",
+    "konva": "^10.5.0",
     "lucide-react": "^0.460.0",
     "plotly.js": "^3.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-konva": "^19.2.7",
     "react-plotly.js": "^2.6.0",
     "react-router-dom": "^7.1.0"
   },

@@ -2,8 +2,9 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { venueAPI } from '@/services/api';
 import { useNotification } from '@/context/NotificationContext';
-import RowWizard from './components/RowWizard';
-import SeatCanvas from './components/SeatCanvas';
+import BlockGeneratorWizard from './components/BlockGeneratorWizard';
+import CanvasEngine from './components/CanvasEngine';
+import TemplateSelectorModal from './components/TemplateSelectorModal';
 import PropsPanel from './components/PropsPanel';
 import Toolbox from './components/Toolbox';
 import './AdminVenueMap.css';
@@ -51,6 +52,8 @@ const AdminVenueMap = () => {
 
   // active tool: 'select' | 'add-seats' | 'add-stage' | 'add-screen' | 'add-aisle' | 'add-ga'
   const [activeTool, setActiveTool] = useState('select');
+  
+  const [showTemplatesModal, setShowTemplatesModal] = useState(false);
 
   const [history, setHistory] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
@@ -72,9 +75,10 @@ const AdminVenueMap = () => {
       const zoomH = containerH / boundsH;
       const newZoom = Math.max(0.2, Math.min(1.2, Math.min(zoomW, zoomH) * 0.9));
       
+      // stage.x = container / 2 - centerX * zoom
       setViewBox({
-        x: 1000 - (containerW / 2) / newZoom,
-        y: 750 - (containerH / 2) / newZoom,
+        x: (containerW / 2) - (1000 * newZoom),
+        y: (containerH / 2) - (750 * newZoom),
         zoom: newZoom
       });
       return;
@@ -107,8 +111,8 @@ const AdminVenueMap = () => {
     const centerY = minY + boundsH / 2;
 
     setViewBox({
-      x: centerX - (containerW / 2) / newZoom,
-      y: centerY - (containerH / 2) / newZoom,
+      x: (containerW / 2) - (centerX * newZoom),
+      y: (containerH / 2) - (centerY * newZoom),
       zoom: newZoom
     });
   }, [components]);
@@ -219,35 +223,40 @@ const AdminVenueMap = () => {
   // ── Wizard confirm ────────────────────────────────────────
   const handleWizardConfirm = (wizardData) => {
     snapshot();
-    const { rows, seatsPerRow, startRow, startNum, seatType, color, price, x, y } = wizardData;
+    const { rows, blocks, seatType, color, price, x, y } = wizardData;
 
-    const SEAT_R = 10;
-    const SEAT_GAP = 4;
-    const step = SEAT_R * 2 + SEAT_GAP;
+    // Attach unique IDs to blocks and seats
+    const finalBlocks = blocks.map(b => ({
+      id: uid(),
+      rowLabel: b.rowLabel,
+      seats: b.seats.map(s => ({
+        ...s,
+        id: uid()
+      }))
+    }));
 
-    const blocks = rows.map((rowLabel, ri) => {
-      const seats = Array.from({ length: seatsPerRow }, (_, ci) => ({
-        id: uid(),
-        rowLabel,
-        col: ci,
-        number: ci + startNum,
-        type: seatType || 'normal',
-        x: x + ci * step,
-        y: y + ri * step,
-      }));
-      return { id: uid(), rowLabel, seats };
-    });
+    // Calculate approximate width and height based on the seats bounding box
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    finalBlocks.forEach(b => b.seats.forEach(s => {
+      minX = Math.min(minX, s.x);
+      minY = Math.min(minY, s.y);
+      maxX = Math.max(maxX, s.x);
+      maxY = Math.max(maxY, s.y);
+    }));
 
-    const width = seatsPerRow * step;
-    const height = rows.length * step;
+    const width = maxX === -Infinity ? 100 : (maxX - minX + 20);
+    const height = maxY === -Infinity ? 100 : (maxY - minY + 20);
+
+    const firstRow = rows[0] || 'A';
+    const lastRow = rows[rows.length - 1] || 'A';
 
     const newComp = {
       id: uid(), type: 'seats',
-      name: `${rows[0]}${startNum}–${rows[rows.length - 1]}${seatsPerRow + startNum - 1}`,
+      name: `${firstRow} – ${lastRow}`,
       x, y, width, height, rotation: 0,
       color: color || '#3f3f46',
       price: price || '',
-      blocks,
+      blocks: finalBlocks,
     };
     setComponents(prev => [...prev, newComp]);
     setSelectedId(newComp.id);
@@ -429,6 +438,9 @@ const AdminVenueMap = () => {
             {`${totalSeats} asientos${totalCapacity > 0 ? ` / ${totalCapacity}` : ''}`}
           </span>
           <div className="avm-sep" />
+          <button className="avm-icon-btn" onClick={() => setShowTemplatesModal(true)} title="Usar Plantilla">
+            🪄 Plantillas
+          </button>
           <button className="avm-save-btn" onClick={saveMap} disabled={saving}>
             {saving ? '...' : '💾 GUARDAR'}
           </button>
@@ -436,20 +448,6 @@ const AdminVenueMap = () => {
       </header>
 
       <div className="avm-body">
-        {/* TOOLBOX */}
-        <section className="avm-surface avm-surface-side">
-          <div className="avm-surface-head">
-            <h3>Herramientas</h3>
-          </div>
-          <Toolbox
-            activeTool={activeTool}
-            setActiveTool={setActiveTool}
-            components={components}
-            selectedId={selectedId}
-            onSelectComponent={id => { setSelectedId(id); setSelectedSeats([]); }}
-          />
-        </section>
-
         {/* CANVAS */}
         <section className="avm-surface avm-surface-main">
           <div className="avm-surface-head">
@@ -464,7 +462,7 @@ const AdminVenueMap = () => {
                 <div className="avm-loading-text">Cargando mapa…</div>
               </div>
             ) : (
-              <SeatCanvas
+              <CanvasEngine
                 components={components}
                 selectedId={selectedId}
                 selectedSeats={selectedSeats}
@@ -482,6 +480,8 @@ const AdminVenueMap = () => {
                 onSelectBlock={(seatIds) => setSelectedSeats(seatIds)}
               />
             )}
+
+            <Toolbox activeTool={activeTool} setActiveTool={setActiveTool} />
 
             {/* Selection action bar */}
             {selectedSeats.length > 0 && (
@@ -544,11 +544,26 @@ const AdminVenueMap = () => {
 
       {/* WIZARD MODAL */}
       {wizard?.mode === 'seats' && (
-        <RowWizard
+        <BlockGeneratorWizard
           x={wizard.x}
           y={wizard.y}
           onConfirm={handleWizardConfirm}
           onCancel={() => { setWizard(null); setActiveTool('select'); }}
+        />
+      )}
+
+      {/* TEMPLATES MODAL */}
+      {showTemplatesModal && (
+        <TemplateSelectorModal
+          onSelectTemplate={(newComponents) => {
+            snapshot();
+            setComponents(newComponents);
+            setSelectedId(null);
+            setSelectedSeats([]);
+            setShowTemplatesModal(false);
+            setTimeout(fitToScreen, 150);
+          }}
+          onCancel={() => setShowTemplatesModal(false)}
         />
       )}
     </div>
