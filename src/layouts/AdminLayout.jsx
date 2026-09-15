@@ -31,7 +31,9 @@ import {
   LogOut,
   Search,
   Moon,
-  Sun
+  Sun,
+  Menu,
+  X
 } from 'lucide-react';
 import { NotificationContainer, NotificationBell } from '@/components';
 import './AdminLayout.css';
@@ -92,11 +94,16 @@ export const AdminLayout = () => {
   const { isDark, toggleTheme } = useTheme();
 
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleLogout = async () => {
     await logout();
     navigate('/login');
+  };
+
+  const handleNavClick = (path) => {
+    setMobileOpen(false);
   };
 
   // Filtrar navegación si hay término de búsqueda
@@ -121,10 +128,18 @@ export const AdminLayout = () => {
 
   return (
     <div className="laika-admin-layout">
+      {/* ─── BACKDROP MOBILE ──────────────────────────────────────────────── */}
+      {mobileOpen && (
+        <div
+          className="laika-admin-sidebar-backdrop"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
       {/* ─── SIDEBAR ──────────────────────────────────────────────────────── */}
-      <aside className={`laika-admin-sidebar ${collapsed ? 'collapsed' : ''}`}>
+      <aside className={`laika-admin-sidebar ${collapsed ? 'collapsed' : ''} ${mobileOpen ? 'mobile-open' : ''}`}>
         <div className="laika-admin-sidebar-header">
-          <NavLink to="/admin" className="laika-admin-brand">
+          <NavLink to="/admin" className="laika-admin-brand" onClick={() => setMobileOpen(false)}>
             <div className="laika-admin-brand-icon">
               <Shield size={22} color="#00ff88" />
             </div>
@@ -172,6 +187,7 @@ export const AdminLayout = () => {
                     key={item.path}
                     to={item.path}
                     end={item.path === '/admin'}
+                    onClick={() => handleNavClick(item.path)}
                     className={({ isActive }) =>
                       `laika-admin-nav-item ${isActive ? 'active' : ''}`
                     }
@@ -216,15 +232,24 @@ export const AdminLayout = () => {
       {/* ─── MAIN CONTENT ─────────────────────────────────────────────────── */}
       <div className="laika-admin-main">
         <header className="laika-admin-topbar">
-          <div className="laika-admin-breadcrumb">
-            <NavLink to="/admin" className="laika-admin-breadcrumb-root">
-              <Shield size={16} color="#00ff88" />
-              <span>Admin</span>
-            </NavLink>
-            <span className="laika-admin-breadcrumb-separator">/</span>
-            <span className="laika-admin-breadcrumb-current">
-              {getCurrentPageTitle()}
-            </span>
+          <div className="laika-admin-topbar-left">
+            <button
+              className="laika-admin-mobile-toggle"
+              onClick={() => setMobileOpen(prev => !prev)}
+              title={mobileOpen ? 'Cerrar menú' : 'Abrir menú'}
+            >
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+            <div className="laika-admin-breadcrumb">
+              <NavLink to="/admin" className="laika-admin-breadcrumb-root" onClick={() => setMobileOpen(false)}>
+                <Shield size={16} color="#00ff88" />
+                <span>Admin</span>
+              </NavLink>
+              <span className="laika-admin-breadcrumb-separator">/</span>
+              <span className="laika-admin-breadcrumb-current">
+                {getCurrentPageTitle()}
+              </span>
+            </div>
           </div>
 
           <div className="laika-admin-topbar-actions">

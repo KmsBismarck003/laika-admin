@@ -4,6 +4,37 @@ import { useAuth } from '@/context/AuthContext';
 import { Shield, Lock, Mail, AlertCircle, ArrowRight, CheckCircle } from 'lucide-react';
 import './Login.css';
 
+const DECOUPLED_PORTS = {
+  admin: 3010,
+  gestor: 3020,
+  operador: 3030
+};
+
+const roleRedirectMap = {
+  admin: '/admin',
+  gestor: '/events/manage',
+  operador: '/staff/dashboard',
+  usuario: '/user/dashboard'
+};
+
+const handleRoleRedirection = (userObj, navigate, from = null) => {
+  const userRole = userObj?.role;
+  const targetPort = DECOUPLED_PORTS[userRole];
+  const currentPort = window.location.port ? parseInt(window.location.port, 10) : 80;
+
+  if (targetPort && currentPort !== targetPort) {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    const b64User = btoa(encodeURIComponent(JSON.stringify(userObj)));
+    const targetPath = roleRedirectMap[userRole] || '/';
+    window.location.href = `http://localhost:${targetPort}/auth-sync?token=${token}&user=${b64User}&redirect=${encodeURIComponent(targetPath)}`;
+    return true;
+  }
+
+  const targetPath = from || '/admin';
+  navigate(targetPath, { replace: true });
+  return false;
+};
+
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -21,7 +52,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      navigate(from, { replace: true });
+      handleRoleRedirection(user, navigate, from);
     }
   }, [isAuthenticated, user, navigate, from]);
 
@@ -52,7 +83,7 @@ const Login = () => {
       });
 
       if (result.success) {
-        navigate(from, { replace: true });
+        handleRoleRedirection(result.user, navigate, from);
       } else {
         setErrorMessage(result.error || 'Credenciales inválidas o sin permisos de Administrador.');
       }
