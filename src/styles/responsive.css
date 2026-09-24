@@ -1,0 +1,70 @@
+/* responsive.css - Sistema responsive global: mobile <768 | tablet 768-1024 | desktop >1024 */
+:root{ --content-pad:24px; --content-pad-sm:16px; }
+
+/* Tablas: scroll horizontal en tablet/móvil */
+.table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.table-responsive table{min-width:640px}
+
+/* Grids adaptativos genéricos */
+.grid-auto{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+.filters-bar, .toolbar, .actions-row{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+
+/* Imágenes / canvas fluidos */
+img, canvas, video{ max-width:100%; height:auto; }
+
+/* Fix cortes de texto en cuadros/cards al cambiar resolución */
+.card, .card-stat, .admin-card, .stats-grid > *{
+  min-width:0; overflow-wrap:break-word; word-break:break-word; hyphens:auto;
+}
+.card__title, .card-stat__value, .card-stat__label, .admin-title, .admin-subtitle, .card__body{
+  white-space:normal !important; overflow:visible !important; text-overflow:clip !important; overflow-wrap:break-word; word-break:break-word;
+}
+.card__title, .card-stat__value{ line-height:1.25; }
+.card-stat__label{ line-height:1.4; }
+.stats-grid, .grid-auto{ align-items:stretch; }
+.stats-grid > *, .grid-auto > *{ min-height:auto; height:auto; }
+
+/* Tablet: 768-1024 */
+@media (max-width:1024px){
+  .laika-admin-sidebar{ width:var(--sidebar-collapsed-w); }
+  .laika-admin-sidebar .laika-admin-brand-info,
+  .laika-admin-sidebar .laika-admin-nav-text,
+  .laika-admin-sidebar .laika-admin-section-label,
+  .laika-admin-sidebar .laika-admin-user-info{ display:none; }
+  .laika-admin-sidebar .laika-admin-sidebar-search{ display:none; }
+  .laika-admin-content{ padding:20px; }
+  .stats-grid{ grid-template-columns:repeat(2,1fr); }
+  .card__title{ font-size:clamp(0.85rem, 2vw, 1rem); }
+  .card-stat__value{ font-size:clamp(1.1rem, 2.5vw, 1.5rem); }
+  .admin-header{ align-items:flex-start; flex-direction:column; }
+  .notification-panel{ width:min(360px, 92vw); right:-8px; }
+}
+
+/* Mobile: <768 */
+@media (max-width:768px){
+  :root{ --sidebar-w:100%; }
+  .laika-admin-layout{ flex-direction:column; }
+  .laika-admin-sidebar{ position:fixed; left:-100%; width:min(300px,85vw); height:100dvh; box-shadow:var(--shadow-md); }
+  .laika-admin-sidebar.mobile-open{ left:0; }
+  .laika-admin-sidebar .laika-admin-brand-info,
+  .laika-admin-sidebar .laika-admin-nav-text,
+  .laika-admin-sidebar .laika-admin-section-label,
+  .laika-admin-sidebar .laika-admin-user-info,
+  .laika-admin-sidebar .laika-admin-sidebar-search{ display:flex; }
+  .laika-admin-mobile-toggle{ display:grid !important; }
+  .laika-admin-topbar{ padding:0 12px; gap:8px; }
+  .laika-admin-breadcrumb{ font-size:0.78rem; }
+  .laika-admin-status-pill{ display:none; }
+  .laika-admin-content{ padding:var(--content-pad-sm); }
+  .admin-dashboard-page{ padding:var(--content-pad-sm) !important; }
+  .stats-grid{ grid-template-columns:1fr; }
+  .grid-auto{ grid-template-columns:1fr; }
+  .modal, .notification-modal-content{ width:92vw !important; max-width:92vw; }
+  .filters-bar, .toolbar{ flex-direction:column; align-items:stretch; }
+  .filters-bar > *, .toolbar > *{ width:100%; }
+}
+
+/* Desktop grande >1400 - centrado */
+@media (min-width:1400px){
+  .laika-admin-content{ max-width:1600px; }
+}

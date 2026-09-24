@@ -1,515 +1,59 @@
-/**
- * Variables CSS - Sistema de Eventos LAIKA Club
- * Tema: Moderno, Elegante y Profesional
- */
-
 :root {
-  /* ========================================
-     COLORES PRINCIPALES (Black & White Aesthetic)
-     ======================================== */
-  --primary: #000000;
-  --primary-dark: #000000;
-  --primary-light: #333333;
+  /* Paleta base - Light */
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f5f5f5;
+  --color-surface-elevated: #ffffff;
+  --color-border: #e5e5e5;
+  --color-border-strong: #d4d4d4;
+  --color-text: #0a0a0a;
+  --color-text-secondary: #525252;
+  --color-text-muted: #a3a3a3;
+  --color-primary: #0a0a0a;
+  --color-primary-fg: #ffffff;
+  --color-accent: #0a0a0a;
+  --color-overlay: rgba(0,0,0,0.4);
 
-  --electric-green: #000000;
-  /* Pure Neon Green */
-  --electric-green-glow: none;
-  /* Removed as it causes blur */
+  /* Semánticos */
+  --color-success: #16a34a; --color-success-bg: #f0fdf4;
+  --color-warning: #ca8a04; --color-warning-bg: #fefce8;
+  --color-danger: #dc2626; --color-danger-bg: #fef2f2;
+  --color-info: #2563eb; --color-info-bg: #eff6ff;
 
-  --secondary: #ffffff;
-  --secondary-dark: #f5f5f5;
-  --secondary-light: #ffffff;
+  /* Layout */
+  --sidebar-w: 272px; --sidebar-collapsed-w: 72px; --topbar-h: 56px; --radius: 10px; --radius-lg: 14px; --radius-full: 999px;
 
-  --accent: #000000;
-  --accent-alt: #666666;
+  /* Tipografía */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --text-xs: 0.75rem; --text-sm: 0.8125rem; --text-base: 0.875rem; --text-lg: 1rem; --text-xl: 1.25rem; --text-2xl: 1.5rem;
 
-  /* Colores neutrales */
-  --neon-blue: #000000;
-  --neon-silver: #a3a3a3;
-  --neon-green: #000000;
-  --neon-pink: #000000;
-  --neon-purple: #000000;
-  --neon-gold: #000000;
+  /* Sombras minimalistas */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
 
-  /* Gradientes elegantes */
-  --gradient-primary: linear-gradient(135deg, #000000 0%, #333333 100%);
-  --gradient-secondary: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
-  --gradient-dark: linear-gradient(180deg, #f9f9f9 0%, #ffffff 100%);
-  --gradient-card: linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%);
-  --gradient-glow: none;
-  --gradient-text: none;
-  /* Removed gradient from text */
-  --gradient-neon: linear-gradient(135deg, #000000 0%, #333333 100%);
-  --gradient-success: linear-gradient(135deg, #404040 0%, #000000 100%);
-  --gradient-danger: linear-gradient(135deg, #171717 0%, #000000 100%);
-  --gradient-warning: linear-gradient(135deg, #737373 0%, #404040 100%);
-  --gradient-info: linear-gradient(135deg, #262626 0%, #000000 100%);
-  --gradient-glass: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.05) 100%);
-
-  /* ========================================
-     COLORES SEMÁNTICOS
-     ======================================== */
-  --success: #000000;
-  --success-light: rgba(0, 255, 0, 0.2);
-  --success-dark: #000000;
-  --success-glow: none;
-
-  --error: #ef4444;
-  --error-light: rgba(239, 68, 68, 0.1);
-  --error-dark: #dc2626;
-  --error-glow: none;
-
-  --warning: #000000;
-  --warning-light: rgba(0, 0, 0, 0.05);
-  --warning-dark: #000000;
-  --warning-glow: none;
-
-  --info: #000000;
-  --info-light: rgba(0, 0, 0, 0.05);
-  --info-dark: #333333;
-  --info-glow: none;
-
-  /* ========================================
-     COLORES NEUTRALES
-     ======================================== */
-  --gray-50: #fafafa;
-  --gray-100: #f5f5f5;
-  --gray-200: #e5e5e5;
-  --gray-300: #d4d4d4;
-  --gray-400: #a3a3a3;
-  --gray-500: #737373;
-  --gray-600: #525252;
-  --gray-700: #404040;
-  --gray-800: #262626;
-  --gray-900: #171717;
-
-  --white: #ffffff;
-  --black: #000000;
-  --pure-black: #000000;
-
-  /* ========================================
-     TIPOGRAFÍA
-     ======================================== */
-  --font-family-base:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  --font-family-heading: 'Inter', 'SF Pro Display', system-ui, sans-serif;
-  --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-
-  /* Tamaños de fuente - Compacted for High Density */
-  --font-size-xs: 0.7rem;
-  --font-size-sm: 0.8rem;
-  --font-size-base: 0.9375rem;
-  /* Reduced from 1rem */
-  --font-size-lg: 1.05rem;
-  --font-size-xl: 1.2rem;
-  --font-size-2xl: 1.4rem;
-  --font-size-3xl: 1.75rem;
-  --font-size-4xl: 2.1rem;
-  --font-size-5xl: 2.8rem;
-  --font-size-6xl: 3.5rem;
-
-  /* Pesos de fuente */
-  --font-weight-light: 300;
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  --font-weight-extrabold: 800;
-  --font-weight-black: 950;
-
-
-  /* Line heights */
-  --line-height-tight: 1.25;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.75;
-
-  /* ========================================
-     ESPACIADO
-     ======================================== */
-  /* Spacing - High Density Scaling */
-  --spacing-0: 0;
-  --spacing-1: 0.25rem;
-  --spacing-2: 0.5rem;
-  --spacing-3: 0.75rem;
-  --spacing-4: 1rem;
-  --spacing-5: 1.25rem;
-  --spacing-6: 1.75rem;
-  /* Increased */
-  --spacing-8: 2.25rem;
-  /* Increased */
-  --spacing-10: 3rem;
-  /* Increased */
-  --spacing-12: 4rem;
-  /* Increased */
-  --spacing-16: 5.5rem;
-  /* Increased */
-  --spacing-20: 7rem;
-  /* Increased */
-  --spacing-24: 8.5rem;
-  /* Increased */
-
-
-  /* ========================================
-     BORDES Y RADIOS
-     ======================================== */
-  --border-radius-sm: 8px;
-  --border-radius-base: 13px;
-  --border-radius-lg: 13px;
-  --border-radius-xl: 13px;
-  --border-radius-2xl: 13px;
-  --border-radius-full: 9999px;
-
-  --border-width-thin: 1px;
-  --border-width-base: 2px;
-  --border-width-thick: 3px;
-
-  /* ========================================
-     SOMBRAS MODERNAS
-     ======================================== */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-base:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-md:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg:
-    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-  --shadow-2xl: 0 35px 60px -15px rgba(0, 0, 0, 0.2);
-
-  /* Sombras con efecto sutil */
-  --shadow-neon-blue: none;
-  --shadow-neon-silver: 0 0 10px rgba(163, 163, 163, 0.2);
-  --shadow-neon-green: none;
-  --shadow-neon-pink: none;
-  --shadow-neon-strong: 0 4px 20px rgba(0, 0, 0, 0.15);
-
-  /* ========================================
-     TRANSICIONES
-     ======================================== */
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-bounce: 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-  /* ========================================
-     Z-INDEX
-     ======================================== */
-  --z-base: 0;
-  --z-dropdown: 100;
-  --z-sticky: 200;
-  --z-fixed: 300;
-  --z-modal-backdrop: 400;
-  --z-modal: 500;
-  --z-popover: 600;
-  --z-tooltip: 700;
-  --z-notification: 800;
-
-  /* ========================================
-     BREAKPOINTS
-     ======================================== */
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
-
-  /* ========================================
-     DIMENSIONES
-     ======================================== */
-  --navbar-height: 72px;
-  --sidebar-width: 280px;
-  --sidebar-collapsed-width: 80px;
-  --max-width-container: 1400px;
-  --max-width-content: 1200px;
-  --max-width-text: 800px;
-
-  /* ========================================
-     TEMA CLARO (DEFAULT)
-     ======================================== */
-  --bg-primary: #ffffff;
-  --bg-secondary: #fafafa;
-  --bg-tertiary: #f5f5f5;
-  --bg-elevated: #ffffff;
-  --bg-overlay: rgba(255, 255, 255, 0.95);
-  --bg-glass: rgba(255, 255, 255, 0.2);
-
-  --text-primary: #000000;
-  --text-secondary: #404040;
-  --text-muted: #737373;
-  --text-disabled: #a3a3a3;
-
-  --border-color: #e5e5e5;
-  --border-subtle: #f5f5f5;
-  --border-emphasis: #d4d4d4;
-  --border-neon: #000000;
+  /* Transiciones */
+  --ease: 180ms cubic-bezier(0.4,0,0.2,1);
+  --z-sidebar: 40; --z-topbar: 30; --z-modal: 50;
 }
 
-/* ========================================
-   CLASES UTILITARIAS
-   ======================================== */
-
-/* Gradientes */
-.gradient-primary {
-  background: var(--gradient-primary);
-}
-
-.gradient-secondary {
-  background: var(--gradient-secondary);
-}
-
-.gradient-dark {
-  background: var(--gradient-dark);
-}
-
-.gradient-card {
-  background: var(--gradient-card);
-}
-
-.gradient-text {
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-text-neon {
-  background: var(--gradient-neon);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Sombras */
-.shadow-sm {
-  box-shadow: var(--shadow-sm);
-}
-
-.shadow {
-  box-shadow: var(--shadow-base);
-}
-
-.shadow-md {
-  box-shadow: var(--shadow-md);
-}
-
-.shadow-lg {
-  box-shadow: var(--shadow-lg);
-}
-
-.shadow-xl {
-  box-shadow: var(--shadow-xl);
-}
-
-.shadow-2xl {
-  box-shadow: var(--shadow-2xl);
-}
-
-.shadow-neon-blue {
-  box-shadow: var(--shadow-neon-blue);
-}
-
-.shadow-neon-silver {
-  box-shadow: var(--shadow-neon-silver);
-}
-
-.shadow-neon-green {
-  box-shadow: var(--shadow-neon-green);
-}
-
-.shadow-neon-pink {
-  box-shadow: var(--shadow-neon-pink);
-}
-
-.shadow-neon-strong {
-  box-shadow: var(--shadow-neon-strong);
-}
-
-/* ========================================
-   EFECTOS ESPECIALES
-   ======================================== */
-
-/* Efecto cristal (glassmorphism) */
-.glass-effect {
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Borde neón */
-.neon-border {
-  border: 2px solid var(--border-neon);
-  box-shadow: var(--shadow-neon-silver);
-  position: relative;
-}
-
-.neon-border::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  padding: 2px;
-  background: linear-gradient(135deg, #000000, #a3a3a3, #525252);
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity var(--transition-base);
-}
-
-.neon-border:hover::before {
-  opacity: 1;
-}
-
-/* Efecto hover neón */
-.hover-neon {
-  transition: all var(--transition-base);
-  position: relative;
-}
-
-.hover-neon::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: var(--shadow-neon-blue);
-  opacity: 0;
-  transition: opacity var(--transition-base);
-  pointer-events: none;
-}
-
-.hover-neon:hover::after {
-  opacity: 1;
-}
-
-/* Texto con brillo */
-.text-glow {
-  text-shadow:
-    0 0 10px rgba(255, 255, 255, 0.8),
-    0 0 20px rgba(255, 255, 255, 0.6),
-    0 0 30px rgba(255, 255, 255, 0.4);
-}
-
-.text-glow-neon {
-  text-shadow:
-    0 0 10px rgba(0, 0, 0, 0.2),
-    0 0 20px rgba(0, 0, 0, 0.1),
-    0 0 30px rgba(0, 0, 0, 0.05);
-}
-
-/* ========================================
-   ANIMACIONES
-   ======================================== */
-
-/* Transiciones */
-.transition {
-  transition: all var(--transition-base);
-}
-
-.transition-fast {
-  transition: all var(--transition-fast);
-}
-
-.transition-slow {
-  transition: all var(--transition-slow);
-}
-
-/* pulse-soft removed per user request (Instant UI) */
-
-/* glow-pulse removed per user request (Instant UI) */
-
-/* Flotante */
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.float {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Shimmer removed per user request (Instant UI) */
-
-/* Gradiente animado */
-@keyframes gradient-shift {
-
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.gradient-animated {
-  background-size: 200% 200%;
-  animation: gradient-shift 3s ease infinite;
-}
-
-/* Línea de escaneo */
-@keyframes scan-line {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-}
-
-.scan-line {
-  position: relative;
-  overflow: hidden;
-}
-
-.scan-line::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg,
-      transparent,
-      #000000,
-      transparent);
-  animation: scan-line 3s linear infinite;
-}
-
-/* Rotación suave */
-@keyframes rotate-slow {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.rotate-slow {
-  animation: rotate-slow 20s linear infinite;
+[data-theme="dark"] {
+  --color-bg: #0a0a0a;
+  --color-surface: #171717;
+  --color-surface-hover: #262626;
+  --color-surface-elevated: #1e1e1e;
+  --color-border: #262626;
+  --color-border-strong: #404040;
+  --color-text: #fafafa;
+  --color-text-secondary: #a3a3a3;
+  --color-text-muted: #737373;
+  --color-primary: #fafafa;
+  --color-primary-fg: #0a0a0a;
+  --color-accent: #fafafa;
+  --color-overlay: rgba(0,0,0,0.6);
+  --color-success-bg: #052e16; --color-warning-bg: #422006; --color-danger-bg: #450a0a; --color-info-bg: #0c1a3a;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
 }

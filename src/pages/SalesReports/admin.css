@@ -1,2 +1,3 @@
-/* Admin styles - importados desde el CSS principal */
-@import url('../admin.css');
+﻿/* Unificado - usa tokens de src/styles/variables.css + src/pages/common/AdminBase.css */
+.admin-dashboard-page{background:var(--color-bg);color:var(--color-text)}
+

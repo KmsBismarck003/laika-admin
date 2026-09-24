@@ -1,5 +1,6 @@
+﻿/* migrado a tokens var(--color-*) */
 /* ============================================================
-   ADMIN VENUE MAP BUILDER — Professional Seat Editor
+   ADMIN VENUE MAP BUILDER â€” Professional Seat Editor
    ============================================================ */
 
 * { box-sizing: border-box; }
@@ -8,20 +9,20 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background: #0b0b0b;
+    background: var(--color-text);
     font-family: 'Inter', -apple-system, sans-serif;
-    color: #fff;
+    color: var(--color-text);
     overflow: hidden;
 }
 
-/* ─── TOP HEADER ─── */
+/* â”€â”€â”€ TOP HEADER â”€â”€â”€ */
 .avm-header {
     display: flex;
     align-items: center;
     gap: 1rem;
     padding: 0 1.5rem;
     height: 56px;
-    background: #0b0b0b;
+    background: var(--color-text);
     border-bottom: 1px solid rgba(255,255,255,0.04);
     position: relative;
     z-index: 100;
@@ -34,13 +35,13 @@
 
 .avm-back-btn {
     display: flex; align-items: center; gap: 0.4rem;
-    background: #000 !important; border: none;
-    color: #fff !important; cursor: pointer;
+    background: var(--color-text) !important; border: none;
+    color: var(--color-text) !important; cursor: pointer;
     font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em;
     padding: 6px 12px; border-radius: 8px;
     transition: all 0.2s;
 }
-.avm-back-btn:hover { background: #000 !important; color: #fff !important; opacity: 0.85; }
+.avm-back-btn:hover { background: var(--color-text) !important; color: var(--color-text) !important; opacity: 0.85; }
 
 .avm-title {
     font-size: 0.9rem; font-weight: 800; letter-spacing: -0.01em;
@@ -60,8 +61,8 @@
     cursor: pointer; transition: all 0.18s;
 }
 .avm-tab.active {
-    background: rgba(255,255,255,0.1); color: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    background: rgba(255,255,255,0.1); color: var(--color-text);
+    box-shadow: 0 2px 8px var(--color-border);
 }
 
 .avm-icon-btn {
@@ -70,27 +71,27 @@
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; transition: all 0.18s;
 }
-.avm-icon-btn:hover:not(:disabled) { background: rgba(255,255,255,0.08); color: #fff; }
+.avm-icon-btn:hover:not(:disabled) { background: rgba(255,255,255,0.08); color: var(--color-text); }
 .avm-icon-btn:disabled { opacity: 0.2; cursor: not-allowed; }
 
 .avm-save-btn {
     display: flex; align-items: center; gap: 0.4rem;
     padding: 7px 16px; border-radius: 9px; border: none;
-    background: #ffffff; color: #000;
+    background: var(--color-text); color: var(--color-text);
     font-size: 0.72rem; font-weight: 800; letter-spacing: 0.05em;
     cursor: pointer; transition: all 0.2s;
 }
-.avm-save-btn:hover:not(:disabled) { background: #e5e5e5; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,255,255,0.3); }
+.avm-save-btn:hover:not(:disabled) { background: var(--color-text); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,255,255,0.3); }
 .avm-save-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
 .avm-sep { width: 1px; height: 20px; background: rgba(255,255,255,0.06); margin: 0 4px; }
 
-/* ─── MAIN BODY ─── */
+/* â”€â”€â”€ MAIN BODY â”€â”€â”€ */
 .avm-body {
     display: flex;
     flex: 1;
     overflow: hidden;
-    background: radial-gradient(circle at 50% 45%, rgba(255,255,255,0.04), rgba(11,11,11,0) 52%), #0b0b0b;
+    background: radial-gradient(circle at 50% 45%, rgba(255,255,255,0.04), rgba(11,11,11,0) 52%), var(--color-text);
     gap: 12px;
     padding: 12px;
 }
@@ -121,7 +122,7 @@
     justify-content: space-between;
     padding: 0.65rem 0.9rem;
     border-bottom: 1px solid rgba(255,255,255,0.08);
-    background: rgba(0,0,0,0.2);
+    background: var(--color-border);
 }
 
 .avm-surface-head h3 {
@@ -151,7 +152,7 @@
     border: 1px solid rgba(255,255,255,0.1);
     padding: 8px 12px;
     border-radius: 100px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    box-shadow: 0 8px 32px var(--color-border);
     z-index: 10;
 }
 
@@ -162,14 +163,14 @@
     background: transparent; color: rgba(255,255,255,0.5);
     cursor: pointer; transition: all 0.2s;
 }
-.avm-float-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.avm-float-btn:hover { background: rgba(255,255,255,0.08); color: var(--color-text); }
 .avm-float-btn.active {
-    background: #ffffff;
-    color: #000;
+    background: var(--color-text);
+    color: var(--color-text);
     box-shadow: 0 4px 12px rgba(255,255,255,0.2);
 }
 
-/* ─── COMPONENTS LIST ─── */
+/* â”€â”€â”€ COMPONENTS LIST â”€â”€â”€ */
 .avm-comp-list { display: flex; flex-direction: column; gap: 4px; }
 
 .avm-comp-item {
@@ -178,13 +179,13 @@
     background: rgba(255,255,255,0.012); color: rgba(255,255,255,0.5);
     cursor: pointer; font-size: 0.72rem; font-weight: 600; transition: all 0.15s;
 }
-.avm-comp-item:hover { background: rgba(255,255,255,0.04); color: #fff; }
-.avm-comp-item.selected { background: rgba(255,255,255,0.065); border-color: rgba(255,255,255,0.2); color: #fff; }
+.avm-comp-item:hover { background: rgba(255,255,255,0.04); color: var(--color-text); }
+.avm-comp-item.selected { background: rgba(255,255,255,0.065); border-color: rgba(255,255,255,0.2); color: var(--color-text); }
 .avm-comp-item-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .avm-comp-item-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .avm-comp-item-count { font-size: 0.6rem; color: rgba(255,255,255,0.3); flex-shrink: 0; }
 
-/* ─── CANVAS AREA ─── */
+/* â”€â”€â”€ CANVAS AREA â”€â”€â”€ */
 .avm-canvas-area {
     flex: 1;
     position: relative;
@@ -214,7 +215,7 @@
     display: block;
 }
 
-/* ─── CANVAS TOOLBAR (floating) ─── */
+/* â”€â”€â”€ CANVAS TOOLBAR (floating) â”€â”€â”€ */
 .avm-canvas-toolbar {
     position: absolute; top: 16px; left: 50%;
     transform: translateX(-50%);
@@ -223,7 +224,7 @@
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 10px; padding: 5px; gap: 4px;
     display: flex; align-items: center;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    box-shadow: 0 8px 32px var(--color-border);
     z-index: 50;
 }
 
@@ -233,10 +234,10 @@
     background: transparent; color: rgba(255,255,255,0.45); cursor: pointer;
     font-size: 0.58rem; font-weight: 700; letter-spacing: 0.04em; transition: all 0.15s;
 }
-.avm-canvas-tool:hover { background: rgba(255,255,255,0.06); color: #fff; }
-.avm-canvas-tool.active { background: rgba(255,255,255,0.18); color: #ffffff; border: 1px solid rgba(255,255,255,0.35); }
+.avm-canvas-tool:hover { background: rgba(255,255,255,0.06); color: var(--color-text); }
+.avm-canvas-tool.active { background: rgba(255,255,255,0.18); color: var(--color-text); border: 1px solid rgba(255,255,255,0.35); }
 
-/* ─── CAPACITY BADGE ─── */
+/* â”€â”€â”€ CAPACITY BADGE â”€â”€â”€ */
 .avm-capacity-badge {
     position: absolute; top: 16px; right: 16px;
     background: rgba(12,12,12,0.68);
@@ -248,12 +249,12 @@
 }
 .avm-cap-row { display: flex; justify-content: space-between; align-items: center; }
 .avm-cap-label { font-size: 0.6rem; font-weight: 700; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; text-transform: uppercase; }
-.avm-cap-value { font-size: 0.8rem; font-weight: 800; color: #fff; }
+.avm-cap-value { font-size: 0.8rem; font-weight: 800; color: var(--color-text); }
 .avm-cap-bar { height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
-.avm-cap-fill { height: 100%; background: #ffffff; border-radius: 2px; transition: width 0.3s ease; }
-.avm-cap-fill.over { background: #ef4444; }
+.avm-cap-fill { height: 100%; background: var(--color-text); border-radius: 2px; transition: width 0.3s ease; }
+.avm-cap-fill.over { background: var(--color-text); }
 
-/* ─── ZOOM CONTROLS ─── */
+/* â”€â”€â”€ ZOOM CONTROLS â”€â”€â”€ */
 .avm-zoom-controls {
     position: absolute; bottom: 20px; right: 20px;
     display: flex; flex-direction: column; gap: 4px; z-index: 50;
@@ -264,10 +265,10 @@
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; font-size: 1rem; transition: all 0.15s; line-height: 1;
 }
-.avm-zoom-btn:hover { color: #fff; border-color: rgba(255,255,255,0.15); }
+.avm-zoom-btn:hover { color: var(--color-text); border-color: rgba(255,255,255,0.15); }
 .avm-zoom-pct { font-size: 0.6rem; font-weight: 800; color: rgba(255,255,255,0.3); text-align: center; }
 
-/* ─── RIGHT PANEL — PROPERTIES ─── */
+/* â”€â”€â”€ RIGHT PANEL â€” PROPERTIES â”€â”€â”€ */
 .avm-props-panel {
     width: 100%;
     flex: 1;
@@ -286,7 +287,7 @@
     border-bottom: 1px solid rgba(255,255,255,0.04);
     display: flex; align-items: center; justify-content: space-between;
 }
-.avm-props-title { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em; color: #ffffff; }
+.avm-props-title { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em; color: var(--color-text); }
 .avm-props-body { padding: 1rem; display: flex; flex-direction: column; gap: 1rem; }
 
 @media (max-width: 1180px) {
@@ -314,7 +315,7 @@
 .avm-field-label { font-size: 0.6rem; font-weight: 700; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; text-transform: uppercase; }
 .avm-field-input {
     background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 8px; padding: 7px 10px; color: #fff;
+    border-radius: 8px; padding: 7px 10px; color: var(--color-text);
     font-size: 0.8rem; outline: none; width: 100%; transition: border-color 0.15s;
 }
 .avm-field-input:focus { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.07); }
@@ -329,7 +330,7 @@
     cursor: pointer; transition: transform 0.15s;
 }
 .avm-color-swatch:hover { transform: scale(1.15); }
-.avm-color-swatch.selected { border-color: #fff; box-shadow: 0 0 8px rgba(255,255,255,0.3); }
+.avm-color-swatch.selected { border-color: var(--color-text); box-shadow: 0 0 8px rgba(255,255,255,0.3); }
 
 .avm-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .avm-type-btn {
@@ -338,8 +339,8 @@
     background: rgba(255,255,255,0.02); color: rgba(255,255,255,0.4);
     cursor: pointer; font-size: 0.65rem; font-weight: 700; transition: all 0.15s;
 }
-.avm-type-btn:hover { background: rgba(255,255,255,0.06); color: #fff; }
-.avm-type-btn.active { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); color: #ffffff; }
+.avm-type-btn:hover { background: rgba(255,255,255,0.06); color: var(--color-text); }
+.avm-type-btn.active { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); color: var(--color-text); }
 .avm-type-btn svg { width: 18px; height: 18px; }
 
 .avm-action-btn {
@@ -349,18 +350,18 @@
     cursor: pointer; font-size: 0.7rem; font-weight: 700; transition: all 0.15s;
     width: 100%;
 }
-.avm-action-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
-.avm-action-btn.danger { border-color: rgba(239,68,68,0.2); color: #f87171; }
-.avm-action-btn.danger:hover { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.4); color: #fff; }
+.avm-action-btn:hover { background: rgba(255,255,255,0.08); color: var(--color-text); }
+.avm-action-btn.danger { border-color: rgba(239,68,68,0.2); color: var(--color-text); }
+.avm-action-btn.danger:hover { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.4); color: var(--color-text); }
 
 .avm-seat-legend { display: flex; flex-direction: column; gap: 6px; }
 .avm-legend-row { display: flex; align-items: center; gap: 8px; font-size: 0.68rem; color: rgba(255,255,255,0.5); }
 .avm-legend-dot { width: 14px; height: 14px; border-radius: 4px; flex-shrink: 0; }
 
-/* ─── WIZARD / MODAL ─── */
+/* â”€â”€â”€ WIZARD / MODAL â”€â”€â”€ */
 .avm-wizard-overlay {
     position: fixed; inset: 0;
-    background: rgba(0,0,0,0.85);
+    background: var(--color-border);
     backdrop-filter: blur(8px);
     display: flex; align-items: center; justify-content: center;
     z-index: 9999; padding: 2rem;
@@ -371,9 +372,9 @@
 @keyframes slideUp { from { transform: translateY(24px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
 .avm-wizard-box {
-    background: #111; border: 1px solid rgba(255,255,255,0.1);
+    background: var(--color-text); border: 1px solid rgba(255,255,255,0.1);
     border-radius: 20px; padding: 2rem; width: 100%; max-width: 540px;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+    box-shadow: 0 40px 100px var(--color-border);
     animation: slideUp 0.25s cubic-bezier(0.175,0.885,0.32,1.275);
 }
 .avm-wizard-title {
@@ -389,7 +390,7 @@
 }
 .avm-wizard-row-pill {
     background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
-    color: #ffffff; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 0.65rem;
+    color: var(--color-text); padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 0.65rem;
 }
 
 .avm-wizard-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
@@ -398,75 +399,75 @@
     background: transparent; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 0.8rem; font-weight: 700;
     transition: all 0.15s;
 }
-.avm-wizard-cancel:hover { background: rgba(255,255,255,0.05); color: #fff; }
+.avm-wizard-cancel:hover { background: rgba(255,255,255,0.05); color: var(--color-text); }
 .avm-wizard-confirm {
     flex: 2; padding: 10px; border-radius: 10px; border: none;
-    background: #ffffff; color: #000; cursor: pointer; font-size: 0.8rem; font-weight: 800;
+    background: var(--color-text); color: var(--color-text); cursor: pointer; font-size: 0.8rem; font-weight: 800;
     transition: all 0.2s;
 }
-.avm-wizard-confirm:hover { background: #e5e5e5; transform: translateY(-1px); }
+.avm-wizard-confirm:hover { background: var(--color-text); transform: translateY(-1px); }
 .avm-wizard-confirm:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
-/* ─── SVG SEAT STYLES ─── */
+/* â”€â”€â”€ SVG SEAT STYLES â”€â”€â”€ */
 .avm-seat-circle {
     cursor: pointer;
     transition: r 0.1s;
 }
-.avm-seat-normal { fill: #2a2a2a; stroke: #555; stroke-width: 1; }
-.avm-seat-vip { fill: #1a1a2e; stroke: #9333ea; stroke-width: 1.5; }
-.avm-seat-accessible { fill: #0f2027; stroke: #06b6d4; stroke-width: 1.5; }
-.avm-seat-selected { fill: #ffffff !important; stroke: #e5e5e5 !important; }
-.avm-seat-occupied { fill: #450a0a; stroke: #7f1d1d; }
+.avm-seat-normal { fill: var(--color-text); stroke: var(--color-text); stroke-width: 1; }
+.avm-seat-vip { fill: var(--color-text); stroke: var(--color-text); stroke-width: 1.5; }
+.avm-seat-accessible { fill: var(--color-text); stroke: var(--color-text); stroke-width: 1.5; }
+.avm-seat-selected { fill: var(--color-text) !important; stroke: var(--color-text) !important; }
+.avm-seat-occupied { fill: var(--color-text); stroke: var(--color-text); }
 
-/* ─── LOADING / SAVING OVERLAY ─── */
+/* â”€â”€â”€ LOADING / SAVING OVERLAY â”€â”€â”€ */
 .avm-loading-overlay {
     position: absolute; inset: 0;
-    background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+    background: var(--color-border); backdrop-filter: blur(4px);
     display: flex; align-items: center; justify-content: center;
     z-index: 200; flex-direction: column; gap: 1rem;
 }
 .avm-loading-spinner {
     width: 36px; height: 36px; border-radius: 50%;
     border: 3px solid rgba(255,255,255,0.1);
-    border-top-color: #ffffff;
+    border-top-color: var(--color-text);
     animation: spin 0.8s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 .avm-loading-text { font-size: 0.75rem; color: rgba(255,255,255,0.4); font-weight: 600; }
 
-/* ─── MINI SEAT IN SIDEBAR ─── */
+/* â”€â”€â”€ MINI SEAT IN SIDEBAR â”€â”€â”€ */
 .avm-seat-type-row {
     display: flex; align-items: center; gap: 8px;
     padding: 6px 8px; border-radius: 7px; font-size: 0.7rem; color: rgba(255,255,255,0.5);
 }
 
-/* ─── SEAT SELECTION INFO ─── */
+/* â”€â”€â”€ SEAT SELECTION INFO â”€â”€â”€ */
 .avm-selection-bar {
     position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
     background: rgba(20,20,20,0.95); backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
     padding: 10px 16px; display: flex; align-items: center; gap: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5); z-index: 60;
+    box-shadow: 0 8px 32px var(--color-border); z-index: 60;
     animation: slideUp 0.2s ease;
 }
 .avm-selection-text { font-size: 0.75rem; color: rgba(255,255,255,0.6); }
-.avm-selection-count { font-size: 0.8rem; font-weight: 800; color: #ffffff; }
+.avm-selection-count { font-size: 0.8rem; font-weight: 800; color: var(--color-text); }
 .avm-sel-btn {
     padding: 5px 12px; border-radius: 7px; border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.05); color: #fff; cursor: pointer;
+    background: rgba(255,255,255,0.05); color: var(--color-text); cursor: pointer;
     font-size: 0.7rem; font-weight: 700; transition: all 0.15s;
 }
 .avm-sel-btn:hover { background: rgba(255,255,255,0.1); }
-.avm-sel-btn.danger { border-color: rgba(239,68,68,0.3); color: #f87171; }
+.avm-sel-btn.danger { border-color: rgba(239,68,68,0.3); color: var(--color-text); }
 .avm-sel-btn.danger:hover { background: rgba(239,68,68,0.15); }
 
-/* ─── CONTEXT MENU ─── */
+/* â”€â”€â”€ CONTEXT MENU â”€â”€â”€ */
 .avm-ctx-menu {
     position: fixed;
     background: rgba(18,18,18,0.98); backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;
     padding: 4px; min-width: 160px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.7); z-index: 9000;
+    box-shadow: 0 10px 40px var(--color-border); z-index: 9000;
     animation: fadeIn 0.1s ease;
 }
 .avm-ctx-item {
@@ -474,7 +475,8 @@
     padding: 8px 12px; border-radius: 7px; cursor: pointer;
     font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.6); transition: all 0.12s;
 }
-.avm-ctx-item:hover { background: rgba(255,255,255,0.07); color: #fff; }
-.avm-ctx-item.danger { color: #f87171; }
-.avm-ctx-item.danger:hover { background: rgba(239,68,68,0.15); color: #fff; }
+.avm-ctx-item:hover { background: rgba(255,255,255,0.07); color: var(--color-text); }
+.avm-ctx-item.danger { color: var(--color-text); }
+.avm-ctx-item.danger:hover { background: rgba(239,68,68,0.15); color: var(--color-text); }
 .avm-ctx-sep { height: 1px; background: rgba(255,255,255,0.06); margin: 3px 8px; }
+
