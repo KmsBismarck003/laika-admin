@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.4.0] - 2026-09-24
+### Autor
+Kms_Bismarck003 <jreyes6458@gmail.com> & Equipo
+
+### Lo nuevo o lo que se añadio
+- Refactorización visual a arquitectura *Bento Box* en todas las interfaces de gestión (Usuarios, Config, Notificaciones, etc).
+- Implementación de un sistema de temas global (Light/Dark mode) con variables CSS en `theme.css` y `variables.css`.
+- Erradicación masiva de archivos `.css` monolíticos heredados (`admin.css`, `UserManagement.css`).
+- Resolución de conflictos de merge (`git merge`) garantizando la convivencia del nuevo layout Bento con el motor de temas globales (lucide-react).
+- Corrección de bugs de scroll y `overflow` en el Sidebar.
 ## [1.3.0] - 2026-09-18
 ### Autor
 Kms_Bismarck003 <jreyes6458@gmail.com>
