@@ -28,3 +28,5 @@ export { default as ThemeToggle } from './ThemeToggle/ThemeToggle';
 export { default as PermissionGuard } from './common/PermissionGuard';
 export { default as AdminProtectedRoute } from './Guards/AdminProtectedRoute';
 export { default as ProtectedRoute } from './Guards/ProtectedRoute';
+export { BentoGrid } from './Bento/BentoGrid';
+export { BentoCard } from './Bento/BentoCard';

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Button, Alert } from '@/components'
+import { BentoGrid, BentoCard, Button, Alert } from '@/components'
 import Skeleton from '@/components/Skeleton'
 import { useSkeletonContext } from '@/context/SkeletonContext'
 import { useNotification } from '@/context/NotificationContext'
 import api from '@/services/api'
-import './admin.css'
-
+// Removed admin.css to rely on global Bento styling
 const Config = () => {
   const { success, error: showError } = useNotification()
   const { showSkeleton } = useSkeletonContext()
@@ -82,81 +81,83 @@ const Config = () => {
         />
       )}
 
-      <Card title="Ajustes Generales">
-        {showSkeleton ? (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '8px 0' }}>
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: i < 3 ? '1px solid var(--border-color)' : 'none' }}>
-                <div style={{ flex: 1 }}>
-                  <Skeleton type="text" width={`${40 + i * 12}%`} height="14px" style={{ marginBottom: '6px' }} />
-                  <Skeleton type="text" width={`${55 + i * 5}%`} height="10px" />
+      <BentoGrid>
+        <BentoCard title="Ajustes Generales" style={{ padding: '2rem' }}>
+          {showSkeleton ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '8px 0' }}>
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: i < 3 ? '1px solid var(--border-color)' : 'none' }}>
+                  <div style={{ flex: 1 }}>
+                    <Skeleton type="text" width={`${40 + i * 12}%`} height="14px" style={{ marginBottom: '6px' }} />
+                    <Skeleton type="text" width={`${55 + i * 5}%`} height="10px" />
+                  </div>
+                  <Skeleton type="text" width="44px" height="24px" style={{ borderRadius: '12px' }} />
                 </div>
-                <Skeleton type="text" width="44px" height="24px" style={{ borderRadius: '12px' }} />
+              ))}
+            </div>
+          ) : (
+            <div className="config-grid" style={{ display: 'grid', gap: '2rem' }}>
+              <div className="config-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
+                <div className="config-info">
+                  <strong style={{ color: 'var(--text-primary)' }}>Modo Mantenimiento</strong>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Deshabilita el acceso de usuarios al sistema</p>
+                </div>
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={systemConfig.maintenanceMode}
+                    onChange={(e) => handleConfigChange('maintenanceMode', e.target.checked)}
+                  />
+                  <span className="toggle-slider"></span>
+                </label>
               </div>
-            ))}
-          </div>
-        ) : (
-          <div className="config-grid">
-            <div className="config-item">
-              <div className="config-info">
-                <strong>Modo Mantenimiento</strong>
-                <p>Deshabilita el acceso de usuarios al sistema</p>
+
+              <div className="config-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
+                <div className="config-info">
+                  <strong style={{ color: 'var(--text-primary)' }}>Registro de Usuarios</strong>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Permite que nuevos usuarios se registren</p>
+                </div>
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={systemConfig.registrationEnabled}
+                    onChange={(e) => handleConfigChange('registrationEnabled', e.target.checked)}
+                  />
+                  <span className="toggle-slider"></span>
+                </label>
               </div>
-              <label className="toggle-switch">
+
+              <div className="config-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
+                <div className="config-info">
+                  <strong style={{ color: 'var(--text-primary)' }}>Tiempo de Sesión (minutos)</strong>
+                </div>
                 <input
-                  type="checkbox"
-                  checked={systemConfig.maintenanceMode}
-                  onChange={(e) => handleConfigChange('maintenanceMode', e.target.checked)}
+                  type="number"
+                  style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', padding: '0.5rem', borderRadius: '4px', width: '80px', textAlign: 'center' }}
+                  value={systemConfig.sessionTimeout}
+                  onChange={(e) => handleConfigChange('sessionTimeout', parseInt(e.target.value))}
+                  min="5"
+                  max="120"
                 />
-                <span className="toggle-slider"></span>
-              </label>
-            </div>
-
-            <div className="config-item">
-              <div className="config-info">
-                <strong>Registro de Usuarios</strong>
-                <p>Permite que nuevos usuarios se registren</p>
               </div>
-              <label className="toggle-switch">
+
+              <div className="config-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div className="config-info">
+                  <strong style={{ color: 'var(--text-primary)' }}>Boletos Máximos por Usuario</strong>
+                </div>
                 <input
-                  type="checkbox"
-                  checked={systemConfig.registrationEnabled}
-                  onChange={(e) => handleConfigChange('registrationEnabled', e.target.checked)}
+                  type="number"
+                  style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', padding: '0.5rem', borderRadius: '4px', width: '80px', textAlign: 'center' }}
+                  value={systemConfig.maxTicketsPerUser}
+                  onChange={(e) => handleConfigChange('maxTicketsPerUser', parseInt(e.target.value))}
+                  min="1"
+                  max="50"
                 />
-                <span className="toggle-slider"></span>
-              </label>
-            </div>
-
-            <div className="config-item">
-              <div className="config-info">
-                <strong>Tiempo de Sesión (minutos)</strong>
               </div>
-              <input
-                type="number"
-                className="config-input"
-                value={systemConfig.sessionTimeout}
-                onChange={(e) => handleConfigChange('sessionTimeout', parseInt(e.target.value))}
-                min="5"
-                max="120"
-              />
             </div>
-
-            <div className="config-item">
-              <div className="config-info">
-                <strong>Boletos Máximos por Usuario</strong>
-              </div>
-              <input
-                type="number"
-                className="config-input"
-                value={systemConfig.maxTicketsPerUser}
-                onChange={(e) => handleConfigChange('maxTicketsPerUser', parseInt(e.target.value))}
-                min="1"
-                max="50"
-              />
-            </div>
-          </div>
-        )}
-      </Card>
+          )}
+        </BentoCard>
+      </BentoGrid>
     </div>
   )
 }

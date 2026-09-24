@@ -11,7 +11,7 @@ import MerchActions from './components/MerchActions';
 import MerchTable from './components/MerchTable';
 import MerchEditModal from './components/MerchEditModal';
 
-import './MerchandiseApproval.css';
+// Removed MerchandiseApproval.css in favor of global Bento styling
 
 const MerchandiseApproval = () => {
     const { success, error: showError } = useNotification();

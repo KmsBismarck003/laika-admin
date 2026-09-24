@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Card, Button, Table, Badge, Modal, Alert, ConfirmationModal, SkeletonRow, Pagination, Icon, Dropdown } from '@/components'
+import { BentoGrid, BentoCard, Button, Table, Badge, Modal, Alert, ConfirmationModal, SkeletonRow, Pagination, Icon, Dropdown } from '@/components'
 import Skeleton from '@/components/Skeleton'
 import { useSkeletonContext } from '@/context/SkeletonContext'
 import AutomaticBackupConfig from '@/components/Admin/AutomaticBackupConfig/AutomaticBackupConfig'
@@ -10,8 +10,7 @@ import NoSqlVault from './NoSqlVault'
 import SqlVault from './SqlVault'
 import { useNotification } from '@/context/NotificationContext'
 import api from '@/services/api'
-import './admin.css'
-
+// Removed admin.css to rely on global Bento and Table components
 const Database = () => {
   const { success, error: showError } = useNotification()
   const navigate = useNavigate()
@@ -479,29 +478,49 @@ const Database = () => {
       </div>
 
       {/* Banner de Estado */}
-      <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-        <div className="glass-panel" style={{ flex: 1, padding: '0.75rem 1rem', display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: '140px' }}>
-          {(loadingBackups || noSqlLoading) ? <Skeleton type="text" width="40px" height="30px" /> : <span style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-primary)' }}>{backups.length}</span>}
-          <div>
-            {(loadingBackups || noSqlLoading) ? <Skeleton width="60px" height="10px" style={{ marginBottom: '4px' }} /> : <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.6, color: 'var(--text-primary)' }}>Respaldos</div>}
-            {(loadingBackups || noSqlLoading) ? <Skeleton width="80px" height="14px" /> : <div style={{ fontWeight: '700', fontSize: '0.85rem', color: 'var(--text-primary)' }}>Disponibles</div>}
+      <BentoGrid style={{ marginBottom: '2rem' }}>
+        <BentoCard variant="stat">
+          <div className="bento-stat-content">
+            <div>
+              <div className="bento-stat-label">Respaldos Disponibles</div>
+              <div className="bento-stat-value">
+                {(loadingBackups || noSqlLoading) ? <Skeleton type="text" width="40px" height="30px" /> : backups.length}
+              </div>
+            </div>
+            <div className="bento-stat-icon">
+               <Icon name="database" size={24} />
+            </div>
           </div>
-        </div>
-        <div className="glass-panel" style={{ flex: 1, padding: '0.75rem 1rem', display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: '140px' }}>
-          {(loadingBackups || noSqlLoading) ? <Skeleton type="text" width="50px" height="30px" /> : <span style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-primary)' }}>{totalSize}</span>}
-          <div>
-            {(loadingBackups || noSqlLoading) ? <Skeleton width="60px" height="10px" style={{ marginBottom: '4px' }} /> : <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.6, color: 'var(--text-primary)' }}>MB Total</div>}
-            {(loadingBackups || noSqlLoading) ? <Skeleton width="80px" height="14px" /> : <div style={{ fontWeight: '700', fontSize: '0.85rem', color: 'var(--text-primary)' }}>Almacenados</div>}
+        </BentoCard>
+        
+        <BentoCard variant="stat">
+          <div className="bento-stat-content">
+            <div>
+              <div className="bento-stat-label">Almacenados (MB)</div>
+              <div className="bento-stat-value">
+                {(loadingBackups || noSqlLoading) ? <Skeleton type="text" width="50px" height="30px" /> : totalSize}
+              </div>
+            </div>
+            <div className="bento-stat-icon">
+               <Icon name="hardDrive" size={24} />
+            </div>
           </div>
-        </div>
-        <div className="glass-panel" style={{ flex: 1, padding: '0.75rem 1rem', display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: '140px' }}>
-          {(loadingBackups || noSqlLoading) ? <Skeleton type="text" width="70px" height="24px" /> : <span style={{ fontSize: '1rem', fontWeight: '800', color: 'var(--text-primary)' }}>{lastBackup}</span>}
-          <div>
-            {(loadingBackups || noSqlLoading) ? <Skeleton width="50px" height="10px" style={{ marginBottom: '4px' }} /> : <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.6, color: 'var(--text-primary)' }}>Último</div>}
-            {(loadingBackups || noSqlLoading) ? <Skeleton width="70px" height="14px" /> : <div style={{ fontWeight: '700', fontSize: '0.85rem', color: 'var(--text-primary)' }}>Respaldo</div>}
+        </BentoCard>
+
+        <BentoCard variant="stat">
+          <div className="bento-stat-content">
+            <div>
+              <div className="bento-stat-label">Último Respaldo</div>
+              <div className="bento-stat-value" style={{ fontSize: '1.5rem' }}>
+                {(loadingBackups || noSqlLoading) ? <Skeleton type="text" width="70px" height="24px" /> : lastBackup}
+              </div>
+            </div>
+            <div className="bento-stat-icon">
+               <Icon name="clock" size={24} />
+            </div>
           </div>
-        </div>
-      </div>
+        </BentoCard>
+      </BentoGrid>
 
       {alert && (
         <Alert

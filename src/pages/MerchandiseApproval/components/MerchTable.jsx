@@ -1,69 +1,81 @@
 import React from 'react';
 import { Target, CreditCard, Edit3 } from 'lucide-react';
-import { Card, Badge, Button } from '@/components';
+import { BentoGrid, BentoCard, Badge, Button, Table } from '@/components';
 
 const MerchTable = ({ filteredGestores, updatingId, togglePremium, setEditingSettings }) => {
+    const columns = [
+        {
+            key: 'identity',
+            header: 'IDENTIDAD GESTOR',
+            render: (_, g) => (
+                <div>
+                    <div style={{ fontWeight: 'bold' }}>{g.first_name} {g.last_name}</div>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{g.email}</div>
+                </div>
+            )
+        },
+        {
+            key: 'premium',
+            header: 'MEMBRESÍA PRO',
+            render: (_, g) => (
+                <Button 
+                    size="small" 
+                    variant={g.is_premium ? 'primary' : 'secondary'} 
+                    loading={updatingId === g.id}
+                    onClick={() => !updatingId && togglePremium(g.id, g.is_premium)}
+                >
+                    {g.is_premium ? 'PREMIUM' : 'ESTÁNDAR'}
+                </Button>
+            )
+        },
+        {
+            key: 'status',
+            header: 'ESTADO TIENDA',
+            render: (_, g) => (
+                <Badge variant={g.settings?.is_enabled ? 'success' : 'secondary'} rounded>
+                    {g.settings?.is_enabled ? 'HABILITADA' : 'BLOQUEADA'}
+                </Badge>
+            )
+        },
+        {
+            key: 'limit',
+            header: 'LÍMITE PROD.',
+            render: (_, g) => (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <Target size={12} /> {g.settings?.product_limit || 50}
+                </div>
+            )
+        },
+        {
+            key: 'commission',
+            header: 'COMISIÓN',
+            render: (_, g) => (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <CreditCard size={12} /> {g.settings?.commission_percentage || 10}%
+                </div>
+            )
+        },
+        {
+            key: 'actions',
+            header: 'ACCIONES',
+            render: (_, g) => (
+                <Button 
+                    variant="info" 
+                    size="small" 
+                    onClick={() => setEditingSettings({...g})}
+                >
+                    <Edit3 size={14} /> AJUSTAR
+                </Button>
+            )
+        }
+    ];
+
     return (
-        <Card className="industrial-table-card">
-            <div className="table-wrapper-industrial">
-                <table className="tech-table">
-                    <thead>
-                        <tr>
-                            <th>IDENTIDAD GESTOR</th>
-                            <th>MEMBRESÍA PRO</th>
-                            <th>ESTADO TIENDA</th>
-                            <th>LÍMITE PROD.</th>
-                            <th>COMISIÓN</th>
-                            <th style={{ textAlign: 'right' }}>ACCIONES</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredGestores.map(g => (
-                            <tr key={g.id}>
-                                <td>
-                                    <div className="user-identity">
-                                        <span className="u-name">{g.first_name} {g.last_name}</span>
-                                        <span className="u-email">{g.email}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className={`tech-switch ${g.is_premium ? 'on' : 'off'} ${updatingId === g.id ? 'loading' : ''}`}
-                                         onClick={() => !updatingId && togglePremium(g.id, g.is_premium)}>
-                                        <div className="switch-knob" />
-                                        <span className="switch-status">{g.is_premium ? 'PREMIUM' : 'ESTÁNDAR'}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <Badge variant={g.settings?.is_enabled ? 'success' : 'secondary'} rounded>
-                                        {g.settings?.is_enabled ? 'HABILITADA' : 'BLOQUEADA'}
-                                    </Badge>
-                                </td>
-                                <td>
-                                    <span className="product-limit-display">
-                                        <Target size={12} /> {g.settings?.product_limit || 50}
-                                    </span>
-                                </td>
-                                <td>
-                                    <div className="commission-badge">
-                                        <CreditCard size={12} /> {g.settings?.commission_percentage || 10}%
-                                    </div>
-                                </td>
-                                <td style={{ textAlign: 'right' }}>
-                                    <Button 
-                                        variant="info" 
-                                        size="small" 
-                                        onClick={() => setEditingSettings({...g})}
-                                        className="action-btn"
-                                    >
-                                        <Edit3 size={14} /> AJUSTAR
-                                    </Button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </Card>
+        <BentoGrid>
+            <BentoCard>
+                <Table columns={columns} data={filteredGestores} />
+            </BentoCard>
+        </BentoGrid>
     );
 };
 

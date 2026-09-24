@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api from '@/services/api'
-import { Card, Button, Table, Badge, SkeletonRow, Modal, ConfirmationModal, Icon } from '@/components'
+import { BentoGrid, BentoCard, Button, Table, Badge, SkeletonRow, Modal, ConfirmationModal, Icon } from '@/components'
 import Skeleton from '@/components/Skeleton/Skeleton';
 import { useSkeletonContext } from '@/context/SkeletonContext'
 import EventForm from './EventForm'
@@ -10,7 +10,7 @@ import EventsFilters from './components/EventsFilters'
 import PreviewMonitor from '@/components/Admin/PreviewMonitor'
 import EventSalesModal from './components/EventSalesModal'
 import { getImageUrl } from '@/utils/imageUtils'
-import './admin.css'
+// Removed local admin.css to rely on global Bento and Table components
 
 const isEventFinished = (event) => {
   if (!event.event_date) return false;
@@ -235,29 +235,31 @@ const Events = () => {
         </Button>
       </div>
 
-      <Card className="glass-panel events-main-card">
-        <EventsFilters 
-          searchTerm={searchTerm}
-          onSearchChange={setSearchTerm}
-          onFilterChange={setFilters}
-        />
+      <BentoGrid>
+        <BentoCard className="events-main-card">
+          <EventsFilters 
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+            onFilterChange={setFilters}
+          />
 
-        <div className="records-count">
+          <div className="records-count" style={{ margin: '1rem 0' }}>
+            {loading ? (
+              <Skeleton type="text" width="60px" />
+            ) : (
+              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-muted)' }}>{filteredEvents.length} EVENTOS ENCONTRADOS</span>
+            )}
+          </div>
+
           {loading ? (
-            <Skeleton type="text" width="60px" />
+            <TableSkeleton />
+          ) : filteredEvents.length === 0 ? (
+            <EmptyState onClear={() => {setSearchTerm(''); setFilters({});}} />
           ) : (
-            <span>{filteredEvents.length} EVENTOS ENCONTRADOS</span>
+            <Table columns={columns} data={filteredEvents} />
           )}
-        </div>
-
-        {loading ? (
-          <TableSkeleton />
-        ) : filteredEvents.length === 0 ? (
-          <EmptyState onClear={() => {setSearchTerm(''); setFilters({});}} />
-        ) : (
-          <Table columns={columns} data={filteredEvents} className="admin-custom-table" />
-        )}
-      </Card>
+        </BentoCard>
+      </BentoGrid>
 
       {isFormOpen && (
         <EventForm

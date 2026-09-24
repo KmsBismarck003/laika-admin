@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PushEngine } from './services/PushEngine';
+import { BentoGrid, BentoCard, Button, Input, Icon, Badge } from '@/components';
 import { apiClient } from '@/services/apiClient';
 import './PushAdminPanel.css';
 
@@ -114,28 +115,32 @@ const PushAdminPanel = () => {
   };
 
   return (
-    <div className="push-admin-container fade-in">
-      <header className="push-admin-header">
-        <div className="header-content">
-          <h1>Central de Notificaciones Push</h1>
-          <p>Gestiona y envía notificaciones nativas a dispositivos Windows, macOS, Android e iOS.</p>
-        </div>
-        <div className="status-badge-container">
-          <span className={`status-badge ${permissionStatus}`}>
-            Estado del Sistema: {permissionStatus.toUpperCase()}
-          </span>
-          {permissionStatus !== 'granted' && (
-            <button className="btn-request-perms" onClick={handleRequestPermission}>
-              Habilitar Permisos Locales
-            </button>
-          )}
-        </div>
-      </header>
+    <div className="fade-in" style={{ padding: '0.5rem 0' }}>
+      <BentoGrid style={{ marginBottom: '1.5rem' }}>
+        <BentoCard>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+            <div>
+              <h1 style={{ fontSize: '1.5rem', margin: '0 0 0.5rem 0', color: 'var(--text-primary)' }}>Central de Notificaciones Push</h1>
+              <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Gestiona y envía notificaciones nativas a dispositivos Windows, macOS, Android e iOS.</p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
+              <Badge variant={permissionStatus === 'granted' ? 'success' : permissionStatus === 'denied' ? 'danger' : 'default'} rounded>
+                Estado del Sistema: {permissionStatus.toUpperCase()}
+              </Badge>
+              {permissionStatus !== 'granted' && (
+                <Button variant="secondary" size="small" onClick={handleRequestPermission}>
+                  Habilitar Permisos Locales
+                </Button>
+              )}
+            </div>
+          </div>
+        </BentoCard>
+      </BentoGrid>
 
-      <div className="push-admin-grid">
+      <BentoGrid>
         {/* Panel Izquierdo - Formulario */}
-        <section className="push-admin-card">
-          <h2>Nueva Campaña Push</h2>
+        <BentoCard>
+          <h2 style={{ fontSize: '1.25rem', marginTop: 0, marginBottom: '1.5rem', color: 'var(--text-primary)', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem' }}>Nueva Campaña Push</h2>
           <form onSubmit={handleSendPush} className="push-form">
             
             <div className="form-group">
@@ -185,26 +190,31 @@ const PushAdminPanel = () => {
               />
             </div>
 
-            <button 
+            <Button 
               type="submit" 
-              className={`btn-send-push ${isSending ? 'sending' : ''}`}
+              variant="primary"
+              fullWidth
+              style={{ marginTop: '1rem' }}
               disabled={isSending || permissionStatus !== 'granted'}
+              loading={isSending}
             >
-              {isSending ? 'Desplegando en Servidores...' : 'Lanzar Notificación Push'}
-            </button>
+              Lanzar Notificación Push
+            </Button>
             
             {feedback && (
-              <div className={`feedback-alert ${feedback.type}`}>
-                {feedback.msg}
+              <div style={{ marginTop: '1rem' }}>
+                <Badge variant={feedback.type === 'error' ? 'danger' : 'success'} style={{ display: 'block', padding: '0.75rem', textAlign: 'center' }}>
+                  {feedback.msg}
+                </Badge>
               </div>
             )}
           </form>
-        </section>
+        </BentoCard>
 
         {/* Panel Derecho - Previsualización de Sistema */}
-        <section className="push-admin-card preview-card">
-          <h2>Previsualización Nativa</h2>
-          <p className="preview-subtitle">Así es como lo verán los usuarios en su Sistema Operativo (Windows/Mac/Android)</p>
+        <BentoCard style={{ display: 'flex', flexDirection: 'column' }}>
+          <h2 style={{ fontSize: '1.25rem', marginTop: 0, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Previsualización Nativa</h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1.5rem' }}>Así es como lo verán los usuarios en su Sistema Operativo (Windows/Mac/Android)</p>
           
           <div className="os-preview-container">
             <div className="mock-os-notification">
@@ -222,49 +232,51 @@ const PushAdminPanel = () => {
             </div>
           </div>
 
-          <div className="psychology-tips">
-            <h3>Tácticas de Retención (Sin Spam)</h3>
-            <ul>
-              <li><strong>Curiosidad:</strong> Evita revelar toda la información en el mensaje. Obliga al clic.</li>
-              <li><strong>Urgencia:</strong> "Últimos lugares", "Por tiempo limitado".</li>
-              <li><strong>Exclusividad:</strong> Haz sentir especial al usuario. "Solo para miembros VIP".</li>
+          <div className="psychology-tips" style={{ background: 'var(--bg-tertiary)', borderLeft: '4px solid var(--primary)', padding: '1.5rem', borderRadius: '0 8px 8px 0', marginTop: 'auto' }}>
+            <h3 style={{ marginTop: 0, fontSize: '1rem', color: 'var(--primary)' }}>Tácticas de Retención (Sin Spam)</h3>
+            <ul style={{ margin: 0, paddingLeft: '1.2rem', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+              <li style={{ marginBottom: '0.5rem' }}><strong>Curiosidad:</strong> Evita revelar toda la información en el mensaje. Obliga al clic.</li>
+              <li style={{ marginBottom: '0.5rem' }}><strong>Urgencia:</strong> "Últimos lugares", "Por tiempo limitado".</li>
+              <li style={{ marginBottom: '0.5rem' }}><strong>Exclusividad:</strong> Haz sentir especial al usuario. "Solo para miembros VIP".</li>
               <li><strong>Cero Emojis:</strong> Mantiene la estética premium y profesional del club.</li>
             </ul>
           </div>
-        </section>
-      </div>
+        </BentoCard>
+      </BentoGrid>
 
-      <div className="push-admin-card mt-2">
-        <h2>Simulador de Triggers Automáticos (Testing)</h2>
-        <p className="preview-subtitle">
-          Prueba en vivo cómo reciben los usuarios las notificaciones del sistema según su comportamiento (Generado vía Psicología UX).
-        </p>
-        <div className="triggers-grid">
-          <button 
-            className="btn-test-trigger" 
-            onClick={() => handleTestSmartTrigger('TICKET_PURCHASE')}
-            disabled={permissionStatus !== 'granted'}
-          >
-            <span>🎟️</span> Compra de Boleto
-          </button>
-          
-          <button 
-            className="btn-test-trigger" 
-            onClick={() => handleTestSmartTrigger('NEW_EVENT')}
-            disabled={permissionStatus !== 'granted'}
-          >
-            <span>📢</span> Nuevo Evento Publicado
-          </button>
+      <BentoGrid style={{ marginTop: '1.5rem' }}>
+        <BentoCard>
+          <h2 style={{ fontSize: '1.25rem', marginTop: 0, marginBottom: '0.5rem', color: 'var(--text-primary)', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem' }}>Simulador de Triggers Automáticos (Testing)</h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
+            Prueba en vivo cómo reciben los usuarios las notificaciones del sistema según su comportamiento (Generado vía Psicología UX).
+          </p>
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <Button 
+              variant="secondary"
+              onClick={() => handleTestSmartTrigger('TICKET_PURCHASE')}
+              disabled={permissionStatus !== 'granted'}
+            >
+              🎟️ Compra de Boleto
+            </Button>
+            
+            <Button 
+              variant="secondary"
+              onClick={() => handleTestSmartTrigger('NEW_EVENT')}
+              disabled={permissionStatus !== 'granted'}
+            >
+              📢 Nuevo Evento Publicado
+            </Button>
 
-          <button 
-            className="btn-test-trigger" 
-            onClick={() => handleTestSmartTrigger('CART_REMINDER')}
-            disabled={permissionStatus !== 'granted'}
-          >
-            <span>🛒</span> Recordatorio de Carrito
-          </button>
-        </div>
-      </div>
+            <Button 
+              variant="secondary"
+              onClick={() => handleTestSmartTrigger('CART_REMINDER')}
+              disabled={permissionStatus !== 'granted'}
+            >
+              🛒 Recordatorio de Carrito
+            </Button>
+          </div>
+        </BentoCard>
+      </BentoGrid>
     </div>
   );
 };

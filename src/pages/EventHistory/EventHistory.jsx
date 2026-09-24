@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { apiClient } from '@/services/apiClient';
-import { LoadingScreen, Icon } from '@/components';
+import { BentoGrid, BentoCard, LoadingScreen, Icon, Badge } from '@/components';
 import { getImageUrl } from '@/utils/imageUtils';
-import './EventHistory.css';
 
 const EventHistory = () => {
   const [events, setEvents] = useState([]);
@@ -73,29 +72,37 @@ const EventHistory = () => {
         {loadingAnalytics ? (
           <div className="analytics-loading">Cargando métricas...</div>
         ) : analytics ? (
-          <div className="analytics-dashboard">
-            <div className="metric-card">
-              <div className="metric-icon revenue"><Icon name="dollarSign" /></div>
-              <div className="metric-info">
-                <h3>Ingresos Totales</h3>
-                <p className="metric-value">${analytics.revenue?.gross?.toLocaleString() || 0}</p>
+        <BentoGrid>
+          <BentoCard variant="stat">
+            <div className="bento-stat-content">
+              <div>
+                <div className="bento-stat-label">Ingresos Totales</div>
+                <div className="bento-stat-value">${analytics?.revenue?.gross?.toLocaleString() || 0}</div>
               </div>
+              <div className="bento-stat-icon"><Icon name="dollarSign" size={24} /></div>
             </div>
-            <div className="metric-card">
-              <div className="metric-icon tickets"><Icon name="ticket" /></div>
-              <div className="metric-info">
-                <h3>Boletos Vendidos</h3>
-                <p className="metric-value">{analytics.tickets?.sold || 0}</p>
+          </BentoCard>
+
+          <BentoCard variant="stat">
+            <div className="bento-stat-content">
+              <div>
+                <div className="bento-stat-label">Boletos Vendidos</div>
+                <div className="bento-stat-value">{analytics?.tickets?.sold || 0}</div>
               </div>
+              <div className="bento-stat-icon"><Icon name="ticket" size={24} /></div>
             </div>
-            <div className="metric-card">
-              <div className="metric-icon scan"><Icon name="checkCircle" /></div>
-              <div className="metric-info">
-                <h3>Asistencias (Scaneados)</h3>
-                <p className="metric-value">{analytics.tickets?.used || 0}</p>
+          </BentoCard>
+
+          <BentoCard variant="stat">
+            <div className="bento-stat-content">
+              <div>
+                <div className="bento-stat-label">Asistencias (Scaneados)</div>
+                <div className="bento-stat-value">{analytics?.tickets?.used || 0}</div>
               </div>
+              <div className="bento-stat-icon"><Icon name="checkCircle" size={24} /></div>
             </div>
-          </div>
+          </BentoCard>
+        </BentoGrid>
         ) : (
           <div className="analytics-error">No se pudieron cargar las métricas.</div>
         )}
@@ -111,33 +118,32 @@ const EventHistory = () => {
       </div>
 
       {events.length === 0 ? (
-        <div className="no-historical-events">
-          <Icon name="history" size={48} />
-          <h3>Sin eventos finalizados</h3>
-          <p>Los eventos aparecerán aquí automáticamente una vez que su fecha y hora hayan concluido.</p>
-        </div>
+        <BentoCard>
+          <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
+            <Icon name="history" size={48} />
+            <h3>Sin eventos finalizados</h3>
+            <p>Los eventos aparecerán aquí automáticamente una vez que su fecha y hora hayan concluido.</p>
+          </div>
+        </BentoCard>
       ) : (
-        <div className="historical-events-grid">
+        <BentoGrid>
           {events.map(event => (
-            <div key={event.id} className="historical-event-card" onClick={() => handleSelectEvent(event)}>
-              <div className="card-image-wrap">
+            <BentoCard key={event.id} className="bento-card--clickable" onClick={() => handleSelectEvent(event)} style={{ padding: 0 }}>
+              <div style={{ width: '100%', height: '160px', overflow: 'hidden', position: 'relative' }}>
                 {event.image_url ? (
-                  <img src={getImageUrl(event.image_url)} alt={event.name} />
+                  <img src={getImageUrl(event.image_url)} alt={event.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 ) : (
-                  <div className="card-image-placeholder"><Icon name="image" /></div>
+                  <div style={{ width: '100%', height: '100%', background: 'var(--bg-tertiary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}><Icon name="image" size={32} /></div>
                 )}
-                <div className="card-overlay">
-                  <span className="view-details-btn">Ver Resultados</span>
-                </div>
               </div>
-              <div className="card-content">
-                <h4>{event.name}</h4>
-                <p><Icon name="calendar" size={14} /> {event.event_date}</p>
-                <p><Icon name="mapPin" size={14} /> {event.venue_name || 'Sin sede'}</p>
+              <div style={{ padding: '1.5rem' }}>
+                <h4 style={{ margin: '0 0 0.5rem 0', color: 'var(--text-primary)' }}>{event.name}</h4>
+                <p style={{ margin: '0 0 0.25rem 0', fontSize: '0.85rem', color: 'var(--text-secondary)' }}><Icon name="calendar" size={14} /> {event.event_date}</p>
+                <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}><Icon name="mapPin" size={14} /> {event.venue_name || 'Sin sede'}</p>
               </div>
-            </div>
+            </BentoCard>
           ))}
-        </div>
+        </BentoGrid>
       )}
     </div>
   );

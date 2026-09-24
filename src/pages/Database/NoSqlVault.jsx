@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { analyticsAPI } from '@/services/miscService';
 import api from '@/services/api'; // Integración con Backend Admin
-import { Card, Button, Icon, Badge, Table, Dropdown, Pagination } from '@/components';
+import { BentoCard, Button, Icon, Badge, Table, Dropdown, Pagination } from '@/components';
 import Skeleton from '@/components/Skeleton/Skeleton';
 import { Cloud, RefreshCw, Trash2, Download, Zap, Database, Clock, Filter, FileText } from 'lucide-react';
 import { useNotification } from '@/context';
@@ -302,7 +302,7 @@ const NoSqlVault = ({ retentionDays = 30, refreshTrigger, onLoadingChange }) => 
 
     if (loading) {
         return (
-            <Card style={{ marginTop: '2rem', border: '2px solid #000', padding: 0, overflow: 'hidden', fontFamily: 'Inter, sans-serif' }}>
+            <BentoCard style={{ marginTop: '2rem', border: '2px solid var(--border-color)', padding: 0, overflow: 'hidden', fontFamily: 'Inter, sans-serif' }}>
                 <div style={{ padding: '1rem', background: '#f8f9fa', borderBottom: '1px solid #ddd', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
                         <Skeleton style={{ height: '18px', width: '220px', marginBottom: '4px', borderRadius: '4px' }} animate />
@@ -348,12 +348,12 @@ const NoSqlVault = ({ retentionDays = 30, refreshTrigger, onLoadingChange }) => 
                 <div style={{ padding: '1.5rem' }}>
                     <Skeleton style={{ height: '320px', width: '100%', borderRadius: '12px' }} animate />
                 </div>
-            </Card>
+            </BentoCard>
         );
     }
 
     return (
-        <Card style={{ marginTop: '2rem', border: '2px solid #000', padding: 0, overflow: 'hidden' }}>
+        <BentoCard style={{ marginTop: '2rem', border: '2px solid var(--border-color)', padding: 0, overflow: 'hidden' }}>
             <div style={{ padding: '1rem', background: '#f8f9fa', borderBottom: '1px solid #ddd', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                     <h2 style={{ fontSize: '1.2rem', fontWeight: 900, textTransform: 'uppercase', margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -466,7 +466,7 @@ const NoSqlVault = ({ retentionDays = 30, refreshTrigger, onLoadingChange }) => 
                     color: #ffffff !important;
                 }
             `}</style>
-        </Card>
+        </BentoCard>
     );
 };
 

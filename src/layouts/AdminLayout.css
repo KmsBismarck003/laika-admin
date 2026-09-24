@@ -10,7 +10,6 @@
   color: var(--text-primary, #f1f5f9);
   font-family: 'Inter', -apple-system, sans-serif;
   position: relative;
-  overflow-x: hidden;
 }
 
 /* ─── SIDEBAR ───────────────────────────────────────────────────────────── */
@@ -27,6 +26,7 @@
   height: 100vh;
   position: sticky;
   top: 0;
+  align-self: flex-start;
 }
 
 .laika-admin-sidebar.collapsed {

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Button, Badge, Table, Input, Icon, SkeletonRow, ConfirmationModal } from '@/components'
+import { BentoGrid, BentoCard, Button, Badge, Table, Input, Icon, SkeletonRow, ConfirmationModal } from '@/components'
 import { useNotification } from '@/context/NotificationContext'
 import { venueAPI } from '@/services/api'
 import { useSkeletonContext } from '@/context/SkeletonContext'
 import VenueFormModal from '@/components/Modals/VenueFormModal'
 import VenueRoomsModal from './VenueRoomsModal'
-import './admin.css' // Reuse admin styles
+// Removed admin.css to rely on global Bento styling
 
 const Venues = () => {
   const { success, error: showError } = useNotification()
@@ -155,39 +155,41 @@ const Venues = () => {
         </Button>
       </div>
 
-      <Card className="glass-panel" style={{ padding: 0, overflow: 'hidden' }}>
-        <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-secondary)' }}>
-          <div style={{ width: '300px' }}>
-            <Input
-              placeholder="Buscar por nombre o ubicación..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              icon={<Icon name="search" size={16} />}
-            />
+      <BentoGrid>
+        <BentoCard style={{ padding: 0, overflow: 'hidden' }}>
+          <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ width: '300px' }}>
+              <Input
+                placeholder="Buscar por nombre o ubicación..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                icon={<Icon name="search" size={16} />}
+              />
+            </div>
+            <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+              {filteredVenues.length} REGISTROS
+            </div>
           </div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
-            {filteredVenues.length} REGISTROS
-          </div>
-        </div>
-        {showSkeleton ? (
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead><tr style={{ background: '#000' }}>
-              {['NOMBRE', 'UBICACIÓN', 'DIRECCIÓN', 'CAPACIDAD', 'ESTADO', 'ACCIONES'].map(h => <th key={h} style={{ padding: '14px 16px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', color: '#fff', textTransform: 'uppercase' }}>{h}</th>)}
-            </tr></thead>
-            <tbody>{Array.from({ length: 6 }).map((_, i) => <SkeletonRow key={i} columns={6} />)}</tbody>
-          </table>
-        ) : filteredVenues.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-            <Icon name="map" size={48} style={{ opacity: 0.1 }} />
-            <p style={{ fontSize: '0.85rem', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
-              No hay recintos registrados
-            </p>
-            <Button size="small" variant="secondary" onClick={() => setSearchTerm('')}>Ver todos</Button>
-          </div>
-        ) : (
-          <Table columns={columns} data={filteredVenues} />
-        )}
-      </Card>
+          {showSkeleton ? (
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead><tr style={{ background: 'var(--bg-tertiary)' }}>
+                {['NOMBRE', 'UBICACIÓN', 'DIRECCIÓN', 'CAPACIDAD', 'ESTADO', 'ACCIONES'].map(h => <th key={h} style={{ padding: '14px 16px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', color: 'var(--text-primary)', textTransform: 'uppercase' }}>{h}</th>)}
+              </tr></thead>
+              <tbody>{Array.from({ length: 6 }).map((_, i) => <SkeletonRow key={i} columns={6} />)}</tbody>
+            </table>
+          ) : filteredVenues.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+              <Icon name="map" size={48} style={{ opacity: 0.1 }} />
+              <p style={{ fontSize: '0.85rem', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                No hay recintos registrados
+              </p>
+              <Button size="small" variant="secondary" onClick={() => setSearchTerm('')}>Ver todos</Button>
+            </div>
+          ) : (
+            <Table columns={columns} data={filteredVenues} />
+          )}
+        </BentoCard>
+      </BentoGrid>
 
       <VenueFormModal
         isOpen={showModal}

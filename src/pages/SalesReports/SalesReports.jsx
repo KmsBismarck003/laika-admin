@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Button, Alert, Icon, AnimatedCounter, SkeletonRow, Input, Pagination, Badge } from '@/components'
+import { BentoGrid, BentoCard, Button, Alert, Icon, AnimatedCounter, SkeletonRow, Input, Pagination, Badge, Table } from '@/components'
 import Skeleton from '@/components/Skeleton'
 import { useSkeletonContext } from '@/context/SkeletonContext'
 import api from '@/services/api'
-import './admin.css'
+// Removed admin.css to rely on global Bento styling
 
 const SalesReports = () => {
   const [loading, setLoading] = useState(true)
@@ -90,114 +90,88 @@ const SalesReports = () => {
 
       {error && <Alert type="error" message={error} onClose={() => setError(null)} />}
 
-      <div className="stats-grid mb-4">
+      <BentoGrid>
         {showSkeleton ? (
-          <div className="skeleton-card" style={{ padding: '1rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <BentoCard variant="stat" style={{ padding: '1rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <Skeleton type="circle" width="56px" height="56px" />
             <div style={{ flex: 1 }}>
               <Skeleton type="text" width="40%" height="12px" style={{ marginBottom: '8px' }} />
               <Skeleton type="text" width="60%" height="32px" />
             </div>
-          </div>
+          </BentoCard>
         ) : (
-          <Card className="stat-card">
-            <div className="stat-content">
-              <div className="stat-icon bg-green">
-                <Icon name="dollarSign" size={28} />
-              </div>
-              <div className="stat-info">
-                <p className="stat-label">Ingresos Totales (Global)</p>
-                <h2 className="stat-value">
+          <BentoCard variant="stat">
+            <div className="bento-stat-content">
+              <div>
+                <div className="bento-stat-label">Ingresos Totales (Global)</div>
+                <div className="bento-stat-value">
                   $<AnimatedCounter value={totalRevenue} />
-                </h2>
+                </div>
+              </div>
+              <div className="bento-stat-icon" style={{ background: 'var(--success)' }}>
+                <Icon name="dollarSign" size={24} style={{ color: '#fff' }} />
               </div>
             </div>
-          </Card>
+          </BentoCard>
         )}
-      </div>
+      </BentoGrid>
 
-      <Card style={{ padding: 0, overflow: 'hidden' }}>
-        <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-secondary)', height: '48px', boxSizing: 'border-box' }}>
-          <div style={{ width: '300px' }}>
-            <Input
-              placeholder="Buscar por nombre de evento..."
-              value={searchTerm}
-              onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
-              icon={<Icon name="search" size={16} />}
-            />
-          </div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
-            {filteredSales.length} REGISTROS
-          </div>
-        </div>
-        <div className="table-responsive">
-          <table className="admin-table">
-            <thead>
-              <tr>
-                <th>Evento</th>
-                <th>Fecha</th>
-                <th>Capacidad</th>
-                <th>Vendidos</th>
-                <th>Restantes</th>
-                <th>Ocupación</th>
-                <th className="text-right">Ingresos</th>
-              </tr>
-            </thead>
-            <tbody>
-              {showSkeleton ? (
-                Array.from({ length: 6 }).map((_, i) => (
-                  <SkeletonRow key={i} columns={7} />
-                ))
-              ) : filteredSales.length > 0 ? (
-                paginatedSales.map((item) => (
-                  <tr key={item.eventId}>
-                    <td className="font-medium">{item.eventName}</td>
-                    <td>{new Date(item.eventDate).toLocaleDateString()}</td>
-                    <td>{item.totalTickets}</td>
-                    <td>{item.ticketsSold}</td>
-                    <td>
-                      <Badge variant={item.remainingTickets < 20 ? 'warning' : 'success'} rounded>
-                        {item.remainingTickets}
-                      </Badge>
-                    </td>
-                    <td>
-                      <div className="progress-bar-container" style={{ width: '100px', height: '6px', background: 'var(--bg-tertiary)', borderRadius: '3px', position: 'relative', overflow: 'hidden', display: 'inline-block' }}>
-                        <div
-                          style={{
-                            width: `${Math.min(item.occupancy, 100)}%`,
-                            height: '100%',
-                            background: item.occupancy > 90 ? 'var(--error)' : 'var(--success)',
-                            borderRadius: '3px'
-                          }}
-                        />
-                      </div>
-                      <span className="text-sm ml-2" style={{ fontSize: '0.75rem', fontWeight: 700 }}>{item.occupancy}%</span>
-                    </td>
-                    <td className="text-right font-bold text-green-600">
-                      {formatCurrency(item.revenue)}
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="7" className="text-center py-8 text-gray-500">
-                    No hay datos de ventas disponibles
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-          {totalPages > 1 && (
-            <div style={{ padding: '1rem', borderTop: '1px solid var(--border-color)' }}>
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
+      <BentoGrid style={{ marginTop: '2rem' }}>
+        <BentoCard style={{ padding: 0, overflow: 'hidden' }}>
+          <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '48px', boxSizing: 'border-box' }}>
+            <div style={{ width: '300px' }}>
+              <Input
+                placeholder="Buscar por nombre de evento..."
+                value={searchTerm}
+                onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
+                icon={<Icon name="search" size={16} />}
               />
             </div>
-          )}
-        </div>
-      </Card>
+            <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+              {filteredSales.length} REGISTROS
+            </div>
+          </div>
+          <div className="table-responsive">
+            <Table 
+              columns={[
+                { key: 'eventName', header: 'Evento' },
+                { key: 'eventDate', header: 'Fecha', render: val => new Date(val).toLocaleDateString() },
+                { key: 'totalTickets', header: 'Capacidad' },
+                { key: 'ticketsSold', header: 'Vendidos' },
+                { key: 'remainingTickets', header: 'Restantes', render: val => <Badge variant={val < 20 ? 'warning' : 'success'} rounded>{val}</Badge> },
+                { key: 'occupancy', header: 'Ocupación', render: val => (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div className="progress-bar-container" style={{ width: '80px', height: '6px', background: 'var(--bg-tertiary)', borderRadius: '3px', position: 'relative', overflow: 'hidden', display: 'inline-block' }}>
+                      <div
+                        style={{
+                          width: `${Math.min(val, 100)}%`,
+                          height: '100%',
+                          background: val > 90 ? 'var(--error)' : 'var(--success)',
+                          borderRadius: '3px'
+                        }}
+                      />
+                    </div>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-primary)' }}>{val}%</span>
+                  </div>
+                )},
+                { key: 'revenue', header: 'Ingresos', render: val => <span style={{ fontWeight: 'bold', color: 'var(--success)' }}>{formatCurrency(val)}</span> }
+              ]}
+              data={paginatedSales}
+              loading={showSkeleton}
+              emptyMessage="No hay datos de ventas disponibles"
+            />
+            {totalPages > 1 && (
+              <div style={{ padding: '1rem', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'center' }}>
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
+                />
+              </div>
+            )}
+          </div>
+        </BentoCard>
+      </BentoGrid>
     </div>
   )
 }

@@ -1,0 +1,211 @@
+/* Bento Box Design System */
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.bento-grid--dense {
+  grid-auto-flow: dense;
+}
+
+.bento-card {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+
+.bento-card--hoverable:hover,
+.bento-card--clickable:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary);
+}
+
+.bento-card--clickable {
+  cursor: pointer;
+}
+
+/* Grid spanning for larger bento boxes (responsive) */
+@media (min-width: 1024px) {
+  .bento-card--col-2 { grid-column: span 2; }
+  .bento-card--col-3 { grid-column: span 3; }
+  .bento-card--col-4 { grid-column: span 4; }
+  
+  .bento-card--row-2 { grid-row: span 2; }
+  .bento-card--row-3 { grid-row: span 3; }
+}
+
+/* Variants */
+
+/* Stat Variant (e.g. for numbers) */
+.bento-card--variant-stat {
+  justify-content: center;
+  align-items: flex-start;
+  background: var(--gradient-card);
+}
+
+.bento-card--variant-stat .bento-stat-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.bento-card--variant-stat .bento-stat-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.bento-card--variant-stat .bento-stat-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.bento-card--variant-stat .bento-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: var(--bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+
+/* Action Variant (e.g. for shortcuts) */
+.bento-card--variant-action {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 1.5rem;
+}
+
+.bento-card--variant-action .bento-action-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 20px;
+  background: var(--primary);
+  color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.bento-card--variant-action:hover .bento-action-icon {
+  transform: scale(1.1);
+}
+
+.bento-card--variant-action .bento-action-label {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+/* Metric Variant (e.g. progress bars) */
+.bento-card--variant-metric {
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.bento-card--variant-metric .bento-metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.bento-card--variant-metric .bento-metric-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+.bento-card--variant-metric .bento-metric-icon-box {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.bento-card--variant-metric .bento-metric-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bento-card--variant-metric .bento-metric-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.bento-card--variant-metric .bento-metric-subtitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bento-card--variant-metric .bento-metric-value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.bento-card--variant-metric .bento-metric-progress-wrapper {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bento-card--variant-metric .bento-metric-progress-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease-in-out, background-color 0.5s ease;
+}
+
+/* Sections for grouped bento cards */
+.bento-section {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.bento-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}

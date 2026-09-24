@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { Card, Button, Table, Badge } from '@/components';
+import { BentoGrid, BentoCard, Button, Table, Badge } from '@/components';
 import { Icon } from '@/components';
 import { useB2BData } from './useB2BData';
 import OrganizationModal from './components/OrganizationModal';
 import ContractModal from './components/ContractModal';
 import ContractManagersModal from './components/ContractManagersModal';
-import '../Events/admin.css';
 
 const B2BManager = () => {
     const {
@@ -176,35 +175,35 @@ const B2BManager = () => {
                 </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+            <BentoGrid>
                 {/* ORGANIZATIONS SECTION */}
-                <Card className="glass-panel">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                        <h3>Clientes / Organizaciones</h3>
+                <BentoCard>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                        <h3 style={{ margin: 0 }}>Clientes / Organizaciones</h3>
                         <Button size="small" onClick={() => {
                             setSelectedOrg(null);
                             setIsOrgModalOpen(true);
                         }}>+ Nuevo Cliente</Button>
                     </div>
                     {loading ? <p>Cargando...</p> : (
-                        <Table columns={orgColumns} data={organizations} className="admin-custom-table" />
+                        <Table columns={orgColumns} data={organizations} />
                     )}
-                </Card>
+                </BentoCard>
 
                 {/* CONTRACTS SECTION */}
-                <Card className="glass-panel">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                        <h3>Contratos / Proyectos</h3>
+                <BentoCard>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                        <h3 style={{ margin: 0 }}>Contratos / Proyectos</h3>
                         <Button size="small" onClick={() => {
                             setSelectedContract(null);
                             setIsContractModalOpen(true);
                         }}>+ Nuevo Contrato</Button>
                     </div>
                     {loading ? <p>Cargando...</p> : (
-                        <Table columns={contractColumns} data={contracts} className="admin-custom-table" />
+                        <Table columns={contractColumns} data={contracts} />
                     )}
-                </Card>
-            </div>
+                </BentoCard>
+            </BentoGrid>
 
             {/* MODAL ORG */}
             <OrganizationModal 

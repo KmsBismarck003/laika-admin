@@ -1,5 +1,6 @@
 import React from 'react';
 import { Zap } from 'lucide-react';
+import { BentoGrid, BentoCard, Icon } from '@/components';
 
 const MerchHeader = ({ gestores }) => {
     const totalGestores = gestores.length;
@@ -7,36 +8,51 @@ const MerchHeader = ({ gestores }) => {
     const tiendasHabilitadas = gestores.filter(g => g.settings?.is_enabled).length;
 
     return (
-        <header className="page-header-industrial">
-            <div className="header-main">
-                <h1><Zap size={24} className="icon-zap" /> MONETIZACIÓN Y PERMISOS</h1>
-                <p>PANEL DE CONTROL TÉCNICO PARA GESTORES Y MEMBRESÍAS</p>
+        <div style={{ marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+                <Zap size={24} />
+                <h1 style={{ margin: 0 }}>MONETIZACIÓN Y PERMISOS</h1>
             </div>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>PANEL DE CONTROL TÉCNICO PARA GESTORES Y MEMBRESÍAS</p>
 
-            <div className="stats-row-industrial">
-                <div className="glass-stat-panel">
-                    <span className="stat-value">{totalGestores}</span>
-                    <div className="stat-info">
-                        <span className="stat-label">GESTORES</span>
-                        <span className="stat-sub">REGISTRADOS</span>
+            <BentoGrid>
+                <BentoCard variant="stat">
+                    <div className="bento-stat-content">
+                        <div>
+                            <div className="bento-stat-label">GESTORES REGISTRADOS</div>
+                            <div className="bento-stat-value">{totalGestores}</div>
+                        </div>
+                        <div className="bento-stat-icon">
+                            <Icon name="users" size={24} />
+                        </div>
                     </div>
-                </div>
-                <div className="glass-stat-panel">
-                    <span className="stat-value">{premiumActivos}</span>
-                    <div className="stat-info">
-                        <span className="stat-label">PREMIUM</span>
-                        <span className="stat-sub">ACTIVOS</span>
+                </BentoCard>
+
+                <BentoCard variant="stat">
+                    <div className="bento-stat-content">
+                        <div>
+                            <div className="bento-stat-label">PREMIUM ACTIVOS</div>
+                            <div className="bento-stat-value">{premiumActivos}</div>
+                        </div>
+                        <div className="bento-stat-icon">
+                            <Icon name="star" size={24} />
+                        </div>
                     </div>
-                </div>
-                <div className="glass-stat-panel highlight">
-                    <span className="stat-value">{tiendasHabilitadas}</span>
-                    <div className="stat-info">
-                        <span className="stat-label">TIENDAS</span>
-                        <span className="stat-sub">HABILITADAS</span>
+                </BentoCard>
+
+                <BentoCard variant="stat">
+                    <div className="bento-stat-content">
+                        <div>
+                            <div className="bento-stat-label">TIENDAS HABILITADAS</div>
+                            <div className="bento-stat-value">{tiendasHabilitadas}</div>
+                        </div>
+                        <div className="bento-stat-icon">
+                            <Icon name="shoppingCart" size={24} />
+                        </div>
                     </div>
-                </div>
-            </div>
-        </header>
+                </BentoCard>
+            </BentoGrid>
+        </div>
     );
 };
 

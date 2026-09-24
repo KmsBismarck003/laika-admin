@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Table, Badge, Icon, Dropdown, Pagination } from '@/components';
+import { BentoCard, Button, Table, Badge, Icon, Dropdown, Pagination } from '@/components';
 import { Database, Clock, Calendar, Download, RefreshCw, Trash2, History, Zap, ShieldCheck } from 'lucide-react';
 import Skeleton from '@/components/Skeleton/Skeleton';
 import { useNotification } from '@/context';
@@ -128,7 +128,7 @@ const SqlVault = ({ backups, loading, onRefresh, onRestore, onDelete, onDownload
     if (loading) {
         return (
             <div className="sql-vault-container" style={{ fontFamily: 'Inter, sans-serif' }}>
-                <Card style={{ padding: 0, overflow: 'hidden', border: '2px solid #000', marginBottom: '2rem' }}>
+                <BentoCard style={{ padding: 0, overflow: 'hidden', border: '2px solid var(--border-color)', marginBottom: '2rem' }}>
                     <div style={{ padding: '1rem', background: '#f8f9fa', borderBottom: '1px solid #ddd', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div>
                             <Skeleton style={{ height: '18px', width: '240px', marginBottom: '4px', borderRadius: '4px' }} animate />
@@ -139,19 +139,19 @@ const SqlVault = ({ backups, loading, onRefresh, onRestore, onDelete, onDownload
                     <div style={{ padding: '1.5rem' }}>
                         <Skeleton style={{ height: '320px', width: '100%', borderRadius: '12px' }} animate />
                     </div>
-                </Card>
+                </BentoCard>
 
-                <Card style={{ padding: '1.5rem', border: '1px dashed #999', background: 'var(--bg-card)' }}>
+                <BentoCard style={{ padding: '1.5rem', border: '1px dashed var(--border-color)' }}>
                     <Skeleton style={{ height: '16px', width: '220px', marginBottom: '1rem', borderRadius: '4px' }} animate />
                     <Skeleton style={{ height: '120px', width: '100%', borderRadius: '12px' }} animate />
-                </Card>
+                </BentoCard>
             </div>
         );
     }
 
     return (
         <div className="sql-vault-container">
-            <Card style={{ padding: 0, overflow: 'hidden', border: '2px solid #000', marginBottom: '2rem' }}>
+            <BentoCard style={{ padding: 0, overflow: 'hidden', border: '2px solid var(--border-color)', marginBottom: '2rem' }}>
                 <div style={{ padding: '1rem', background: '#f8f9fa', borderBottom: '1px solid #ddd', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
                         <h2 style={{ fontSize: '1rem', fontWeight: 900, margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -182,9 +182,9 @@ const SqlVault = ({ backups, loading, onRefresh, onRestore, onDelete, onDownload
                         </div>
                     )}
                 </div>
-            </Card>
+            </BentoCard>
 
-            <Card style={{ border: '1px dashed #999', background: 'var(--bg-card)' }}>
+            <BentoCard style={{ border: '1px dashed var(--border-color)' }}>
                 <h3 style={{ fontSize: '0.85rem', fontWeight: 900, margin: '0 0 1rem 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <Calendar size={18} /> PRÓXIMOS RESPALDOS AUTOMÁTICOS
                 </h3>
@@ -195,7 +195,7 @@ const SqlVault = ({ backups, loading, onRefresh, onRestore, onDelete, onDownload
                     emptyMessage="No hay respaldos automáticos programados actualmente."
                     showHeader={false}
                 />
-            </Card>
+            </BentoCard>
 
             <style>{`
                 .sql-vault-scoped-table .table th {

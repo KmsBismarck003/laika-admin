@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Card, Table, Badge, Button, Input, Icon, SkeletonRow, Pagination, Modal } from '@/components'
+import { BentoGrid, BentoCard, Table, Badge, Button, Input, Icon, SkeletonRow, Pagination, Modal } from '@/components'
 import Skeleton from '@/components/Skeleton/Skeleton';
 import { useNotification } from '@/context/NotificationContext'
 import useAdminUsers from '@/hooks/useAdminUsers'
@@ -14,8 +14,7 @@ import UserEditModal from '@/components/Modals/UserEditModal'
 import UserPreviewModal from '@/components/Modals/UserPreviewModal/UserPreviewModal'
 import ConfirmationModal from '@/components/Modals/ConfirmationModal'
 
-import './UserManagement.css'
-import './admin.css'
+// Removed legacy UserManagement.css and admin.css to rely on global Bento styling
 
 const Users = () => {
   const { success, error: notifyError } = useNotification()
@@ -212,13 +211,13 @@ const Users = () => {
             setSelectedUser(row);
             setShowPreviewModal(true);
           }}
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: 'pointer', width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-tertiary)' }}
           title="Ver vista previa"
         >
           <img 
             src={getImageUrl(val || row.avatar || row.profile_photo)} 
             alt="Avatar" 
-            className="user-mgmt__avatar-img"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             onError={(e) => {
               e.target.src = 'https://ui-avatars.com/api/?name=' + (row.first_name || 'U') + '&background=random'
             }}
@@ -260,7 +259,7 @@ const Users = () => {
           )
         }
         return (
-          <div className="user-mgmt__actions">
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             {row.pending_request && (
               <Button size="small" variant="success" onClick={() => approvePermission(row.id, row.pending_request)}>
                 <Icon name="check" size={12} className="mr-1" /> AUTORIZAR
@@ -295,119 +294,115 @@ const Users = () => {
 
   return (
     <div className="admin-users-page" style={{ padding: '0.5rem 0' }}>
-      <div className="user-mgmt__header" style={{ marginBottom: '0.5rem' }}>
-        <h1 style={{ fontSize: '1.25rem', margin: 0 }}>Usuarios</h1>
-        <div className="user-mgmt__header-actions">
-          <Button variant="secondary" size="small" onClick={() => fetchUsers()} style={{ height: '30px', padding: '0 12px', fontSize: '0.8rem' }}>
-            Refrescar
-          </Button>
-          <Button variant="warning" size="small" onClick={() => setShowCampaignModal(true)} style={{ height: '30px', padding: '0 12px', fontSize: '0.8rem' }}>
-            <Icon name="tag" size={12} className="mr-1" /> Campañas
-          </Button>
-          <Button variant="primary" size="small" onClick={() => setShowCreateModal(true)} style={{ height: '30px', padding: '0 12px', fontSize: '0.8rem' }}>
-            <Icon name="plus" size={12} className="mr-1" /> Nuevo
-          </Button>
-        </div>
-      </div>
-
-      <div className="user-mgmt__toolbar-bar">
-        <div className="user-mgmt__compact-toolbar">
-          <div className="user-mgmt__search-container">
-            <Input
-              placeholder="Buscar..."
-              value={searchInput}
-              onChange={e => setSearchInput(e.target.value)}
-              className="input--compact"
-              icon={<Icon name="search" size={14} />}
-              fullWidth
-            />
-          </div>
-
-          <div className="user-mgmt__filters-row">
-            <div className="user-mgmt__select-wrapper">
-              <label>ROL:</label>
-              <select
-                className="user-mgmt__select"
-                value={filters.role}
-                onChange={e => updateFilters({ role: e.target.value })}
-              >
-                <option value="">TODOS</option>
-                <option value="admin">ADMIN</option>
-                <option value="gestor">GESTOR</option>
-                <option value="operador">OPERADOR</option>
-                <option value="usuario">USUARIO</option>
-              </select>
-            </div>
-
-            <div className="user-mgmt__select-wrapper">
-              <label>ESTADO:</label>
-              <select
-                className="user-mgmt__select"
-                value={filters.status || ''}
-                onChange={e => updateFilters({ status: e.target.value })}
-              >
-                <option value="">TODOS</option>
-                <option value="active">ACTIVO</option>
-                <option value="disabled">BAJA</option>
-                <option value="locked">BLOQUEO</option>
-              </select>
-            </div>
-
-            {(filters.search || filters.role || filters.status) && (
-              <Button
-                variant="secondary"
-                size="small"
-                onClick={handleClearFilters}
-                className="user-mgmt__clear-btn"
-              >
-                <Icon name="close" size={10} />
+      <BentoGrid style={{ marginBottom: '1.5rem' }}>
+        <BentoCard style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+            <h1 style={{ fontSize: '1.25rem', margin: 0, color: 'var(--text-primary)' }}>Usuarios</h1>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <Button variant="secondary" size="small" onClick={() => fetchUsers()}>Refrescar</Button>
+              <Button variant="warning" size="small" onClick={() => setShowCampaignModal(true)}>
+                <Icon name="tag" size={12} style={{ marginRight: '4px' }} /> Campañas
               </Button>
-            )}
+              <Button variant="primary" size="small" onClick={() => setShowCreateModal(true)}>
+                <Icon name="plus" size={12} style={{ marginRight: '4px' }} /> Nuevo
+              </Button>
+            </div>
           </div>
 
-          <div className="user-mgmt__stats">
-            {loading ? <Skeleton type="text" width="30px" height="12px" /> : <strong>{total}</strong>} <span>REGISTROS</span>
-          </div>
-        </div>
-      </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+            <div style={{ flex: '1 1 300px' }}>
+              <Input
+                placeholder="Buscar..."
+                value={searchInput}
+                onChange={e => setSearchInput(e.target.value)}
+                icon={<Icon name="search" size={14} />}
+                fullWidth
+              />
+            </div>
 
-      <Card style={{ padding: 0, overflow: 'hidden' }}>
-        {loading ? (
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead><tr style={{ background: 'var(--bg-secondary)', borderBottom: '2px solid var(--border-color)' }}>
-              {['USUARIO', 'EMAIL', 'ROL', 'ESTADO', 'FECHA', 'ACCIONES'].map(h => <th key={h} style={{ padding: '14px 16px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>{h}</th>)}
-            </tr></thead>
-            <tbody>{Array.from({ length: 8 }).map((_, i) => <SkeletonRow key={i} columns={6} />)}</tbody>
-          </table>
-        ) : (
-          <>
-            <Table 
-              columns={columns} 
-              data={users} 
-              sortable 
-              rowPriority={(row) => {
-                const priorities = {
-                  admin: 100,
-                  gestor: 90,
-                  operador: 80,
-                  usuario: 70
-                }
-                return priorities[row.role] || 0
-              }}
-              rowClassName={(row) => `user-row--${row.role}`}
-            />
-            {total > (filters.limit || 15) && (
-              <div style={{ padding: '0.75rem', display: 'flex', justifyContent: 'center', borderTop: '1px solid var(--border-color)' }}>
-                <Pagination 
-                  currentPage={filters.page || 1}
-                  totalPages={Math.ceil(total / (filters.limit || 15))}
-                  onPageChange={(page) => updateFilters({ page })}
-                />
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)' }}>ROL:</label>
+                <select
+                  style={{ background: 'var(--bg-tertiary)', color: 'var(--text-primary)', border: '1px solid var(--border-color)', padding: '0.4rem', borderRadius: '6px', fontSize: '0.85rem' }}
+                  value={filters.role}
+                  onChange={e => updateFilters({ role: e.target.value })}
+                >
+                  <option value="">TODOS</option>
+                  <option value="admin">ADMIN</option>
+                  <option value="gestor">GESTOR</option>
+                  <option value="operador">OPERADOR</option>
+                  <option value="usuario">USUARIO</option>
+                </select>
               </div>
-            )}
-          </>
-        )}
-      </Card>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)' }}>ESTADO:</label>
+                <select
+                  style={{ background: 'var(--bg-tertiary)', color: 'var(--text-primary)', border: '1px solid var(--border-color)', padding: '0.4rem', borderRadius: '6px', fontSize: '0.85rem' }}
+                  value={filters.status || ''}
+                  onChange={e => updateFilters({ status: e.target.value })}
+                >
+                  <option value="">TODOS</option>
+                  <option value="active">ACTIVO</option>
+                  <option value="disabled">BAJA</option>
+                  <option value="locked">BLOQUEO</option>
+                </select>
+              </div>
+
+              {(filters.search || filters.role || filters.status) && (
+                <Button variant="secondary" size="small" onClick={handleClearFilters} style={{ padding: '0.4rem' }}>
+                  <Icon name="x" size={14} />
+                </Button>
+              )}
+
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                {loading ? <Skeleton type="text" width="30px" height="12px" style={{ display: 'inline-block' }} /> : <strong style={{ color: 'var(--text-primary)' }}>{total}</strong>} REGISTROS
+              </div>
+            </div>
+          </div>
+        </BentoCard>
+      </BentoGrid>
+
+      <BentoGrid>
+        <BentoCard style={{ padding: 0, overflow: 'hidden' }}>
+          {loading ? (
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead><tr style={{ background: 'var(--bg-tertiary)', borderBottom: '2px solid var(--border-color)' }}>
+                {['USUARIO', 'EMAIL', 'ROL', 'ESTADO', 'FECHA', 'ACCIONES'].map(h => <th key={h} style={{ padding: '14px 16px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>{h}</th>)}
+              </tr></thead>
+              <tbody>{Array.from({ length: 8 }).map((_, i) => <SkeletonRow key={i} columns={6} />)}</tbody>
+            </table>
+          ) : (
+            <>
+              <Table 
+                columns={columns} 
+                data={users} 
+                sortable 
+                rowPriority={(row) => {
+                  const priorities = {
+                    admin: 100,
+                    gestor: 90,
+                    operador: 80,
+                    usuario: 70
+                  }
+                  return priorities[row.role] || 0
+                }}
+                rowClassName={(row) => `user-row--${row.role}`}
+              />
+              {total > (filters.limit || 15) && (
+                <div style={{ padding: '0.75rem', display: 'flex', justifyContent: 'center', borderTop: '1px solid var(--border-color)' }}>
+                  <Pagination 
+                    currentPage={filters.page || 1}
+                    totalPages={Math.ceil(total / (filters.limit || 15))}
+                    onPageChange={(page) => updateFilters({ page })}
+                  />
+                </div>
+              )}
+            </>
+          )}
+        </BentoCard>
+      </BentoGrid>
 
       {/* Modales */}
       <UserFormModal
