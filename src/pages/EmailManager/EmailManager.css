@@ -1,3 +1,4 @@
+﻿/* migrado a tokens var(--color-*) */
 /* Email Manager - Premium Industrial Style */
 .email-manager-container {
     padding: 40px;
@@ -8,7 +9,7 @@
 
 .admin-header {
     margin-bottom: 30px;
-    border-left: 4px solid #000;
+    border-left: 4px solid var(--color-text);
     padding-left: 20px;
 }
 
@@ -21,7 +22,7 @@
     text-transform: uppercase;
     letter-spacing: -0.02em;
     margin: 0;
-    color: #000;
+    color: var(--color-text);
 }
 
 .title-icon {
@@ -30,7 +31,7 @@
 }
 
 .admin-subtitle {
-    color: #666;
+    color: var(--color-text);
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.2em;
@@ -42,7 +43,7 @@
     display: flex;
     gap: 15px;
     margin-bottom: 30px;
-    border-bottom: 2px solid #eee;
+    border-bottom: 2px solid var(--color-text);
     padding-bottom: 10px;
 }
 
@@ -56,18 +57,18 @@
     font-size: 0.9rem;
     font-weight: 700;
     text-transform: uppercase;
-    color: #666;
+    color: var(--color-text);
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
 }
 
 .tab-btn:hover {
-    color: #000;
+    color: var(--color-text);
 }
 
 .tab-btn.active {
-    color: #000;
+    color: var(--color-text);
 }
 
 .tab-btn.active::after {
@@ -77,7 +78,7 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background: #000;
+    background: var(--color-text);
 }
 
 /* Config Section */
@@ -88,7 +89,7 @@
 }
 
 .section-desc {
-    color: #666;
+    color: var(--color-text);
     margin-bottom: 30px;
 }
 
@@ -99,8 +100,8 @@
 }
 
 .template-config-card {
-    background: #fff;
-    border: 1px solid #ddd;
+    background: var(--color-text);
+    border: 1px solid var(--color-text);
     padding: 25px;
     border-radius: 8px;
     position: relative;
@@ -108,8 +109,8 @@
 }
 
 .template-config-card.active-card {
-    border-color: #000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-color: var(--color-text);
+    box-shadow: 0 4px 15px var(--color-border);
 }
 
 .template-config-card h3 {
@@ -119,7 +120,7 @@
 }
 
 .template-config-card p {
-    color: #666;
+    color: var(--color-text);
     font-size: 0.9rem;
     margin-bottom: 20px;
     line-height: 1.5;
@@ -129,8 +130,8 @@
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    background: #000;
-    color: #fff;
+    background: var(--color-text);
+    color: var(--color-text);
     padding: 5px 10px;
     font-size: 0.7rem;
     font-weight: bold;
@@ -147,8 +148,8 @@
 }
 
 .tester-sidebar {
-    background: #fff;
-    border: 1px solid #000;
+    background: var(--color-text);
+    border: 1px solid var(--color-text);
     padding: 30px;
 }
 
@@ -157,7 +158,7 @@
     align-items: center;
     gap: 12px;
     margin-bottom: 25px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-text);
     padding-bottom: 15px;
 }
 
@@ -172,7 +173,7 @@
 .card-icon {
     width: 20px;
     height: 20px;
-    color: #000;
+    color: var(--color-text);
 }
 
 .form-section, .dynamic-form, .test-action-box {
@@ -184,16 +185,16 @@
     text-transform: uppercase;
     font-weight: 800;
     margin-bottom: 15px;
-    color: #333;
-    border-left: 3px solid #000;
+    color: var(--color-text);
+    border-left: 3px solid var(--color-text);
     padding-left: 10px;
 }
 
 .industrial-select {
     width: 100%;
     padding: 12px 15px;
-    border: 1px solid #ddd;
-    background: #fafafa;
+    border: 1px solid var(--color-text);
+    background: var(--color-text);
     font-family: inherit;
     font-size: 0.9rem;
     text-transform: uppercase;
@@ -204,8 +205,8 @@
 }
 
 .industrial-select:focus {
-    border-color: #000;
-    background: #fff;
+    border-color: var(--color-text);
+    background: var(--color-text);
 }
 
 .industrial-label {
@@ -214,14 +215,14 @@
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 8px;
-    color: #444;
+    color: var(--color-text);
 }
 
 .industrial-textarea-small {
     width: 100%;
     min-height: 120px;
-    background: #fafafa;
-    border: 1px solid #ddd;
+    background: var(--color-text);
+    border: 1px solid var(--color-text);
     padding: 15px;
     font-family: 'JetBrains Mono', 'Courier New', monospace;
     font-size: 0.85rem;
@@ -232,13 +233,13 @@
 }
 
 .industrial-textarea-small:focus {
-    border-color: #000;
-    background: #fff;
+    border-color: var(--color-text);
+    background: var(--color-text);
 }
 
 .tester-preview {
-    background: #f4f4f4;
-    border: 1px solid #ddd;
+    background: var(--color-text);
+    border: 1px solid var(--color-text);
     padding: 20px;
     height: 100%;
     min-height: 800px;
@@ -248,10 +249,10 @@
 
 .preview-container {
     flex: 1;
-    background: #fff;
-    border: 1px solid #eee;
+    background: var(--color-text);
+    border: 1px solid var(--color-text);
     border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px var(--color-border);
     overflow: hidden;
 }
 

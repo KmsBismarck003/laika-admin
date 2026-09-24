@@ -1,3 +1,4 @@
+﻿/* migrado a tokens var(--color-*) */
 /* DATABASE MANAGEMENT STYLES - MINIMALIST WHITE INDUSTRIAL */
 
 .admin-database-page {
@@ -45,19 +46,19 @@
 }
 
 .backup-option-card {
-  background: #fff;
+  background: var(--color-text);
   border: 1px solid var(--border-color);
   border-radius: 0px;
   padding: var(--spacing-6);
   text-align: center;
   transition: all 0.2s ease;
-  box-shadow: 0 10px 25px -10px rgba(0,0,0,0.1) !important;
+  box-shadow: 0 10px 25px -10px var(--color-border) !important;
 }
 
 .backup-option-card:hover {
   border-color: var(--black);
   transform: translateY(-4px);
-  box-shadow: 0 15px 30px -10px rgba(0,0,0,0.2) !important;
+  box-shadow: 0 15px 30px -10px var(--color-border) !important;
 }
 
 .backup-option-card h4 {
@@ -90,24 +91,24 @@
 }
 
 /* Dropdown Industrial Enhancements */
-.dropdown__item--sql { color: #2980b9; }
-.dropdown__item--json { color: #f39c12; }
-.dropdown__item--excel { color: #27ae60; }
-.dropdown__item--pdf { color: #e74c3c; }
+.dropdown__item--sql { color: var(--color-text); }
+.dropdown__item--json { color: var(--color-text); }
+.dropdown__item--excel { color: var(--color-text); }
+.dropdown__item--pdf { color: var(--color-text); }
 
 /* TABLE CUSTOMIZATION - DATABASE VAULTS */
 .sql-vault-scoped-table thead,
 .sql-vault-scoped-table thead tr,
 .nosql-vault-scoped-table thead,
 .nosql-vault-scoped-table thead tr {
-    background-color: #111111 !important;
+    background-color: var(--color-text) !important;
 }
 
 .sql-vault-scoped-table thead th,
 .nosql-vault-scoped-table thead th {
-    background-color: #111111 !important;
-    color: #ffffff !important;
-    border-bottom: 2px solid #000000 !important;
+    background-color: var(--color-text) !important;
+    color: var(--color-text) !important;
+    border-bottom: 2px solid var(--color-text) !important;
     font-weight: 900 !important;
     font-size: 0.7rem !important;
     letter-spacing: 0.05em !important;
@@ -118,10 +119,11 @@
 /* Ensuring icons inside header are also white */
 .sql-vault-scoped-table thead th svg,
 .nosql-vault-scoped-table thead th svg {
-    color: #ffffff !important;
+    color: var(--color-text) !important;
 }
 
 @media (max-width: 768px) {
     .database-mgmt__stats-banner { flex-direction: column; }
     .backup-options { grid-template-columns: 1fr; }
 }
+

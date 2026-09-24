@@ -1,60 +1,31 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useCallback, useEffect, useState, useMemo } from 'react';
 
 const ThemeContext = createContext(null);
+const STORAGE_KEY = 'laika-theme'; 
 
 export const ThemeProvider = ({ children }) => {
-  const [isDark, setIsDark] = useState(() => {
-    const saved = localStorage.getItem('theme');
-    return saved ? saved === 'dark' : true; // Dark mode por defecto para Admin
-  });
-
-  const [customColor, setCustomColor] = useState(() => {
-    return localStorage.getItem('custom_accent_color') || '#00ff88';
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved === 'light' || saved === 'dark') return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
   useEffect(() => {
-    const root = document.documentElement;
-    if (isDark) {
-      root.setAttribute('data-theme', 'dark');
-      root.classList.add('dark-theme');
-      root.classList.remove('light-theme');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      root.setAttribute('data-theme', 'light');
-      root.classList.add('light-theme');
-      root.classList.remove('dark-theme');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDark]);
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem(STORAGE_KEY, theme);
+  }, [theme]);
 
-  useEffect(() => {
-    document.documentElement.style.setProperty('--primary', customColor);
-    localStorage.setItem('custom_accent_color', customColor);
-  }, [customColor]);
+  const toggleTheme = useCallback(() => setTheme(t => t === 'dark' ? 'light' : 'dark'), []);
+  const isDark = theme === 'dark';
 
-  const toggleTheme = () => setIsDark(prev => !prev);
+  const value = useMemo(() => ({ theme, isDark, toggleTheme, setTheme }), [theme, isDark, toggleTheme]);
 
-  return (
-    <ThemeContext.Provider
-      value={{
-        theme: isDark ? 'dark' : 'light',
-        isDark,
-        toggleTheme,
-        customColor,
-        setCustomColor
-      }}
-    >
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };
 
 export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme debe usarse dentro de ThemeProvider');
-  }
-  return context;
+  const ctx = React.useContext(ThemeContext);
+  if (!ctx) throw new Error('useTheme debe usarse dentro de ThemeProvider');
+  return ctx;
 };
-
 export default ThemeContext;
