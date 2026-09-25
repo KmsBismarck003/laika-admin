@@ -45,7 +45,7 @@
 .user-mgmt__select-wrapper label {
   font-size: 0.65rem;
   font-weight: 800;
-  color: var(--text-secondary, var(--color-text));
+  color: var(--color-text);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0;
@@ -56,9 +56,9 @@
   padding: 4px 10px;
   height: 32px;
   border-radius: 4px;
-  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.12));
-  background: var(--bg-card, rgba(255, 255, 255, 0.04));
-  color: var(--text-primary, var(--color-text));
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
   font-size: 0.85rem;
   min-width: 130px;
   cursor: pointer;
@@ -67,13 +67,18 @@
 }
 
 .user-mgmt__select:focus {
-  border-color: var(--primary, var(--color-text));
+  border-color: var(--color-border-strong);
   box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
 }
 
 .user-mgmt__select option {
-  background: var(--bg-dark, var(--color-text));
-  color: var(--text-primary, var(--color-text));
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .user-mgmt__select option {
+  background: #1e1e1e;
+  color: #fafafa;
 }
 
 /* â”€â”€ Header de la pÃ¡gina â”€â”€ */
@@ -216,8 +221,9 @@
 }
 
 .user-mgmt__toolbar-bar {
-  background: var(--color-text);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   height: 48px;
   /* Slightly taller for more breath */
@@ -228,6 +234,12 @@
   width: 100%;
   box-sizing: border-box;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] .user-mgmt__toolbar-bar {
+  background: var(--color-surface-elevated);
+  color: var(--color-text);
+  border-color: var(--color-border);
 }
 
 /* â”€â”€ Toolbar Compacto â”€â”€ */
@@ -279,8 +291,8 @@
   padding: 0 12px;
   height: 32px;
   border-radius: 6px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: var(--color-text);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
   color: var(--color-text);
   font-size: 0.82rem;
   min-width: 130px;
@@ -294,41 +306,59 @@
 }
 
 .user-mgmt__select:hover {
-  border-color: var(--color-text);
-  background: var(--color-text);
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-hover);
 }
 
 .user-mgmt__select option {
-  background: var(--color-text);
+  background: var(--color-surface);
   color: var(--color-text);
+}
+
+[data-theme="dark"] .user-mgmt__select {
+  background: var(--color-surface-elevated);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .user-mgmt__select option {
+  background: #1e1e1e;
+  color: #fafafa;
 }
 
 .input--compact .input {
   height: 32px !important;
   font-size: 0.85rem !important;
   padding: 0 12px 0 38px !important;
-  background: var(--color-text) !important;
+  background: var(--color-surface) !important;
   color: var(--color-text) !important;
   border-radius: 6px !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid var(--color-border) !important;
   box-sizing: border-box !important;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
   margin: 0 !important;
   /* Force zero margin to prevent "chueco" */
 }
 
+[data-theme="dark"] .input--compact .input {
+  background: var(--color-surface-elevated) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
+}
+
 .input--compact .input:focus {
-  border-color: var(--color-text) !important;
+  border-color: var(--color-border-strong) !important;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) !important;
 }
 
 .input--compact .input::placeholder {
-  color: var(--color-text) !important;
+  color: var(--color-text-secondary) !important;
+  opacity: 1;
 }
 
 .user-mgmt__compact-toolbar .input__icon {
   left: 12px !important;
-  color: var(--color-text) !important;
+  color: var(--color-text-secondary) !important;
 }
 
 .user-mgmt__select-wrapper label {
@@ -355,8 +385,8 @@
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid rgba(0, 0, 0, 0.05);
-  background: var(--color-text);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-hover);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -392,7 +422,7 @@ tr:hover .user-mgmt__avatar-img {
 
 /* â”€â”€ Modal EdiciÃ³n Premium (Screenshot Style) â”€â”€ */
 .user-edit-modal-premium .modal__header {
-    background: var(--color-text) !important;
+    background: var(--color-surface) !important;
     border-bottom: 1px solid var(--color-border) !important;
     padding: 24px 32px !important;
 }
@@ -405,7 +435,7 @@ tr:hover .user-mgmt__avatar-img {
 }
 
 .user-edit-modal-premium .modal__close {
-    background: var(--color-text) !important;
+    background: var(--color-surface) !important;
     border: 1px solid var(--color-border) !important;
     color: var(--color-text) !important;
     border-radius: 6px !important;
@@ -414,7 +444,7 @@ tr:hover .user-mgmt__avatar-img {
 }
 
 .user-edit-modal-premium .modal__close:hover {
-    background: var(--color-text) !important;
+    background: var(--color-surface-hover) !important;
     transform: none !important;
 }
 
@@ -424,6 +454,70 @@ tr:hover .user-mgmt__avatar-img {
 
 .user-edit-modal-premium .modal__footer {
     padding: 0 !important;
-    background: var(--color-text) !important;
+    background: var(--color-surface) !important;
+}
+
+/* GRUPO D-12: boton Nuevo, tabla e iconos tematicos */
+.user-mgmt__header h1 {
+  color: var(--color-text);
+}
+
+.user-mgmt__header-actions .btn--primary,
+.user-mgmt__header-actions .btn-primary {
+  background: var(--color-primary);
+  color: var(--color-primary-fg);
+  border: 1px solid var(--color-primary);
+  font-weight: 800;
+}
+
+.user-mgmt__header-actions .btn--primary svg,
+.user-mgmt__header-actions .btn-primary svg {
+  color: currentColor;
+}
+
+.admin-users-page .table th,
+.admin-users-page table th {
+  background: var(--color-surface-hover) !important;
+  color: var(--color-text) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+}
+
+.admin-users-page .table td,
+.admin-users-page table td {
+  color: var(--color-text) !important;
+}
+
+.user-mgmt__actions svg,
+.user-mgmt__protected-badge svg,
+.user-mgmt__status-badge svg {
+  color: currentColor;
+}
+
+.user-mgmt__stats {
+  color: var(--color-text-secondary);
+}
+
+.user-mgmt__stats strong {
+  color: var(--color-text);
+}
+
+.user-form-select {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.user-form-select option {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .user-form-select {
+  background: var(--color-surface-elevated);
+}
+
+[data-theme="dark"] .user-form-select option {
+  background: #1e1e1e;
+  color: #fafafa;
 }
 

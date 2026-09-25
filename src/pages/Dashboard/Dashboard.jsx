@@ -395,10 +395,10 @@ const Dashboard = () => {
       </div>
       <style>{`
         .metric-card {
-          background: var(--bg-card);
+          background: var(--color-surface);
           border-radius: 13px;
           padding: 1.5rem;
-          border: var(--laika-border-light);
+          border: 1px solid var(--color-border);
           box-shadow: 0 10px 25px -10px rgba(0,0,0,0.2) !important;
           cursor: pointer;
           transition: all 0.2s ease;
@@ -406,9 +406,10 @@ const Dashboard = () => {
           flex-direction: column;
           gap: 1.5rem;
           height: 100%;
+          min-width: 0;
         }
         .metric-card:hover { 
-          border-color: var(--text-primary); 
+          border-color: var(--color-border-strong); 
           box-shadow: 0 15px 30px -10px rgba(0,0,0,0.3) !important; 
         }
         .metric-card-header {
@@ -416,23 +417,24 @@ const Dashboard = () => {
           justify-content: space-between;
           align-items: center;
           padding-bottom: 1rem;
-          border-bottom: 1px solid rgba(0,0,0,0.06);
+          border-bottom: 1px solid var(--color-border);
         }
         .metric-title {
           font-size: 0.9rem;
           font-weight: 900;
-          color: var(--text-primary);
+          color: var(--color-text);
           letter-spacing: 0.05em;
         }
         .metric-icon-box {
           width: 24px;
           height: 24px;
-          border: 1px solid #eee;
+          border: 1px solid var(--color-border);
           border-radius: 4px;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #aaa;
+          color: var(--color-text-secondary);
+          background: var(--color-surface-hover);
         }
         .metric-card-body {
           display: flex;
@@ -443,24 +445,27 @@ const Dashboard = () => {
           display: flex;
           justify-content: space-between;
           align-items: flex-end;
+          gap: .5rem;
+          flex-wrap: wrap;
         }
         .metric-subtitle {
           font-size: 0.65rem;
           font-weight: 800;
-          color: #999;
+          color: var(--color-text-secondary);
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
         .metric-value {
           font-size: 1.25rem;
           font-weight: 900;
-          color: var(--text-primary);
+          color: var(--color-text);
           line-height: 1;
         }
         .metric-progress-wrapper {
           width: 100%;
           height: 8px;
-          background: #f0f0f0;
+          background: var(--color-surface-hover);
+          border: 1px solid var(--color-border);
           border-radius: 4px;
           overflow: hidden;
         }
@@ -470,18 +475,27 @@ const Dashboard = () => {
           transition: width 0.5s ease-in-out, background-color 0.5s ease;
         }
         .dashboard-footer-grid {
-          display: flex; /* Changed from grid so they don't stretch */
+          display: grid;
+          grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
           gap: 1.5rem;
           margin-top: 2rem;
-          flex-wrap: wrap;
+          min-width: 0;
         }
         .metric-card {
-          width: 380px;
+          width: auto;
           max-width: 100%;
+          min-width: 0;
         }
-        .premium-reset-btn { height: 32px; padding: 0 12px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: #000 !important; border: 1px solid #000 !important; }
-        .premium-reset-btn svg { stroke: #fff !important; }
-        .premium-reset-btn:hover { background: #000 !important; border-color: #000 !important; opacity: 0.8; }
+        @media(max-width:1024px){
+          .dashboard-footer-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+        }
+        @media(max-width:640px){
+          .dashboard-footer-grid{grid-template-columns:1fr}
+          .metric-card{padding:1rem}
+        }
+        .premium-reset-btn { height: 32px; padding: 0 12px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: var(--color-surface-hover) !important; border: 1px solid var(--color-border) !important; color: var(--color-text-secondary); }
+        .premium-reset-btn svg { stroke: currentColor !important; }
+        .premium-reset-btn:hover { border-color: var(--color-border-strong) !important; color: var(--color-text); opacity: 1; }
       `}</style>
 
 

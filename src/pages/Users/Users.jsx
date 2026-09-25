@@ -296,7 +296,7 @@ const Users = () => {
   return (
     <div className="admin-users-page" style={{ padding: '0.5rem 0' }}>
       <div className="user-mgmt__header" style={{ marginBottom: '0.5rem' }}>
-        <h1 style={{ fontSize: '1.25rem', margin: 0 }}>Usuarios</h1>
+        <h1 style={{ fontSize: '1.25rem', margin: 0, color: 'var(--color-text)' }}>Usuarios</h1>
         <div className="user-mgmt__header-actions">
           <Button variant="secondary" size="small" onClick={() => fetchUsers()} style={{ height: '30px', padding: '0 12px', fontSize: '0.8rem' }}>
             Refrescar
@@ -374,8 +374,8 @@ const Users = () => {
       <Card style={{ padding: 0, overflow: 'hidden' }}>
         {loading ? (
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead><tr style={{ background: 'var(--bg-secondary)', borderBottom: '2px solid var(--border-color)' }}>
-              {['USUARIO', 'EMAIL', 'ROL', 'ESTADO', 'FECHA', 'ACCIONES'].map(h => <th key={h} style={{ padding: '14px 16px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>{h}</th>)}
+            <thead><tr style={{ background: 'var(--color-surface-hover)', borderBottom: '1px solid var(--color-border)' }}>
+              {['USUARIO', 'EMAIL', 'ROL', 'ESTADO', 'FECHA', 'ACCIONES'].map(h => <th key={h} style={{ padding: '14px 16px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', color: 'var(--color-text)', textTransform: 'uppercase', background: 'var(--color-surface-hover)' }}>{h}</th>)}
             </tr></thead>
             <tbody>{Array.from({ length: 8 }).map((_, i) => <SkeletonRow key={i} columns={6} />)}</tbody>
           </table>
@@ -397,7 +397,7 @@ const Users = () => {
               rowClassName={(row) => `user-row--${row.role}`}
             />
             {total > (filters.limit || 15) && (
-              <div style={{ padding: '0.75rem', display: 'flex', justifyContent: 'center', borderTop: '1px solid var(--border-color)' }}>
+              <div style={{ padding: '0.75rem', display: 'flex', justifyContent: 'center', borderTop: '1px solid var(--color-border)' }}>
                 <Pagination 
                   currentPage={filters.page || 1}
                   totalPages={Math.ceil(total / (filters.limit || 15))}

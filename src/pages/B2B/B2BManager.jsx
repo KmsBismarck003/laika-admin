@@ -170,37 +170,37 @@ const B2BManager = () => {
     return (
         <div className="admin-events-page">
             <div className="page-header">
-                <div className="header-title-group">
-                    <h1>B2B: Clientes y Contratos</h1>
-                    <p className="header-subtitle">Gestiona las organizaciones (recintos/promotores), sus paquetes contratados, edítalos o elimínalos.</p>
+                <div className="header-title-group" style={{ minWidth: 0 }}>
+                    <h1 className="b2b-title" style={{ color: 'var(--color-text)', margin: '0 0 4px' }}>B2B: Clientes y Contratos</h1>
+                    <p className="header-subtitle b2b-subtitle" style={{ color: 'var(--color-text-secondary)', margin: 0 }}>Gestiona las organizaciones (recintos/promotores), sus paquetes contratados, edítalos o elimínalos.</p>
                 </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+            <div className="b2b-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', minWidth: 0 }}>
                 {/* ORGANIZATIONS SECTION */}
-                <Card className="glass-panel">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                        <h3>Clientes / Organizaciones</h3>
+                <Card className="glass-panel b2b-panel">
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '.75rem', flexWrap: 'wrap', marginBottom: '1rem', minWidth: 0 }}>
+                        <h3 className="b2b-section-title" style={{ color: 'var(--color-text)', margin: 0 }}>Clientes / Organizaciones</h3>
                         <Button size="small" onClick={() => {
                             setSelectedOrg(null);
                             setIsOrgModalOpen(true);
                         }}>+ Nuevo Cliente</Button>
                     </div>
-                    {loading ? <p>Cargando...</p> : (
+                    {loading ? <p className="b2b-muted" style={{ color: 'var(--color-text-secondary)' }}>Cargando...</p> : (
                         <Table columns={orgColumns} data={organizations} className="admin-custom-table" />
                     )}
                 </Card>
 
                 {/* CONTRACTS SECTION */}
-                <Card className="glass-panel">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                        <h3>Contratos / Proyectos</h3>
+                <Card className="glass-panel b2b-panel">
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '.75rem', flexWrap: 'wrap', marginBottom: '1rem', minWidth: 0 }}>
+                        <h3 className="b2b-section-title" style={{ color: 'var(--color-text)', margin: 0 }}>Contratos / Proyectos</h3>
                         <Button size="small" onClick={() => {
                             setSelectedContract(null);
                             setIsContractModalOpen(true);
                         }}>+ Nuevo Contrato</Button>
                     </div>
-                    {loading ? <p>Cargando...</p> : (
+                    {loading ? <p className="b2b-muted" style={{ color: 'var(--color-text-secondary)' }}>Cargando...</p> : (
                         <Table columns={contractColumns} data={contracts} className="admin-custom-table" />
                     )}
                 </Card>

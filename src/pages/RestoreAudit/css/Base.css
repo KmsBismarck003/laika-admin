@@ -61,3 +61,38 @@
   color: #22c55e;
   margin-bottom: 1rem;
 }
+
+/* D-14: selectores y options visibles en ambos temas */
+.restore-audit-page select,
+.restore-audit-page input[type="date"],
+.restore-audit-page input[type="datetime-local"] {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  color-scheme: light;
+}
+
+.restore-audit-page select option {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.restore-audit-page select::picker(select) {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .restore-audit-page select,
+[data-theme="dark"] .restore-audit-page input[type="date"],
+[data-theme="dark"] .restore-audit-page input[type="datetime-local"] {
+  background: #1e1e1e;
+  color: #fafafa;
+  border-color: var(--color-border);
+  color-scheme: dark;
+}
+
+[data-theme="dark"] .restore-audit-page select option {
+  background: #1e1e1e;
+  color: #fafafa;
+}

@@ -10,16 +10,16 @@ const AdAnalytics = ({ clicksData, loadingClicks }) => {
           justifyContent: 'space-between', 
           alignItems: 'center', 
           marginBottom: '1rem', 
-          borderBottom: '1px solid var(--border-color)', 
+          borderBottom: '1px solid var(--color-border)', 
           paddingBottom: '0.5rem' 
       }}>
-        <h3 style={{ fontSize: '1rem', fontWeight: 600 }}>Usuarios que interactuaron</h3>
+        <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--color-text)' }}>Usuarios que interactuaron</h3>
         <Badge variant="primary">{clicksData.length} Clics</Badge>
       </div>
 
       <div className="whatsapp-style-list" style={{ maxHeight: '300px', overflowY: 'auto', paddingRight: '0.5rem' }}>
         {loadingClicks ? (
-          <p style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '1rem' }}>Cargando...</p>
+          <p style={{ textAlign: 'center', color: 'var(--color-text-secondary)', padding: '1rem' }}>Cargando...</p>
         ) : clicksData.length > 0 ? (
           clicksData.map((click, idx) => (
             <div 
@@ -31,7 +31,8 @@ const AdAnalytics = ({ clicksData, loadingClicks }) => {
                 gap: '0.8rem', 
                 padding: '0.8rem', 
                 borderRadius: '12px', 
-                background: 'rgba(255,255,255,0.03)', 
+                background: 'var(--color-surface-hover)', 
+                border: '1px solid var(--color-border)',
                 marginBottom: '0.5rem', 
                 transition: 'background 0.2s' 
               }}
@@ -42,7 +43,8 @@ const AdAnalytics = ({ clicksData, loadingClicks }) => {
                   width: '40px', 
                   height: '40px', 
                   borderRadius: '50%', 
-                  background: '#333', 
+                  background: 'var(--color-surface-elevated)', 
+                  border: '1px solid var(--color-border)',
                   overflow: 'hidden', 
                   flexShrink: 0 
                 }}
@@ -59,21 +61,22 @@ const AdAnalytics = ({ clicksData, loadingClicks }) => {
                     fontSize: '0.9rem', 
                     whiteSpace: 'nowrap', 
                     overflow: 'hidden', 
-                    textOverflow: 'ellipsis' 
+                    textOverflow: 'ellipsis',
+                    color: 'var(--color-text)'
                 }}>
                   {click.full_name || 'Usuario Anónimo'}
                 </div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
                   {click.email || 'Sin correo asociado'}
                 </div>
               </div>
-              <div className="wa-time" style={{ fontSize: '0.7rem', color: 'var(--accent-color)', fontWeight: 500 }}>
+              <div className="wa-time" style={{ fontSize: '0.7rem', color: 'var(--color-text-secondary)', fontWeight: 500 }}>
                 {new Date(click.clicked_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </div>
             </div>
           ))
         ) : (
-          <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+          <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-text-secondary)', fontSize: '0.85rem' }}>
             Aún no hay clics registrados para este anuncio.
           </div>
         )}

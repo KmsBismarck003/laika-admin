@@ -18,14 +18,19 @@ const BigDataFilters = ({
     handleExportExcel
 }) => {
     return (
-        <Card style={{ 
+        <Card className="bigdata-panel-card bigdata-filters-card" style={{ 
             padding: openFiltersPanel ? '1.5rem' : '1rem 1.2rem', 
-            background: 'var(--bg-card, #ffffff)', 
-            border: '1px solid var(--border-color, #e2e8f0)', 
+            background: 'var(--color-surface)', 
+            border: '1px solid var(--color-border)', 
             boxShadow: '0 4px 20px rgba(0,0,0,0.03)', 
             borderRadius: '16px', 
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', 
-            overflow: 'hidden'
+            overflow: 'visible',
+            minWidth: 0,
+            height: 'auto',
+            flex: '0 0 auto',
+            alignSelf: 'start',
+            width: '100%'
         }}>
             <button 
                 onClick={() => setOpenFiltersPanel(v => !v)} 
@@ -41,19 +46,19 @@ const BigDataFilters = ({
                     marginBottom: openFiltersPanel ? '1.5rem' : '0'
                 }}
             >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <div style={{ background: '#f1f5f9', padding: '6px', borderRadius: '8px', color: '#0f172a' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
+                    <div className="bigdata-icon" style={{ background: 'var(--color-surface-hover)', padding: '6px', borderRadius: '8px', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}>
                         <Filter size={16} />
                     </div>
-                    <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#0f172a', margin: 0, letterSpacing: '0.5px' }}>FILTROS AVANZADOS</h3>
+                    <h3 className="bigdata-title" style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-text)', margin: 0, letterSpacing: '0.5px' }}>FILTROS AVANZADOS</h3>
                 </div>
-                <ChevronDown size={18} color="#64748b" style={{ transform: openFiltersPanel ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }} />
+                <ChevronDown size={18} color="currentColor" className="bigdata-icon" style={{ transform: openFiltersPanel ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease', color: 'var(--color-text-secondary)' }} />
             </button>
             
             {openFiltersPanel && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+                <div className="bigdata-panel-body bigdata-filters-body" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', minWidth: 0, height: 'auto', maxHeight: 'none', overflow: 'visible' }}>
                     <div className="filter-group">
-                        <label>Filtrar por Evento</label>
+                        <label className="bigdata-subtitle">Filtrar por Evento</label>
                         <select name="event_id" value={filters.event_id} onChange={handleFilterChange} className="select-premium">
                             <option value="">Todos los eventos</option>
                             {eventsList.map(ev => (
@@ -66,9 +71,9 @@ const BigDataFilters = ({
                     
                     <div className="filter-group">
                         <label>Rango Temporal</label>
-                        <div style={{ display: 'flex', gap: '8px' }}>
-                            <input type="date" name="date_from" value={filters.date_from} onChange={handleFilterChange} className="input-premium" />
-                            <input type="date" name="date_to" value={filters.date_to} onChange={handleFilterChange} className="input-premium" />
+                        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', minWidth: 0 }}>
+                            <input type="date" name="date_from" value={filters.date_from} onChange={handleFilterChange} className="input-premium" style={{ minWidth: 0, flex: '1 1 120px' }} />
+                            <input type="date" name="date_to" value={filters.date_to} onChange={handleFilterChange} className="input-premium" style={{ minWidth: 0, flex: '1 1 120px' }} />
                         </div>
                     </div>
                     
@@ -102,9 +107,9 @@ const BigDataFilters = ({
 
                     <div className="filter-group">
                         <label>Rango de Precios</label>
-                        <div style={{ display: 'flex', gap: '8px' }}>
-                            <input type="number" name="min_price" placeholder="Mín" value={filters.min_price} onChange={handleFilterChange} className="input-premium" />
-                            <input type="number" name="max_price" placeholder="Máx" value={filters.max_price} onChange={handleFilterChange} className="input-premium" />
+                        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', minWidth: 0 }}>
+                            <input type="number" name="min_price" placeholder="Mín" value={filters.min_price} onChange={handleFilterChange} className="input-premium" style={{ minWidth: 0, flex: '1 1 100px' }} />
+                            <input type="number" name="max_price" placeholder="Máx" value={filters.max_price} onChange={handleFilterChange} className="input-premium" style={{ minWidth: 0, flex: '1 1 100px' }} />
                         </div>
                     </div>
 
@@ -133,9 +138,9 @@ const BigDataFilters = ({
                         <button 
                             onClick={() => analysisMode === '3D_EXPLORATION' ? executeAnalysis() : executeMLAnalysis(analysisMode)} 
                             style={{ 
-                                background: '#1e293b', 
-                                color: '#ffffff', 
-                                border: 'none', 
+                                background: 'var(--color-primary)', 
+                                color: 'var(--color-primary-fg)', 
+                                border: '1px solid var(--color-border-strong)', 
                                 padding: '0.8rem', 
                                 borderRadius: '10px', 
                                 fontWeight: 700, 
@@ -143,17 +148,17 @@ const BigDataFilters = ({
                                 cursor: 'pointer',
                                 transition: 'all 0.2s'
                             }}
-                            onMouseOver={(e) => e.currentTarget.style.background = '#0f172a'}
-                            onMouseOut={(e) => e.currentTarget.style.background = '#1e293b'}
+                            onMouseOver={(e) => e.currentTarget.style.filter = 'brightness(0.92)'}
+                            onMouseOut={(e) => e.currentTarget.style.filter = 'none'}
                         >
                             APLICAR FILTROS
                         </button>
                         <button 
                             onClick={handleExportExcel} 
                             style={{ 
-                                background: '#f8fafc', 
-                                color: '#10b981', 
-                                border: '1px solid #10b981', 
+                                background: 'var(--color-surface)', 
+                                color: 'var(--color-success)', 
+                                border: '1px solid var(--color-success)', 
                                 padding: '0.8rem', 
                                 borderRadius: '10px', 
                                 fontWeight: 700, 
@@ -165,8 +170,8 @@ const BigDataFilters = ({
                                 gap: '8px',
                                 transition: 'all 0.2s'
                             }}
-                            onMouseOver={(e) => e.currentTarget.style.background = '#ecfdf5'}
-                            onMouseOut={(e) => e.currentTarget.style.background = '#f8fafc'}
+                            onMouseOver={(e) => e.currentTarget.style.background = 'var(--color-surface-hover)'}
+                            onMouseOut={(e) => e.currentTarget.style.background = 'var(--color-surface)'}
                         >
                             <Download size={14} /> EXPORTAR CSV
                         </button>

@@ -317,7 +317,7 @@ const Events = () => {
 const TableSkeleton = () => (
   <div className="table-container">
     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-      <thead><tr style={{ background: 'var(--bg-secondary)', borderBottom: '2px solid var(--border-color)' }}>
+      <thead><tr style={{ background: 'var(--color-surface)', borderBottom: '2px solid var(--color-border)' }}>
         {['POSTER', 'EVENTO', 'FECHA', 'ESTADO', 'ACCIONES'].map(h => <th key={h} className="th-skeleton">{h}</th>)}
       </tr></thead>
       <tbody>{Array.from({ length: 6 }).map((_, i) => <SkeletonRow key={i} columns={5} />)}</tbody>

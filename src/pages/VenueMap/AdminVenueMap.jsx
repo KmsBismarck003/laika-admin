@@ -434,7 +434,7 @@ const AdminVenueMap = () => {
         </div>
 
         <div className="avm-header-right">
-          <span style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.3)' }}>
+          <span style={{ fontSize: '0.68rem', color: 'var(--color-text-secondary)' }}>
             {`${totalSeats} asientos${totalCapacity > 0 ? ` / ${totalCapacity}` : ''}`}
           </span>
           <div className="avm-sep" />
@@ -489,8 +489,8 @@ const AdminVenueMap = () => {
                 <span className="avm-selection-count">{selectedSeats.length}</span>
                 <span className="avm-selection-text">asientos seleccionados</span>
                 <button className="avm-sel-btn" onClick={() => changeSeatType('normal')}>Normal</button>
-                <button className="avm-sel-btn" onClick={() => changeSeatType('vip')} style={{ color: '#a855f7' }}>VIP</button>
-                <button className="avm-sel-btn" onClick={() => changeSeatType('accessible')} style={{ color: '#06b6d4' }}>Acc</button>
+                <button className="avm-sel-btn" onClick={() => changeSeatType('vip')} style={{ color: 'var(--color-info)', fontWeight: 700 }}>VIP</button>
+                <button className="avm-sel-btn" onClick={() => changeSeatType('accessible')} style={{ color: 'var(--color-success)', fontWeight: 700 }}>Acc</button>
                 <div className="avm-sep" />
                 <button className="avm-sel-btn danger" onClick={deleteSelectedSeats}>Eliminar</button>
                 <button className="avm-sel-btn" onClick={() => setSelectedSeats([])}>X</button>

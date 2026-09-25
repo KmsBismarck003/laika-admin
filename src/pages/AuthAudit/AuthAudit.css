@@ -18,7 +18,7 @@
     font-weight: 900;
     font-size: 1.4rem;
     letter-spacing: -0.02em;
-    color: #000;
+    color: var(--color-text);
     margin: 0;
     text-transform: uppercase;
 }
@@ -26,7 +26,7 @@
 .audit-status-badge {
     font-size: 0.75rem;
     font-weight: 700;
-    color: #666;
+    color: var(--color-text-secondary);
     margin-top: 4px;
     display: flex;
     align-items: center;
@@ -39,24 +39,53 @@
     grid-template-columns: 1fr 160px 200px;
     gap: 0.75rem;
     align-items: center;
-    background: #fff;
-    border: 1px solid #e5e7eb;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
     padding: 0.75rem;
     margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .audit-filters-card {
+    background: var(--color-surface-elevated);
+    border-color: var(--color-border);
 }
 
 .audit-input, .audit-select {
     height: 38px;
     padding: 0 0.75rem;
-    border: 1.5px solid #e5e7eb;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
     font-size: 0.85rem;
     font-family: 'Inter', sans-serif;
     outline: none;
     transition: border-color 0.2s;
 }
 
+[data-theme="dark"] .audit-input, [data-theme="dark"] .audit-select {
+    background: var(--color-surface-elevated);
+    color: var(--color-text);
+    border-color: var(--color-border);
+}
+
+.audit-input::placeholder {
+    color: var(--color-text-secondary);
+    opacity: 1;
+}
+
+.audit-select option {
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+[data-theme="dark"] .audit-select option {
+    background: #1e1e1e;
+    color: #fafafa;
+}
+
 .audit-input:focus, .audit-select:focus {
-    border-color: #000;
+    border-color: var(--color-border-strong);
 }
 
 .audit-select {
@@ -68,8 +97,8 @@
 
 /* TABLE STYLES */
 .audit-table-container {
-    background: #fff;
-    border: 1px solid #e5e7eb;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     overflow: hidden;
 }
 
@@ -96,12 +125,13 @@
 
 .audit-tech-table td {
     padding: 1rem;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid var(--color-border);
     vertical-align: middle;
+    color: var(--color-text);
 }
 
 .audit-tech-table tr:hover td {
-    background: #fdfdfd;
+    background: var(--color-surface-hover);
 }
 
 /* PAGINATION */
@@ -111,14 +141,14 @@
     justify-content: center;
     gap: 1.5rem;
     padding: 1rem;
-    border-top: 1px solid #e5e7eb;
-    background: #fafafa;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
 }
 
 .page-info {
     font-size: 0.8rem;
     font-weight: 700;
-    color: #374151;
+    color: var(--color-text-secondary);
     letter-spacing: 0.02em;
 }
 
@@ -132,8 +162,8 @@
 .audit-avatar {
     width: 32px;
     height: 32px;
-    background: #000;
-    color: #fff;
+    background: var(--color-primary);
+    color: var(--color-primary-fg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -145,8 +175,8 @@
     display: block;
 }
 
-.audit-u-name { font-weight: 700; color: #000; font-size: 0.85rem; }
-.audit-u-email { font-size: 0.75rem; color: #6b7280; }
+.audit-u-name { font-weight: 700; color: var(--color-text); font-size: 0.85rem; }
+.audit-u-email { font-size: 0.75rem; color: var(--color-text-secondary); }
 
 /* DEVICE INFO */
 .audit-device-cell {
@@ -155,9 +185,13 @@
     gap: 0.5rem;
 }
 
+.audit-device-cell svg {
+    color: currentColor;
+}
+
 .device-text { line-height: 1.2; }
-.device-os { font-weight: 700; color: #000; display: block; }
-.device-browser { font-size: 0.7rem; color: #6b7280; text-transform: uppercase; }
+.device-os { font-weight: 700; color: var(--color-text); display: block; }
+.device-browser { font-size: 0.7rem; color: var(--color-text-secondary); text-transform: uppercase; }
 
 /* ATTEMPTS */
 .audit-badge-circle {
@@ -166,7 +200,48 @@
     justify-content: center;
     width: 24px;
     height: 24px;
-    border: 1.5px solid #000;
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-text);
     font-weight: 900;
     font-size: 0.75rem;
+}
+
+/* D-13: boton ACTUALIZAR fuerte en ambos temas */
+.audit-header-flex .tech-btn,
+.admin-section .admin-header .btn--outline,
+.admin-section .admin-header .btn-outline {
+    background: #000;
+    color: #fff;
+    border: 1px solid #000;
+    font-weight: 800;
+}
+
+.audit-header-flex .tech-btn:hover,
+.admin-section .admin-header .btn--outline:hover,
+.admin-section .admin-header .btn-outline:hover {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+    color: #fff;
+}
+
+[data-theme="dark"] .audit-header-flex .tech-btn,
+[data-theme="dark"] .admin-section .admin-header .btn--outline,
+[data-theme="dark"] .admin-section .admin-header .btn-outline {
+    background: #fafafa;
+    color: #0a0a0a;
+    border: 1px solid #fafafa;
+}
+
+[data-theme="dark"] .audit-header-flex .tech-btn:hover,
+[data-theme="dark"] .admin-section .admin-header .btn--outline:hover,
+[data-theme="dark"] .admin-section .admin-header .btn-outline:hover {
+    background: #fff;
+    border-color: #525252;
+    color: #0a0a0a;
+}
+
+[data-theme="dark"] .audit-tech-table th {
+    background: var(--color-surface-elevated);
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
 }

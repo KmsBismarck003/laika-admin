@@ -4,7 +4,7 @@ import { Button, Icon } from '@/components';
 const UsersHeader = ({ onRefresh, onCreateNew }) => {
     return (
         <div className="user-mgmt__header" style={{ marginBottom: '0.8rem' }}>
-            <h1 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>
+            <h1 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0, letterSpacing: '-0.02em', color: 'var(--color-text)' }}>
                 GESTIÓN DE USUARIOS
             </h1>
             <div className="user-mgmt__header-actions" style={{ display: 'flex', gap: '10px' }}>

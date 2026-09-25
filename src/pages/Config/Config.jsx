@@ -86,7 +86,7 @@ const Config = () => {
         {showSkeleton ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '8px 0' }}>
             {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: i < 3 ? '1px solid var(--border-color)' : 'none' }}>
+              <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: i < 3 ? '1px solid var(--color-border)' : 'none' }}>
                 <div style={{ flex: 1 }}>
                   <Skeleton type="text" width={`${40 + i * 12}%`} height="14px" style={{ marginBottom: '6px' }} />
                   <Skeleton type="text" width={`${55 + i * 5}%`} height="10px" />

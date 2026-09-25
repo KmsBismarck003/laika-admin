@@ -1,3 +1,23 @@
 ﻿/* Unificado - usa tokens de src/styles/variables.css + src/pages/common/AdminBase.css */
 .admin-dashboard-page{background:var(--color-bg);color:var(--color-text)}
+.admin-page{background:var(--color-bg);color:var(--color-text)}
+.admin-page .page-header h1{color:var(--color-text)}
+.admin-page .page-header p{color:var(--color-text-secondary)}
+/* Iconos con contraste en ambos modos (usa currentColor heredado) */
+.admin-page svg{color:var(--color-text-secondary)}
+.admin-page .btn svg{color:currentColor}
+.admin-page .stat-icon svg{color:var(--color-text-secondary)}
+.admin-page .admin-table svg{color:var(--color-text-secondary)}
+[data-theme="dark"] .admin-page svg{color:var(--color-text)}
+[data-theme="dark"] .admin-page .stat-icon svg{color:var(--color-text)}
+[data-theme="dark"] .admin-page .admin-table svg{color:var(--color-text)}
+[data-theme="dark"] .admin-page .btn svg{color:currentColor}
+/* Botones visibles */
+.admin-page .btn--primary,.admin-page .btn-primary{background:var(--color-primary) !important;color:var(--color-primary-fg) !important;border-color:var(--color-primary) !important}
+.admin-page .btn--primary svg,.admin-page .btn-primary svg{color:var(--color-primary-fg) !important}
+[data-theme="dark"] .admin-page .btn--primary svg,[data-theme="dark"] .admin-page .btn-primary svg{color:var(--color-primary-fg) !important}
+/* Textos tabla */
+.admin-page .admin-table{color:var(--color-text)}
+.admin-page .stat-label{color:var(--color-text-secondary)}
+.admin-page .stat-value{color:var(--color-text)}
 

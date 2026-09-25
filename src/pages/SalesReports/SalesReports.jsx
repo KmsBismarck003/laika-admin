@@ -117,7 +117,7 @@ const SalesReports = () => {
       </div>
 
       <Card style={{ padding: 0, overflow: 'hidden' }}>
-        <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-secondary)', height: '48px', boxSizing: 'border-box' }}>
+        <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--color-surface)', height: '48px', boxSizing: 'border-box' }}>
           <div style={{ width: '300px' }}>
             <Input
               placeholder="Buscar por nombre de evento..."
@@ -126,7 +126,7 @@ const SalesReports = () => {
               icon={<Icon name="search" size={16} />}
             />
           </div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+          <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--color-text-secondary)', textTransform: 'uppercase' }}>
             {filteredSales.length} REGISTROS
           </div>
         </div>
@@ -161,12 +161,12 @@ const SalesReports = () => {
                       </Badge>
                     </td>
                     <td>
-                      <div className="progress-bar-container" style={{ width: '100px', height: '6px', background: 'var(--bg-tertiary)', borderRadius: '3px', position: 'relative', overflow: 'hidden', display: 'inline-block' }}>
+                      <div className="progress-bar-container" style={{ width: '100px', height: '6px', background: 'var(--color-bg)', borderRadius: '3px', position: 'relative', overflow: 'hidden', display: 'inline-block', border: '1px solid var(--color-border)' }}>
                         <div
                           style={{
                             width: `${Math.min(item.occupancy, 100)}%`,
                             height: '100%',
-                            background: item.occupancy > 90 ? 'var(--error)' : 'var(--success)',
+                            background: item.occupancy > 90 ? 'var(--color-danger)' : 'var(--color-success)',
                             borderRadius: '3px'
                           }}
                         />
@@ -188,7 +188,7 @@ const SalesReports = () => {
             </tbody>
           </table>
           {totalPages > 1 && (
-            <div style={{ padding: '1rem', borderTop: '1px solid var(--border-color)' }}>
+            <div style={{ padding: '1rem', borderTop: '1px solid var(--color-border)' }}>
               <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}

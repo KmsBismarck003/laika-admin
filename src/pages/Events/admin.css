@@ -1,3 +1,51 @@
 ﻿/* Unificado - usa tokens de src/styles/variables.css + src/pages/common/AdminBase.css */
 .admin-dashboard-page{background:var(--color-bg);color:var(--color-text)}
+.admin-events-page{background:var(--color-bg);color:var(--color-text)}
+.admin-events-page .page-header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.admin-events-page .header-title-group h1{color:var(--color-text);margin:0}
+.admin-events-page .header-subtitle{color:var(--color-text-secondary);margin:4px 0 0 0}
+/* Botones siempre visibles en ambos modos: primary usa tokens tematicos */
+.admin-events-page .btn--primary,.admin-events-page .btn-primary{background:var(--color-primary) !important;color:var(--color-primary-fg) !important;border-color:var(--color-primary) !important}
+.admin-events-page .btn--primary svg,.admin-events-page .btn-primary svg{color:var(--color-primary-fg) !important}
+.admin-events-page .btn--danger,.admin-events-page .btn-danger{background:var(--color-danger) !important;color:#fff !important;border-color:var(--color-danger) !important}
+.admin-events-page .btn--danger svg,.admin-events-page .btn-danger svg{color:#fff !important}
+.admin-events-page .btn--info,.admin-events-page .btn-info{background:var(--color-info) !important;color:#fff !important;border-color:var(--color-info) !important}
+.admin-events-page .btn--info svg,.admin-events-page .btn-info svg{color:#fff !important}
+.admin-events-page .btn--warning,.admin-events-page .btn-warning{background:var(--color-warning) !important;color:#0a0a0a !important;border-color:var(--color-warning) !important}
+.admin-events-page .btn--warning svg,.admin-events-page .btn-warning svg{color:currentColor !important}
+[data-theme="dark"] .admin-events-page .btn--warning,[data-theme="dark"] .admin-events-page .btn-warning{background:#eab308 !important;border-color:#eab308 !important;color:#0a0a0a !important}
+.admin-events-page .btn--ghost,.admin-events-page .btn-ghost{color:var(--color-text-secondary) !important;border-color:var(--color-border) !important}
+.admin-events-page .btn--ghost svg,.admin-events-page .btn-ghost svg{color:var(--color-text-secondary) !important}
+/* Textos generales con contraste tematico */
+.admin-events-page .event-name-primary{color:var(--color-text);font-weight:700}
+.admin-events-page .event-location-sub{color:var(--color-text-secondary);font-size:0.75rem;display:flex;align-items:center;gap:4px}
+.admin-events-page .records-count{color:var(--color-text-secondary);font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin:12px 0}
+.admin-events-page .empty-state{color:var(--color-text-secondary);text-align:center;padding:3rem 1rem;display:flex;flex-direction:column;align-items:center;gap:1rem}
+.admin-events-page .empty-state .empty-icon{color:var(--color-text-muted)}
+.admin-events-page .th-skeleton{color:var(--color-text-secondary)}
+.events-main-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;box-shadow:var(--shadow);color:var(--color-text)}
+/* Barra busqueda + filtros alineada */
+.events-filters-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 0}
+.events-filters-bar .filter-group{display:flex;align-items:center}
+.events-filters-bar .search-filter{flex:1 1 220px;min-width:200px;max-width:320px}
+.events-filters-bar .select-filter select{background:var(--color-surface);color:var(--color-text);border:1px solid var(--color-border);border-radius:8px;padding:8px 12px;font-size:0.85rem;outline:none}
+.events-filters-bar .select-filter select:disabled{opacity:0.5}
+.events-filters-bar .select-filter select:focus{border-color:var(--color-border-strong)}
+/* Layout tarjetas/lista eventos */
+.events-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:16px}
+.event-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;box-shadow:var(--shadow);padding:16px;color:var(--color-text);transition:box-shadow 180ms ease,transform 180ms ease}
+.event-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.admin-events-page .admin-custom-table{background:var(--color-surface);color:var(--color-text)}
+.admin-events-page .admin-custom-table th{color:var(--color-text-secondary)}
+.admin-events-page .admin-custom-table td{color:var(--color-text)}
+/* Formulario evento: textos y divisores tematicos */
+.event-form-container{color:var(--color-text)}
+.event-form-container .form-section-title{color:var(--color-text)}
+.event-form-container .dynamic-empty{color:var(--color-text-secondary)}
+.event-form-container .form-divider{border-color:var(--color-border)}
+.event-form-container .btn-icon.danger{color:var(--color-danger);border:1px solid var(--color-border);background:var(--color-danger-bg);border-radius:8px;padding:6px;cursor:pointer}
+/* Modal ventas: correccion contraste (complementa estilos inline) */
+.sales-metrics-container{color:var(--color-text)}
+.sales-tabs button{color:var(--color-text-secondary) !important}
+[data-theme="dark"] .sales-tabs button{color:var(--color-text-secondary) !important}
 

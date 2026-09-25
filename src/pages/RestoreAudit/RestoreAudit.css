@@ -200,7 +200,7 @@
 .ra-form-group label {
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--color-text);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -215,12 +215,43 @@
 .ra-form-group textarea {
   padding: 10px 12px;
   border-radius: 8px;
-  border: 1px solid var(--border-color, rgba(255,255,255,0.1));
-  background: var(--bg-input, rgba(255,255,255,0.05));
-  color: var(--text-primary);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
   font-size: 0.9rem;
   transition: all 0.2s ease;
   font-family: inherit;
+  color-scheme: light;
+}
+
+[data-theme="dark"] .ra-form-group input,
+[data-theme="dark"] .ra-form-group select,
+[data-theme="dark"] .ra-form-group textarea {
+  background: var(--color-surface-elevated);
+  color: var(--color-text);
+  border-color: var(--color-border);
+  color-scheme: dark;
+}
+
+.ra-form-group select option {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .ra-form-group select option {
+  background: #1e1e1e;
+  color: #fafafa;
+}
+
+.ra-form-group select::picker(select) {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .ra-form-group select::picker(select) {
+  background: #1e1e1e;
+  color: #fafafa;
 }
 
 .ra-form-group input:focus,
@@ -349,10 +380,35 @@
 .ra-history-filters select {
   padding: 8px 12px;
   border-radius: 8px;
-  border: 1px solid var(--border-color, rgba(255,255,255,0.1));
-  background: var(--bg-input, rgba(255,255,255,0.05));
-  color: var(--text-primary);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
   font-size: 0.85rem;
+  color-scheme: light;
+}
+
+[data-theme="dark"] .ra-history-filters input,
+[data-theme="dark"] .ra-history-filters select {
+  background: var(--color-surface-elevated);
+  color: var(--color-text);
+  border-color: var(--color-border);
+  color-scheme: dark;
+}
+
+.ra-history-filters select option {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .ra-history-filters select option {
+  background: #1e1e1e;
+  color: #fafafa;
+}
+
+.ra-history-filters select::picker(select) {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
 }
 
 .ra-table-wrap {
@@ -381,8 +437,15 @@
 .ra-table td {
   padding: 12px 14px;
   font-size: 0.88rem;
-  color: var(--text-primary);
-  border-bottom: 1px solid var(--border-color, rgba(255,255,255,0.04));
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .ra-table th,
+[data-theme="dark"] .ra-dist-table th {
+  background: var(--color-surface-elevated);
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .ra-table tr:hover td {

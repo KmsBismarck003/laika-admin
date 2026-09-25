@@ -21,16 +21,17 @@ const BigDataTools = ({
     canonicalData
 }) => {
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <div className="bigdata-side-stack" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', minWidth: 0 }}>
             {/* Esquema de Color */}
-            <Card style={{ 
+            <Card className="bigdata-panel-card" style={{ 
                 padding: openColorPanel ? '1.5rem' : '1rem 1.2rem', 
-                background: 'var(--bg-card, #ffffff)', 
-                border: '1px solid var(--border-color, #e2e8f0)', 
+                background: 'var(--color-surface)', 
+                border: '1px solid var(--color-border)', 
                 boxShadow: '0 4px 20px rgba(0,0,0,0.03)', 
                 borderRadius: '16px', 
                 transition: 'all 0.3s ease',
-                overflow: 'hidden'
+                overflow: 'visible',
+                minWidth: 0
             }}>
                 <button 
                     onClick={() => setOpenColorPanel(v => !v)} 
@@ -46,25 +47,25 @@ const BigDataTools = ({
                         marginBottom: openColorPanel ? '1rem' : '0'
                     }}
                 >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <div style={{ background: '#f1f5f9', padding: '6px', borderRadius: '8px', color: '#0f172a' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
+                        <div className="bigdata-icon" style={{ background: 'var(--color-surface-hover)', padding: '6px', borderRadius: '8px', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}>
                             <Palette size={16} />
                         </div>
-                        <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#0f172a', margin: 0, letterSpacing: '0.5px' }}>ESQUEMA DE COLOR</h3>
+                        <h3 className="bigdata-title" style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-text)', margin: 0, letterSpacing: '0.5px' }}>ESQUEMA DE COLOR</h3>
                     </div>
-                    <ChevronDown size={18} color="#64748b" style={{ transform: openColorPanel ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }} />
+                    <ChevronDown size={18} color="currentColor" style={{ transform: openColorPanel ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease', color: 'var(--color-text-secondary)', flexShrink: 0 }} />
                 </button>
                 
                 {openColorPanel && (
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                    <div className="bigdata-panel-body" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: '8px', overflowY: 'auto', overflowX: 'hidden', maxHeight: '300px', minWidth: 0, paddingRight: '4px' }}>
                         {Object.keys(palettes).map(p => (
                             <button 
                                 key={p} 
                                 onClick={() => setColorPalette(p)} 
                                 style={{
-                                    background: colorPalette === p ? '#111827' : '#f8fafc',
-                                    color: colorPalette === p ? '#ffffff' : '#475569',
-                                    border: colorPalette === p ? '1px solid #111827' : '1px solid #e2e8f0',
+                                    background: colorPalette === p ? 'var(--color-primary)' : 'var(--color-surface-hover)',
+                                    color: colorPalette === p ? 'var(--color-primary-fg)' : 'var(--color-text-secondary)',
+                                    border: colorPalette === p ? '1px solid var(--color-border-strong)' : '1px solid var(--color-border)',
                                     padding: '0.8rem 0.5rem',
                                     borderRadius: '10px',
                                     fontWeight: 700,
@@ -82,14 +83,15 @@ const BigDataTools = ({
             </Card>
 
             {/* Configuración 3D */}
-            <Card style={{ 
+            <Card className="bigdata-panel-card" style={{ 
                 padding: openMetricsPanel ? '1.5rem' : '1rem 1.2rem', 
-                background: 'var(--bg-card, #ffffff)', 
-                border: '1px solid var(--border-color, #e2e8f0)', 
+                background: 'var(--color-surface)', 
+                border: '1px solid var(--color-border)', 
                 boxShadow: '0 4px 20px rgba(0,0,0,0.03)', 
                 borderRadius: '16px', 
                 transition: 'all 0.3s ease',
-                overflow: 'hidden'
+                overflow: 'visible',
+                minWidth: 0
             }}>
                 <button 
                     onClick={() => setOpenMetricsPanel(v => !v)} 
@@ -105,60 +107,60 @@ const BigDataTools = ({
                         marginBottom: openMetricsPanel ? '1.5rem' : '0'
                     }}
                 >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <div style={{ background: '#f1f5f9', padding: '6px', borderRadius: '8px', color: '#0f172a' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
+                        <div className="bigdata-icon" style={{ background: 'var(--color-surface-hover)', padding: '6px', borderRadius: '8px', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}>
                             <Settings size={16} />
                         </div>
-                        <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#0f172a', margin: 0, letterSpacing: '0.5px' }}>CONFIGURACIÓN 3D</h3>
+                        <h3 className="bigdata-title" style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-text)', margin: 0, letterSpacing: '0.5px' }}>CONFIGURACIÓN 3D</h3>
                     </div>
-                    <ChevronDown size={18} color="#64748b" style={{ transform: openMetricsPanel ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }} />
+                    <ChevronDown size={18} color="currentColor" style={{ transform: openMetricsPanel ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease', color: 'var(--color-text-secondary)', flexShrink: 0 }} />
                 </button>
                 
                 {openMetricsPanel && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+                    <div className="bigdata-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', overflowY: 'auto', overflowX: 'hidden', maxHeight: '65vh', minWidth: 0, paddingRight: '6px', scrollbarWidth: 'thin' }}>
                         <div className="slider-group">
-                            <div className="slider-header" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                                <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#475569' }}>Altura (Z)</label>
-                                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#111827', background: '#f1f5f9', padding: '2px 8px', borderRadius: '6px' }}>{hMult}x</span>
+                            <div className="slider-header" style={{ display: 'flex', justifyContent: 'space-between', gap: '.5rem', flexWrap: 'wrap', marginBottom: '6px' }}>
+                                <label style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-text-secondary)' }}>Altura (Z)</label>
+                                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-text)', background: 'var(--color-surface-hover)', border: '1px solid var(--color-border)', padding: '2px 8px', borderRadius: '6px' }}>{hMult}x</span>
                             </div>
                             <input type="range" min="0.5" max="5" step="0.1" value={hMult} onChange={(e) => setHMult(parseFloat(e.target.value))} className="slider-premium" />
                         </div>
                         
                         <div className="slider-group">
-                            <div className="slider-header" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                                <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#475569' }}>Ancho Base</label>
-                                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#111827', background: '#f1f5f9', padding: '2px 8px', borderRadius: '6px' }}>{barWidth}</span>
+                            <div className="slider-header" style={{ display: 'flex', justifyContent: 'space-between', gap: '.5rem', flexWrap: 'wrap', marginBottom: '6px' }}>
+                                <label style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-text-secondary)' }}>Ancho Base</label>
+                                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-text)', background: 'var(--color-surface-hover)', border: '1px solid var(--color-border)', padding: '2px 8px', borderRadius: '6px' }}>{barWidth}</span>
                             </div>
                             <input type="range" min="0.05" max="0.5" step="0.01" value={barWidth} onChange={(e) => setBarWidth(parseFloat(e.target.value))} className="slider-premium" />
                         </div>
                         
                         <div className="slider-group">
-                            <div className="slider-header" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                                <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#475569' }}>Tamaño Puntos</label>
-                                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#111827', background: '#f1f5f9', padding: '2px 8px', borderRadius: '6px' }}>{markerSize}px</span>
+                            <div className="slider-header" style={{ display: 'flex', justifyContent: 'space-between', gap: '.5rem', flexWrap: 'wrap', marginBottom: '6px' }}>
+                                <label style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-text-secondary)' }}>Tamaño Puntos</label>
+                                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-text)', background: 'var(--color-surface-hover)', border: '1px solid var(--color-border)', padding: '2px 8px', borderRadius: '6px' }}>{markerSize}px</span>
                             </div>
                             <input type="range" min="4" max="24" step="1" value={markerSize} onChange={(e) => setMarkerSize(parseInt(e.target.value))} className="slider-premium" />
                         </div>
                         
                         <div className="slider-group">
-                            <div className="slider-header" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                                <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#475569' }}>Opacidad</label>
-                                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#111827', background: '#f1f5f9', padding: '2px 8px', borderRadius: '6px' }}>{Math.round(opacity * 100)}%</span>
+                            <div className="slider-header" style={{ display: 'flex', justifyContent: 'space-between', gap: '.5rem', flexWrap: 'wrap', marginBottom: '6px' }}>
+                                <label style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-text-secondary)' }}>Opacidad</label>
+                                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-text)', background: 'var(--color-surface-hover)', border: '1px solid var(--color-border)', padding: '2px 8px', borderRadius: '6px' }}>{Math.round(opacity * 100)}%</span>
                             </div>
                             <input type="range" min="0.1" max="1" step="0.05" value={opacity} onChange={(e) => setOpacity(parseFloat(e.target.value))} className="slider-premium" />
                         </div>
                         
-                        <div className="slider-group" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#475569' }}>Color Custom</label>
+                        <div className="slider-group" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '.5rem', flexWrap: 'wrap' }}>
+                            <label style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-text-secondary)' }}>Color Custom</label>
                             <input type="color" value={customColor} onChange={(e) => setCustomColor(e.target.value)} style={{ padding: 0, border: 'none', width: '32px', height: '32px', borderRadius: '8px', cursor: 'pointer', background: 'transparent' }} />
                         </div>
 
-                        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '8px', marginTop: '0.5rem' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '8px', marginTop: '0.5rem', minWidth: 0 }}>
                             <select 
                                 className="select-premium" 
                                 value={buildingShape} 
                                 onChange={(e) => setBuildingShape(e.target.value)}
-                                style={{ padding: '0.6rem', fontSize: '0.75rem' }}
+                                style={{ padding: '0.6rem', fontSize: '0.75rem', minWidth: 0 }}
                             >
                                 <option value="cube">Cubos</option>
                                 <option value="pyramid">Pirámides</option>
@@ -167,9 +169,9 @@ const BigDataTools = ({
                             <button 
                                 onClick={() => setIsWireframe(!isWireframe)} 
                                 style={{
-                                    background: isWireframe ? '#111827' : '#f8fafc',
-                                    color: isWireframe ? '#ffffff' : '#475569',
-                                    border: isWireframe ? '1px solid #111827' : '1px solid #e2e8f0',
+                                    background: isWireframe ? 'var(--color-primary)' : 'var(--color-surface-hover)',
+                                    color: isWireframe ? 'var(--color-primary-fg)' : 'var(--color-text-secondary)',
+                                    border: '1px solid var(--color-border)',
                                     padding: '0.6rem',
                                     borderRadius: '10px',
                                     fontWeight: 700,
@@ -190,60 +192,64 @@ const BigDataTools = ({
             </Card>
 
             {/* Log de Tectónico */}
-            <Card style={{ 
+            <Card className="bigdata-panel-card" style={{ 
                 padding: openLogPanel ? '0' : '1rem 1.2rem', 
-                background: 'var(--bg-card, #ffffff)', 
-                border: '1px solid var(--border-color, #e2e8f0)', 
+                background: 'var(--color-surface)', 
+                border: '1px solid var(--color-border)', 
                 boxShadow: '0 4px 20px rgba(0,0,0,0.03)', 
                 borderRadius: '16px', 
                 transition: 'all 0.3s ease',
-                overflow: 'hidden',
-                flexGrow: 0
+                overflow: 'visible',
+                flexGrow: 0,
+                minWidth: 0
             }}>
                 <button 
                     onClick={() => setOpenLogPanel(v => !v)} 
                     style={{ 
                         width: '100%', 
                         background: 'transparent', 
-                        border: openLogPanel ? 'none' : 'none', 
-                        borderBottom: openLogPanel ? '1px solid #e2e8f0' : 'none',
+                        border: 'none', 
+                        borderBottom: openLogPanel ? '1px solid var(--color-border)' : 'none',
                         display: 'flex', 
                         alignItems: 'center', 
                         justifyContent: 'space-between', 
                         padding: openLogPanel ? '1rem 1.5rem' : '0', 
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        color: 'var(--color-text)'
                     }}
                 >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <div style={{ background: '#f1f5f9', padding: '6px', borderRadius: '8px', color: '#0f172a' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
+                        <div className="bigdata-icon" style={{ background: 'var(--color-surface-hover)', padding: '6px', borderRadius: '8px', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}>
                             <DatabaseIcon size={16} />
                         </div>
-                        <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#0f172a', margin: 0, letterSpacing: '0.5px' }}>LOG DE EVENTOS</h3>
+                        <h3 className="bigdata-title" style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-text)', margin: 0, letterSpacing: '0.5px' }}>LOG DE EVENTOS</h3>
                     </div>
-                    <ChevronDown size={18} color="#64748b" style={{ transform: openLogPanel ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }} />
+                    <ChevronDown size={18} color="currentColor" style={{ transform: openLogPanel ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease', color: 'var(--color-text-secondary)', flexShrink: 0 }} />
                 </button>
                 
                 {openLogPanel && (
-                    <div style={{ maxHeight: '200px', overflowY: 'auto', padding: '0.5rem 1rem' }}>
+                    <div className="bigdata-panel-body" style={{ maxHeight: '300px', overflowY: 'auto', overflowX: 'hidden', padding: '0.5rem 1rem', minWidth: 0, scrollbarWidth: 'thin' }}>
                         {canonicalData.slice(0, 20).map((d, i) => (
                             <div key={i} style={{ 
                                 display: 'flex', 
                                 alignItems: 'center', 
+                                gap: '.5rem',
                                 padding: '0.8rem 0.5rem', 
-                                borderBottom: '1px solid #f1f5f9',
+                                borderBottom: '1px solid var(--color-border)',
                                 transition: 'background 0.2s',
-                                borderRadius: '8px'
+                                borderRadius: '8px',
+                                minWidth: 0
                             }}
-                            onMouseOver={(e) => e.currentTarget.style.background = '#f8fafc'}
+                            onMouseOver={(e) => e.currentTarget.style.background = 'var(--color-surface-hover)'}
                             onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}
                             >
-                                <span style={{ fontSize: '0.65rem', fontWeight: 800, color: '#94a3b8', width: '24px' }}>{(i+1).toString().padStart(2, '0')}</span>
-                                <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#334155', flexGrow: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', paddingRight: '10px' }}>{d.producto}</span>
-                                <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#0f172a' }}>${d.val_num.toLocaleString()}</span>
+                                <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--color-text-muted)', width: '24px', flexShrink: 0 }}>{(i+1).toString().padStart(2, '0')}</span>
+                                <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--color-text)', flexGrow: 1, minWidth: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', paddingRight: '10px' }}>{d.producto}</span>
+                                <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--color-text)', flexShrink: 0 }}>${d.val_num.toLocaleString()}</span>
                             </div>
                         ))}
                         {canonicalData.length === 0 && (
-                            <div style={{ padding: '2rem', textAlign: 'center', color: '#94a3b8', fontSize: '0.8rem', fontWeight: 600 }}>Sin datos coincidentes</div>
+                            <div className="bigdata-desc" style={{ padding: '2rem', textAlign: 'center', color: 'var(--color-text-secondary)', fontSize: '0.8rem', fontWeight: 600 }}>Sin datos coincidentes</div>
                         )}
                     </div>
                 )}

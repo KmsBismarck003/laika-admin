@@ -17,7 +17,7 @@ const BigDataAnalytics = () => {
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <h1 style={{ margin: 0, fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>Análisis y Predicciones</h1>
+                <h1 style={{ margin: 0, fontSize: '1.8rem', fontWeight: 900, color: 'var(--color-text)' }}>Análisis y Predicciones</h1>
                 <button
                   onClick={() => setShowHelp(true)}
                   style={{
@@ -28,7 +28,7 @@ const BigDataAnalytics = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#64748b',
+                    color: 'var(--color-text-secondary)',
                     transition: 'color 0.2s',
                     borderRadius: '50%'
                   }}
@@ -119,16 +119,23 @@ const BigDataAnalytics = () => {
           margin: 0;
           font-size: 1.8rem;
           font-weight: 900;
-          color: #000 !important;
+          color: var(--color-text) !important;
+        }
+        [data-theme="dark"] .header-title-group h1 {
+          color: #fafafa !important;
         }
         .page-subtitle {
           margin: 0.25rem 0 0 0;
           font-size: 0.85rem;
-          color: #000 !important;
-          opacity: 0.7;
+          color: var(--color-text-secondary) !important;
+          opacity: 1;
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.1em;
+        }
+        [data-theme="dark"] .page-subtitle {
+          color: #a3a3a3 !important;
+          opacity: 1;
         }
         @keyframes slideDown {
           from {

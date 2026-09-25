@@ -77,7 +77,7 @@ const VenueCard = ({ venue, onEdit, onDelete }) => {
                 <div>
                     <h3 style={{ margin: 0, fontSize: '15px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px', color: '#fff', lineHeight: '1.2', textShadow: '0 0 10px rgba(255,255,255,0.3)' }}>{venue.name}</h3>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '6px' }}>
-                        <Icon name="map-pin" size={12} style={{ color: 'var(--primary-color)' }} />
+                        <Icon name="map-pin" size={12} style={{ color: 'var(--color-text-secondary)' }} />
                         <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '1px' }}>{venue.city}</span>
                     </div>
                 </div>
@@ -168,7 +168,7 @@ const VenueCard = ({ venue, onEdit, onDelete }) => {
                         style={{ width: '45px', background: 'rgba(255,0,0,0.1)', border: '1px solid rgba(255,0,0,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         onClick={() => onDelete(venue)}
                     >
-                        <Icon name="trash-2" size={18} style={{ color: '#ff3b3b' }} />
+                        <Icon name="trash-2" size={18} style={{ color: 'var(--color-danger)' }} />
                     </Button>
                 </div>
             </div>

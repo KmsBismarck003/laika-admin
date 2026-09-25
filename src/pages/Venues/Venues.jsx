@@ -97,7 +97,7 @@ const Venues = () => {
       render: (_, row) => (
         <div style={{ fontSize: '0.85rem' }}>
           <div style={{ fontWeight: 'bold' }}>{row.municipality_name || row.city || '—'}</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
             {row.state_name ? `${row.state_name}, ` : ''}{row.country_name || ''}
           </div>
         </div>
@@ -114,7 +114,7 @@ const Venues = () => {
               <Icon name="user" size={10} className="mr-1" /> {row.manager_first_name} {row.manager_last_name}
             </Badge>
           ) : (
-            <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>Sin asignar</span>
+            <span style={{ color: 'var(--color-text-muted)', fontStyle: 'italic' }}>Sin asignar</span>
           )}
         </div>
       )
@@ -156,7 +156,7 @@ const Venues = () => {
       </div>
 
       <Card className="glass-panel" style={{ padding: 0, overflow: 'hidden' }}>
-        <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-secondary)' }}>
+        <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--color-surface)' }}>
           <div style={{ width: '300px' }}>
             <Input
               placeholder="Buscar por nombre o ubicación..."
@@ -165,19 +165,19 @@ const Venues = () => {
               icon={<Icon name="search" size={16} />}
             />
           </div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+          <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--color-text-secondary)', textTransform: 'uppercase' }}>
             {filteredVenues.length} REGISTROS
           </div>
         </div>
         {showSkeleton ? (
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead><tr style={{ background: '#000' }}>
-              {['NOMBRE', 'UBICACIÓN', 'DIRECCIÓN', 'CAPACIDAD', 'ESTADO', 'ACCIONES'].map(h => <th key={h} style={{ padding: '14px 16px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', color: '#fff', textTransform: 'uppercase' }}>{h}</th>)}
+            <thead><tr style={{ background: 'var(--color-primary)' }}>
+              {['NOMBRE', 'UBICACIÓN', 'DIRECCIÓN', 'CAPACIDAD', 'ESTADO', 'ACCIONES'].map(h => <th key={h} style={{ padding: '14px 16px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', color: 'var(--color-primary-fg)', textTransform: 'uppercase' }}>{h}</th>)}
             </tr></thead>
             <tbody>{Array.from({ length: 6 }).map((_, i) => <SkeletonRow key={i} columns={6} />)}</tbody>
           </table>
         ) : filteredVenues.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--color-text-muted)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
             <Icon name="map" size={48} style={{ opacity: 0.1 }} />
             <p style={{ fontSize: '0.85rem', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
               No hay recintos registrados

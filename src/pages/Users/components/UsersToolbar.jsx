@@ -26,12 +26,12 @@ const UsersToolbar = ({
 
                 <div className="user-mgmt__filters-row" style={{ display: 'flex', gap: '10px' }}>
                     <div className="user-mgmt__select-wrapper">
-                        <label style={{ fontSize: '0.65rem', fontWeight: 800, marginRight: '5px' }}>ROL:</label>
+                        <label style={{ fontSize: '0.65rem', fontWeight: 800, marginRight: '5px', color: 'var(--color-text)' }}>ROL:</label>
                         <select
                             className="user-mgmt__select"
                             value={filters.role}
                             onChange={e => updateFilters({ role: e.target.value })}
-                            style={{ padding: '4px 8px', borderRadius: '4px', border: '1px solid #ddd', fontSize: '0.75rem', fontWeight: 700 }}
+                            style={{ padding: '4px 8px', borderRadius: '4px', border: '1px solid var(--color-border)', fontSize: '0.75rem', fontWeight: 700, background: 'var(--color-surface)', color: 'var(--color-text)' }}
                         >
                             <option value="">TODOS</option>
                             <option value="admin">ADMIN</option>
@@ -42,12 +42,12 @@ const UsersToolbar = ({
                     </div>
 
                     <div className="user-mgmt__select-wrapper">
-                        <label style={{ fontSize: '0.65rem', fontWeight: 800, marginRight: '5px' }}>ESTADO:</label>
+                        <label style={{ fontSize: '0.65rem', fontWeight: 800, marginRight: '5px', color: 'var(--color-text)' }}>ESTADO:</label>
                         <select
                             className="user-mgmt__select"
                             value={filters.status || ''}
                             onChange={e => updateFilters({ status: e.target.value })}
-                            style={{ padding: '4px 8px', borderRadius: '4px', border: '1px solid #ddd', fontSize: '0.75rem', fontWeight: 700 }}
+                            style={{ padding: '4px 8px', borderRadius: '4px', border: '1px solid var(--color-border)', fontSize: '0.75rem', fontWeight: 700, background: 'var(--color-surface)', color: 'var(--color-text)' }}
                         >
                             <option value="">TODOS</option>
                             <option value="active">ACTIVO</option>
@@ -69,8 +69,8 @@ const UsersToolbar = ({
                     )}
                 </div>
 
-                <div className="user-mgmt__stats" style={{ fontSize: '0.7rem', fontWeight: 800, color: '#888', borderLeft: '1px solid #eee', paddingLeft: '15px' }}>
-                    {loading ? <Skeleton type="text" width="30px" height="12px" /> : <strong style={{ color: '#000' }}>{total}</strong>} REGISTROS
+                <div className="user-mgmt__stats" style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--color-text-secondary)', borderLeft: '1px solid var(--color-border)', paddingLeft: '15px' }}>
+                    {loading ? <Skeleton type="text" width="30px" height="12px" /> : <strong style={{ color: 'var(--color-text)' }}>{total}</strong>} REGISTROS
                 </div>
             </div>
         </div>

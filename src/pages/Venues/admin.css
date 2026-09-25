@@ -1,3 +1,29 @@
 ﻿/* Unificado - usa tokens de src/styles/variables.css + src/pages/common/AdminBase.css */
 .admin-dashboard-page{background:var(--color-bg);color:var(--color-text)}
+.admin-page{background:var(--color-bg);color:var(--color-text)}
+.admin-page .admin-header h1{color:var(--color-text)}
+/* Crear nuevo recinto: contraste en ambos modos */
+.admin-page .admin-header .btn--primary,.admin-page .admin-header .btn-primary{background:var(--color-primary) !important;color:var(--color-primary-fg) !important;border-color:var(--color-primary) !important}
+.admin-page .admin-header .btn--primary svg,.admin-page .admin-header .btn-primary svg{color:var(--color-primary-fg) !important}
+/* Acciones tabla: Salas (info) y Eliminar (danger) visibles en claro */
+.admin-page .btn--info,.admin-page .btn-info{background:var(--color-info) !important;color:#fff !important;border-color:var(--color-info) !important}
+.admin-page .btn--info svg,.admin-page .btn-info svg{color:#fff !important}
+.admin-page .btn--danger,.admin-page .btn-danger{background:var(--color-danger) !important;color:#fff !important;border-color:var(--color-danger) !important}
+.admin-page .btn--danger svg,.admin-page .btn-danger svg{color:#fff !important}
+.admin-page .btn--warning,.admin-page .btn-warning{color:#000 !important}
+/* Responsable y editar: nunca negro fijo, usan variables */
+.admin-page .admin-table td{color:var(--color-text)}
+.admin-page .admin-table th{color:var(--color-text-secondary)}
+.venue-manager-name{color:var(--color-text)}
+.venue-manager-sub{color:var(--color-text-secondary)}
+[data-theme="dark"] .venue-manager-name{color:var(--color-text)}
+[data-theme="dark"] .admin-page .btn--warning svg,[data-theme="dark"] .admin-page .btn-warning svg{color:#000 !important}
+/* VenueCard tactica: mantiene fondo decorativo oscuro, textos claros fijos solo sobre ese fondo */
+.venue-tactical-card{border-radius:12px !important}
+.venue-tactical-card .technical-stat span{color:#fff}
+[data-theme="dark"] .venue-tactical-card{border-color:var(--color-border-strong) !important}
+/* Iconos sala/modal con contraste */
+.venue-rooms-modal{color:var(--color-text)}
+.venue-rooms-modal svg{color:var(--color-text-secondary)}
+[data-theme="dark"] .venue-rooms-modal svg{color:var(--color-text)}
 
