@@ -108,7 +108,7 @@ const SalesReports = () => {
                   $<AnimatedCounter value={totalRevenue} />
                 </div>
               </div>
-              <div className="bento-stat-icon" style={{ background: 'var(--success)' }}>
+              <div className="bento-stat-icon" style={{ background: 'var(--color-success)' }}>
                 <Icon name="dollarSign" size={24} style={{ color: '#fff' }} />
               </div>
             </div>
@@ -118,7 +118,7 @@ const SalesReports = () => {
 
       <BentoGrid style={{ marginTop: '2rem' }}>
         <BentoCard style={{ padding: 0, overflow: 'hidden' }}>
-          <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '48px', boxSizing: 'border-box' }}>
+          <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '48px', boxSizing: 'border-box' }}>
             <div style={{ width: '300px' }}>
               <Input
                 placeholder="Buscar por nombre de evento..."
@@ -127,7 +127,7 @@ const SalesReports = () => {
                 icon={<Icon name="search" size={16} />}
               />
             </div>
-            <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--color-text-secondary)', textTransform: 'uppercase' }}>
               {filteredSales.length} REGISTROS
             </div>
           </div>
@@ -141,27 +141,27 @@ const SalesReports = () => {
                 { key: 'remainingTickets', header: 'Restantes', render: val => <Badge variant={val < 20 ? 'warning' : 'success'} rounded>{val}</Badge> },
                 { key: 'occupancy', header: 'Ocupación', render: val => (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <div className="progress-bar-container" style={{ width: '80px', height: '6px', background: 'var(--bg-tertiary)', borderRadius: '3px', position: 'relative', overflow: 'hidden', display: 'inline-block' }}>
+                    <div className="progress-bar-container" style={{ width: '80px', height: '6px', background: 'var(--color-surface-hover)', borderRadius: '3px', position: 'relative', overflow: 'hidden', display: 'inline-block' }}>
                       <div
                         style={{
                           width: `${Math.min(val, 100)}%`,
                           height: '100%',
-                          background: val > 90 ? 'var(--error)' : 'var(--success)',
+                          background: val > 90 ? 'var(--color-danger)' : 'var(--color-success)',
                           borderRadius: '3px'
                         }}
                       />
                     </div>
-                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-primary)' }}>{val}%</span>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-text)' }}>{val}%</span>
                   </div>
                 )},
-                { key: 'revenue', header: 'Ingresos', render: val => <span style={{ fontWeight: 'bold', color: 'var(--success)' }}>{formatCurrency(val)}</span> }
+                { key: 'revenue', header: 'Ingresos', render: val => <span style={{ fontWeight: 'bold', color: 'var(--color-success)' }}>{formatCurrency(val)}</span> }
               ]}
               data={paginatedSales}
               loading={showSkeleton}
               emptyMessage="No hay datos de ventas disponibles"
             />
             {totalPages > 1 && (
-              <div style={{ padding: '1rem', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'center' }}>
+              <div style={{ padding: '1rem', borderTop: '1px solid var(--color-border)', display: 'flex', justifyContent: 'center' }}>
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}

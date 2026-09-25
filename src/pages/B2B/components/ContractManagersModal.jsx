@@ -132,15 +132,15 @@ const ContractManagersModal = ({
 
     return (
         <Modal isOpen={isOpen} title={`Cuentas Vinculadas - ${contract?.name || ''}`} onClose={onClose} size="large">
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxHeight: '75vh', overflowY: 'auto' }}>
+            <div className="b2b-managers" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxHeight: '75vh', overflowY: 'auto', overflowX: 'hidden', minWidth: 0 }}>
                 
                 {/* Current Managers Section */}
-                <div>
-                    <h4 style={{ color: '#e2e8f0', marginBottom: '0.8rem', fontSize: '1.1rem' }}>Cuentas de Gestor Asignadas</h4>
+                <div style={{ minWidth: 0 }}>
+                    <h4 className="b2b-section-title" style={{ color: 'var(--color-text)', marginBottom: '0.8rem', fontSize: '1.1rem' }}>Cuentas de Gestor Asignadas</h4>
                     {loading ? (
-                        <p style={{ color: '#a0aec0' }}>Cargando asignaciones...</p>
+                        <p className="b2b-muted" style={{ color: 'var(--color-text-secondary)' }}>Cargando asignaciones...</p>
                     ) : assignedManagers.length === 0 ? (
-                        <p style={{ color: '#a0aec0', fontStyle: 'italic', background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '8px', border: '1px dashed rgba(255,255,255,0.1)' }}>
+                        <p className="b2b-muted" style={{ color: 'var(--color-text-secondary)', fontStyle: 'italic', background: 'var(--color-surface-hover)', padding: '1rem', borderRadius: '8px', border: '1px dashed var(--color-border-strong)' }}>
                             No hay gestores asignados a este contrato. Los gestores vinculados podrán crear y controlar eventos bajo este contrato/proyecto.
                         </p>
                     ) : (
@@ -149,8 +149,8 @@ const ContractManagersModal = ({
                 </div>
 
                 {/* Add New Manager Section */}
-                <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '1.5rem' }}>
-                    <h4 style={{ color: '#e2e8f0', marginBottom: '0.8rem', fontSize: '1.1rem' }}>Vincular Nuevo Gestor/Usuario</h4>
+                <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '1.5rem', minWidth: 0 }}>
+                    <h4 className="b2b-section-title" style={{ color: 'var(--color-text)', marginBottom: '0.8rem', fontSize: '1.1rem' }}>Vincular Nuevo Gestor/Usuario</h4>
                     
                     <div style={{ marginBottom: '1rem' }}>
                         <Input 
@@ -161,9 +161,9 @@ const ContractManagersModal = ({
                         />
                     </div>
 
-                    <div style={{ maxHeight: '200px', overflowY: 'auto', background: 'rgba(0,0,0,0.2)', borderRadius: '8px', padding: '0.5rem', border: '1px solid rgba(255,255,255,0.05)' }}>
+                    <div className="b2b-user-list" style={{ maxHeight: '200px', overflowY: 'auto', overflowX: 'hidden', background: 'var(--color-surface-hover)', borderRadius: '8px', padding: '0.5rem', border: '1px solid var(--color-border)', minWidth: 0 }}>
                         {availableUsers.length === 0 ? (
-                            <p style={{ color: '#a0aec0', textAlign: 'center', padding: '1rem' }}>No se encontraron usuarios disponibles</p>
+                            <p className="b2b-muted" style={{ color: 'var(--color-text-secondary)', textAlign: 'center', padding: '1rem' }}>No se encontraron usuarios disponibles</p>
                         ) : (
                             availableUsers.map(user => (
                                 <div 
@@ -172,14 +172,16 @@ const ContractManagersModal = ({
                                         display: 'flex', 
                                         justifyContent: 'space-between', 
                                         alignItems: 'center', 
+                                        gap: '1rem',
+                                        flexWrap: 'wrap',
                                         padding: '0.6rem 0.8rem', 
-                                        borderBottom: '1px solid rgba(255,255,255,0.05)',
-                                        gap: '1rem'
+                                        borderBottom: '1px solid var(--color-border)',
+                                        minWidth: 0
                                     }}
                                 >
-                                    <div>
-                                        <div style={{ fontWeight: '500', color: '#fff' }}>{user.firstName || user.first_name} {user.lastName || user.last_name}</div>
-                                        <div style={{ fontSize: '0.8rem', color: '#a0aec0' }}>{user.email} <span style={{ marginLeft: '8px', opacity: 0.6 }}>({user.role})</span></div>
+                                    <div style={{ minWidth: 0, flex: '1 1 200px' }}>
+                                        <div className="b2b-user-name" style={{ fontWeight: '500', color: 'var(--color-text)' }}>{user.firstName || user.first_name} {user.lastName || user.last_name}</div>
+                                        <div className="b2b-muted" style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>{user.email} <span style={{ marginLeft: '8px', opacity: 0.6 }}>({user.role})</span></div>
                                     </div>
                                     <Button 
                                         size="small" 

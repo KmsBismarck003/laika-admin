@@ -61,7 +61,7 @@ const AuditTable = ({ logs, loading, paginated }) => {
                                         {log.ip_address || '—'}
                                     </td>
                                     <td>
-                                        <div className="audit-device-cell">
+                                        <div className="audit-device-cell" style={{ color: 'var(--color-text)' }}>
                                             {device.icon}
                                             <div className="device-text">
                                                 <span className="device-os">{device.os}</span>
@@ -76,7 +76,7 @@ const AuditTable = ({ logs, loading, paginated }) => {
                                             1
                                         </span>
                                     </td>
-                                    <td style={{ color: '#444', maxWidth: 220, fontSize: '0.78rem' }}>
+                                    <td style={{ color: 'var(--color-text-secondary)', maxWidth: 220, fontSize: '0.78rem' }}>
                                         {log.summary || '—'}
                                     </td>
                                 </tr>

@@ -14,7 +14,7 @@ const AdsTable = ({
       key: 'image_url',
       header: 'Imagen',
       render: (url) => (
-        <div style={{ width: '100px', height: '60px', borderRadius: '8px', overflow: 'hidden', backgroundColor: '#000' }}>
+        <div style={{ width: '100px', height: '60px', borderRadius: '8px', overflow: 'hidden', backgroundColor: 'var(--color-surface-elevated)', border: '1px solid var(--color-border)' }}>
           <img 
             src={getImageUrl(url)} 
             alt="Ad" 

@@ -75,7 +75,7 @@ const EmailTester = () => {
                 </div>
                 
                 <div className="form-section">
-                    <label>Plantilla a probar</label>
+                    <label className="industrial-label">Plantilla a probar</label>
                     <select 
                         className="industrial-select"
                         value={selectedTemplate} 
@@ -142,7 +142,7 @@ const EmailTester = () => {
                     <iframe 
                         title="Email Preview"
                         srcDoc={previewHtml}
-                        style={{ width: '100%', height: '100%', border: 'none', backgroundColor: '#fff', borderRadius: '8px' }}
+                        style={{ width: '100%', height: '100%', minHeight: '700px', border: '1px solid var(--color-border)', backgroundColor: '#fff', borderRadius: '8px', boxShadow: 'var(--shadow-md)' }}
                     />
                 </div>
             </div>

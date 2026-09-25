@@ -12,10 +12,10 @@ const VisualSettingsToolbar = ({
     if (analysisMode !== '2D_EXPLORATION') return null;
 
     return (
-        <div className="visual-settings-toolbar">
+        <div className="visual-settings-toolbar bigdata-panel-card" style={{ flexWrap: 'wrap', minWidth: 0, overflow: 'hidden' }}>
             {/* Sección: Geometría */}
-            <div className="toolbar-section">
-                <Settings size={16} color="#94a3b8" />
+            <div className="toolbar-section" style={{ minWidth: 0, flex: '1 1 220px' }}>
+                <Settings size={16} color="currentColor" style={{ color: 'var(--color-text-secondary)' }} />
                 
                 <div className="slider-horizontal-premium">
                     <label>Grosor Barras</label>
@@ -41,10 +41,10 @@ const VisualSettingsToolbar = ({
             </div>
 
             {/* Sección: Apariencia */}
-            <div className="toolbar-section">
-                <Palette size={16} color="#94a3b8" />
+            <div className="toolbar-section" style={{ minWidth: 0, flex: '1 1 180px' }}>
+                <Palette size={16} color="currentColor" style={{ color: 'var(--color-text-secondary)' }} />
                 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, flexWrap: 'wrap', flex: 1 }}>
                     <div className="slider-horizontal-premium">
                         <label>Opacidad</label>
                         <input 
@@ -59,8 +59,8 @@ const VisualSettingsToolbar = ({
                 </div>
 
             {/* Sección: Estilo de Elementos (Segmented Control) */}
-            <div className="toolbar-section">
-                <div className="segmented-group">
+            <div className="toolbar-section" style={{ minWidth: 0 }}>
+                <div className="segmented-group" style={{ minWidth: 0, maxWidth: '100%', overflow: 'auto' }}>
                     <button 
                         className={`segmented-btn ${buildingShape === 'cube' ? 'active' : ''}`}
                         onClick={() => setBuildingShape('cube')}

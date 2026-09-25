@@ -1,3 +1,19 @@
 ﻿/* Unificado - usa tokens de src/styles/variables.css + src/pages/common/AdminBase.css */
 .admin-dashboard-page{background:var(--color-bg);color:var(--color-text)}
+/* D-15: card compacta centrada + boton ACTUALIZAR fuerte */
+.admin-config-page{color:var(--color-text)}
+.admin-config-page .page-header{max-width:880px;margin:0 auto 16px auto}
+.admin-config-page .page-header h1{color:var(--color-text)}
+.admin-config-page .card{max-width:880px;margin:0 auto;background:var(--color-surface);border:1px solid var(--color-border);border-radius:14px;box-shadow:var(--shadow);padding:24px}
+[data-theme="dark"] .admin-config-page .card{background:var(--color-surface-elevated);border-color:var(--color-border)}
+.admin-config-page .config-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:768px){.admin-config-page .config-grid{grid-template-columns:1fr}.admin-config-page .card{padding:16px}}
+.admin-config-page .config-info strong{color:var(--color-text)}
+.admin-config-page .config-info p{color:var(--color-text-secondary)}
+.admin-config-page .config-input{background:var(--color-surface);color:var(--color-text);border:1px solid var(--color-border)}
+[data-theme="dark"] .admin-config-page .config-input{background:var(--color-surface-elevated)}
+.admin-config-page .page-header .btn--secondary,.admin-config-page .page-header .btn-secondary{background:#000;color:#fff;border:1px solid #000;font-weight:800}
+.admin-config-page .page-header .btn--secondary:hover,.admin-config-page .page-header .btn-secondary:hover{background:#1a1a1a;border-color:#1a1a1a;color:#fff}
+[data-theme="dark"] .admin-config-page .page-header .btn--secondary,[data-theme="dark"] .admin-config-page .page-header .btn-secondary{background:#fafafa;color:#0a0a0a;border:1px solid #fafafa}
+[data-theme="dark"] .admin-config-page .page-header .btn--secondary:hover,[data-theme="dark"] .admin-config-page .page-header .btn-secondary:hover{background:#fff;border-color:#525252;color:#0a0a0a}
 

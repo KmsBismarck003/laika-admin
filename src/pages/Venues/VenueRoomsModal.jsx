@@ -142,7 +142,7 @@ const VenueRoomsModal = ({ isOpen, onClose, venue }) => {
         {!isEditing ? (
           <>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-              <p style={{ color: 'var(--text-secondary)' }}>Gestiona las salas o áreas de este recinto. Cada sala puede tener su propio mapa de asientos.</p>
+              <p style={{ color: 'var(--color-text-secondary)' }}>Gestiona las salas o áreas de este recinto. Cada sala puede tener su propio mapa de asientos.</p>
               <Button variant="primary" onClick={() => openEditForm()}>
                 <Icon name="plus" size={16} className="mr-1" /> NUEVA SALA
               </Button>
@@ -151,7 +151,7 @@ const VenueRoomsModal = ({ isOpen, onClose, venue }) => {
             {loading ? (
               <div style={{ textAlign: 'center', padding: '2rem' }}>Cargando salas...</div>
             ) : rooms.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '3rem', border: '1px dashed var(--border-color)', borderRadius: '8px', color: 'var(--text-muted)' }}>
+              <div style={{ textAlign: 'center', padding: '3rem', border: '1px dashed var(--color-border)', borderRadius: '8px', color: 'var(--color-text-muted)' }}>
                 <Icon name="inbox" size={48} style={{ opacity: 0.2, marginBottom: '1rem' }} />
                 <p>Este recinto no tiene salas registradas.</p>
               </div>
@@ -161,7 +161,7 @@ const VenueRoomsModal = ({ isOpen, onClose, venue }) => {
           </>
         ) : (
           <form onSubmit={handleSaveRoom} className="venue-form glass-panel" style={{ padding: '2rem' }}>
-            <h3 style={{ marginBottom: '1.5rem', color: 'var(--text-primary)' }}>{selectedRoom ? 'Editar Sala' : 'Crear Nueva Sala'}</h3>
+            <h3 style={{ marginBottom: '1.5rem', color: 'var(--color-text)' }}>{selectedRoom ? 'Editar Sala' : 'Crear Nueva Sala'}</h3>
             
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
               <Input
@@ -183,8 +183,8 @@ const VenueRoomsModal = ({ isOpen, onClose, venue }) => {
               />
             </div>
 
-            <div className="form-group" style={{ marginTop: '1rem', background: 'var(--bg-secondary)', padding: '1rem', borderRadius: '8px' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
+            <div className="form-group" style={{ marginTop: '1rem', background: 'var(--color-surface)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--color-border)' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', color: 'var(--color-text)' }}>
                 <input
                   type="checkbox"
                   name="has_map"
@@ -193,8 +193,8 @@ const VenueRoomsModal = ({ isOpen, onClose, venue }) => {
                   style={{ width: '20px', height: '20px' }}
                 />
                 <div>
-                  <strong style={{ display: 'block', color: 'var(--text-primary)' }}>Utilizar Mapa de Asientos Numerados</strong>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Si se activa, podrás diseñar la distribución de asientos y venderlos de forma individual o por zonas. De lo contrario, será Entrada General.</span>
+                  <strong style={{ display: 'block', color: 'var(--color-text)' }}>Utilizar Mapa de Asientos Numerados</strong>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)' }}>Si se activa, podrás diseñar la distribución de asientos y venderlos de forma individual o por zonas. De lo contrario, será Entrada General.</span>
                 </div>
               </label>
             </div>

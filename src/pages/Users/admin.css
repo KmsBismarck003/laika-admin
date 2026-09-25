@@ -1,3 +1,7 @@
 ﻿/* Unificado - usa tokens de src/styles/variables.css + src/pages/common/AdminBase.css */
 .admin-dashboard-page{background:var(--color-bg);color:var(--color-text)}
+/* D-12: refuerzo tematico Users */
+.admin-users-page{color:var(--color-text)}
+.admin-users-page .user-mgmt__toolbar-bar{background:var(--color-surface);color:var(--color-text);border:1px solid var(--color-border)}
+[data-theme="dark"] .admin-users-page .user-mgmt__toolbar-bar{background:var(--color-surface-elevated);border-color:var(--color-border)}
 

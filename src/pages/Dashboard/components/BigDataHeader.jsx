@@ -47,8 +47,8 @@ const BigDataHeader = ({
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
             <header style={{ 
-                background: 'var(--bg-card, #ffffff)', 
-                border: '1px solid var(--border-color, #e2e8f0)', 
+                background: 'var(--color-surface)', 
+                border: '1px solid var(--color-border)', 
                 boxShadow: '0 4px 20px rgba(0,0,0,0.03)', 
                 borderRadius: '16px', 
                 padding: '1.2rem 1.5rem', 
@@ -58,16 +58,16 @@ const BigDataHeader = ({
                 flexWrap: 'wrap',
                 gap: '1rem'
             }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    <div style={{ background: '#111827', padding: '10px', borderRadius: '12px', color: '#fff', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', minWidth: 0, flexWrap: 'wrap' }}>
+                    <div className="bigdata-icon" style={{ background: 'var(--color-primary)', padding: '10px', borderRadius: '12px', color: 'var(--color-primary-fg)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
                         <DatabaseIcon size={20} />
                     </div>
-                    <div>
-                        <div style={{ fontWeight: 800, fontSize: '1.2rem', color: '#111827', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div style={{ minWidth: 0 }}>
+                        <div className="bigdata-title" style={{ fontWeight: 800, fontSize: '1.2rem', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                             ANÁLISIS Y PREDICCIONES {managerId ? 'DE MIS EVENTOS' : ''}
-                            <span style={{ fontSize: '0.65rem', background: '#f1f5f9', color: '#475569', padding: '4px 8px', borderRadius: '8px', fontWeight: 700, border: '1px solid #e2e8f0' }}>v8.5_ML</span>
+                            <span style={{ fontSize: '0.65rem', background: 'var(--color-surface-hover)', color: 'var(--color-text-secondary)', padding: '4px 8px', borderRadius: '8px', fontWeight: 700, border: '1px solid var(--color-border)' }}>v8.5_ML</span>
                         </div>
-                        <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '2px', fontWeight: 500 }}>
+                        <div className="bigdata-subtitle" style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', marginTop: '2px', fontWeight: 500 }}>
                             {managerId ? 'Filtrado por tus eventos' : 'Motor Distribuido: Spark ML'}
                         </div>
                     </div>
@@ -76,31 +76,32 @@ const BigDataHeader = ({
                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
                     
                     {/* CUSTOM DROPDOWN PARA MODO DE ANÁLISIS */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', position: 'relative' }} ref={menuRef}>
-                        <label style={{ fontSize: '0.65rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase' }}>Modo de Análisis</label>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', position: 'relative', minWidth: 0 }} ref={menuRef}>
+                        <label style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--color-text-secondary)', textTransform: 'uppercase' }}>Modo de Análisis</label>
                         <button 
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             style={{ 
-                                background: '#f8fafc', 
-                                border: isMenuOpen ? '1px solid #111827' : '1px solid #e2e8f0', 
+                                background: 'var(--color-surface-hover)', 
+                                border: isMenuOpen ? '1px solid var(--color-border-strong)' : '1px solid var(--color-border)', 
                                 padding: '0.5rem 1rem', 
                                 borderRadius: '10px', 
                                 fontSize: '0.85rem', 
                                 fontWeight: 600, 
-                                color: '#111827',
+                                color: 'var(--color-text)',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'space-between',
                                 gap: '12px',
                                 cursor: 'pointer',
                                 minWidth: '200px',
+                                maxWidth: '100%',
                                 transition: 'all 0.2s'
                             }}
                         >
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
                                 {activeMode.icon} {activeMode.label}
                             </div>
-                            <ChevronDown size={16} color="#64748b" style={{ transform: isMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }} />
+                            <ChevronDown size={16} color="currentColor" style={{ transform: isMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }} />
                         </button>
                         
                         {isMenuOpen && (
@@ -110,13 +111,15 @@ const BigDataHeader = ({
                                 left: 0, 
                                 right: 0,
                                 marginTop: '4px',
-                                background: '#ffffff', 
-                                border: '1px solid #e2e8f0',
+                                background: 'var(--color-surface)', 
+                                border: '1px solid var(--color-border)',
                                 borderRadius: '12px',
                                 boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
                                 zIndex: 50,
                                 maxHeight: '300px',
-                                overflowY: 'auto'
+                                overflowY: 'auto',
+                                overflowX: 'hidden',
+                                minWidth: 0
                             }}>
                                 {modes.map(mode => (
                                     <button
@@ -128,19 +131,19 @@ const BigDataHeader = ({
                                         style={{
                                             width: '100%',
                                             padding: '10px 12px',
-                                            background: analysisMode === mode.id ? '#f1f5f9' : 'transparent',
+                                            background: analysisMode === mode.id ? 'var(--color-surface-hover)' : 'transparent',
                                             border: 'none',
-                                            borderBottom: '1px solid #f8fafc',
+                                            borderBottom: '1px solid var(--color-border)',
                                             display: 'flex',
                                             alignItems: 'center',
                                             gap: '10px',
                                             fontSize: '0.8rem',
                                             fontWeight: 600,
-                                            color: analysisMode === mode.id ? '#111827' : '#475569',
+                                            color: analysisMode === mode.id ? 'var(--color-text)' : 'var(--color-text-secondary)',
                                             cursor: 'pointer',
                                             textAlign: 'left'
                                         }}
-                                        onMouseOver={(e) => { if (analysisMode !== mode.id) e.currentTarget.style.background = '#f8fafc'; }}
+                                        onMouseOver={(e) => { if (analysisMode !== mode.id) e.currentTarget.style.background = 'var(--color-surface-hover)'; }}
                                         onMouseOut={(e) => { if (analysisMode !== mode.id) e.currentTarget.style.background = 'transparent'; }}
                                     >
                                         {mode.icon} {mode.label}
@@ -151,22 +154,24 @@ const BigDataHeader = ({
                     </div>
 
                     {['3D_EXPLORATION', 'CLASS_KDD'].includes(analysisMode) && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                        <label style={{ fontSize: '0.65rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase' }}>Fuente de Datos</label>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', minWidth: 0 }}>
+                        <label style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--color-text-secondary)', textTransform: 'uppercase' }}>Fuente de Datos</label>
                         <select 
                             value={selectedTable} 
                             onChange={(e) => setSelectedTable(e.target.value)} 
                             style={{ 
-                                background: '#f8fafc', 
-                                border: '1px solid #e2e8f0', 
+                                background: 'var(--color-surface-hover)', 
+                                border: '1px solid var(--color-border)', 
                                 padding: '0.5rem 1rem', 
                                 borderRadius: '10px', 
                                 fontSize: '0.85rem', 
                                 fontWeight: 600, 
-                                color: '#1e293b',
+                                color: 'var(--color-text)',
                                 outline: 'none',
                                 cursor: 'pointer',
-                                height: '37px'
+                                height: '37px',
+                                minWidth: 0,
+                                maxWidth: '100%'
                             }}
                         >
                             <option value="tickets">Tickets Principales</option>
@@ -177,15 +182,15 @@ const BigDataHeader = ({
                     </div>
                     )}
                     
-                    <div style={{ width: '1px', height: '40px', background: '#e2e8f0', margin: '0 0.2rem' }}></div>
+                    <div style={{ width: '1px', height: '40px', background: 'var(--color-border)', margin: '0 0.2rem' }}></div>
                     
                     <div style={{ display: 'flex', alignItems: 'flex-end', height: '100%', paddingBottom: '0' }}>
                         <button 
                             onClick={() => setShowGlossary(!showGlossary)} 
                             style={{ 
-                                background: showGlossary ? '#e0e7ff' : '#f8fafc',
-                                color: showGlossary ? '#4338ca' : '#475569',
-                                border: showGlossary ? '1px solid #c7d2fe' : '1px solid #e2e8f0',
+                                background: showGlossary ? 'var(--color-surface-hover)' : 'var(--color-surface)',
+                                color: 'var(--color-text-secondary)',
+                                border: '1px solid var(--color-border)',
                                 borderRadius: '10px',
                                 padding: '0.55rem 0.8rem',
                                 fontWeight: 600,
@@ -210,9 +215,9 @@ const BigDataHeader = ({
                                 else executeMLAnalysis(analysisMode);
                             }} 
                             style={{ 
-                                background: '#111827', 
-                                color: '#ffffff', 
-                                border: 'none',
+                                background: 'var(--color-primary)', 
+                                color: 'var(--color-primary-fg)', 
+                                border: '1px solid var(--color-border-strong)',
                                 padding: '0.55rem 1.2rem',
                                 borderRadius: '10px',
                                 fontWeight: 600,

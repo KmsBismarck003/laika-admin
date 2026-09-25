@@ -211,7 +211,7 @@ const Users = () => {
             setSelectedUser(row);
             setShowPreviewModal(true);
           }}
-          style={{ cursor: 'pointer', width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-tertiary)' }}
+          style={{ cursor: 'pointer', width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--color-surface-hover)' }}
           title="Ver vista previa"
         >
           <img 
@@ -297,7 +297,7 @@ const Users = () => {
       <BentoGrid style={{ marginBottom: '1.5rem' }}>
         <BentoCard style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-            <h1 style={{ fontSize: '1.25rem', margin: 0, color: 'var(--text-primary)' }}>Usuarios</h1>
+            <h1 style={{ fontSize: '1.25rem', margin: 0, color: 'var(--color-text)' }}>Usuarios</h1>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
               <Button variant="secondary" size="small" onClick={() => fetchUsers()}>Refrescar</Button>
               <Button variant="warning" size="small" onClick={() => setShowCampaignModal(true)}>
@@ -322,9 +322,9 @@ const Users = () => {
 
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)' }}>ROL:</label>
+                <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-text-secondary)' }}>ROL:</label>
                 <select
-                  style={{ background: 'var(--bg-tertiary)', color: 'var(--text-primary)', border: '1px solid var(--border-color)', padding: '0.4rem', borderRadius: '6px', fontSize: '0.85rem' }}
+                  style={{ background: 'var(--color-surface-hover)', color: 'var(--color-text)', border: '1px solid var(--color-border)', padding: '0.4rem', borderRadius: '6px', fontSize: '0.85rem' }}
                   value={filters.role}
                   onChange={e => updateFilters({ role: e.target.value })}
                 >
@@ -337,9 +337,9 @@ const Users = () => {
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)' }}>ESTADO:</label>
+                <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-text-secondary)' }}>ESTADO:</label>
                 <select
-                  style={{ background: 'var(--bg-tertiary)', color: 'var(--text-primary)', border: '1px solid var(--border-color)', padding: '0.4rem', borderRadius: '6px', fontSize: '0.85rem' }}
+                  style={{ background: 'var(--color-surface-hover)', color: 'var(--color-text)', border: '1px solid var(--color-border)', padding: '0.4rem', borderRadius: '6px', fontSize: '0.85rem' }}
                   value={filters.status || ''}
                   onChange={e => updateFilters({ status: e.target.value })}
                 >
@@ -356,8 +356,8 @@ const Users = () => {
                 </Button>
               )}
 
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                {loading ? <Skeleton type="text" width="30px" height="12px" style={{ display: 'inline-block' }} /> : <strong style={{ color: 'var(--text-primary)' }}>{total}</strong>} REGISTROS
+              <div style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>
+                {loading ? <Skeleton type="text" width="30px" height="12px" style={{ display: 'inline-block' }} /> : <strong style={{ color: 'var(--color-text)' }}>{total}</strong>} REGISTROS
               </div>
             </div>
           </div>
@@ -368,8 +368,8 @@ const Users = () => {
         <BentoCard style={{ padding: 0, overflow: 'hidden' }}>
           {loading ? (
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-              <thead><tr style={{ background: 'var(--bg-tertiary)', borderBottom: '2px solid var(--border-color)' }}>
-                {['USUARIO', 'EMAIL', 'ROL', 'ESTADO', 'FECHA', 'ACCIONES'].map(h => <th key={h} style={{ padding: '14px 16px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>{h}</th>)}
+              <thead><tr style={{ background: 'var(--color-surface-hover)', borderBottom: '2px solid var(--color-border)' }}>
+                {['USUARIO', 'EMAIL', 'ROL', 'ESTADO', 'FECHA', 'ACCIONES'].map(h => <th key={h} style={{ padding: '14px 16px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', color: 'var(--color-text-secondary)', textTransform: 'uppercase' }}>{h}</th>)}
               </tr></thead>
               <tbody>{Array.from({ length: 8 }).map((_, i) => <SkeletonRow key={i} columns={6} />)}</tbody>
             </table>
@@ -391,7 +391,7 @@ const Users = () => {
                 rowClassName={(row) => `user-row--${row.role}`}
               />
               {total > (filters.limit || 15) && (
-                <div style={{ padding: '0.75rem', display: 'flex', justifyContent: 'center', borderTop: '1px solid var(--border-color)' }}>
+                <div style={{ padding: '0.75rem', display: 'flex', justifyContent: 'center', borderTop: '1px solid var(--color-border)' }}>
                   <Pagination 
                     currentPage={filters.page || 1}
                     totalPages={Math.ceil(total / (filters.limit || 15))}
@@ -436,33 +436,33 @@ const Users = () => {
         }
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          <p style={{ fontSize: '0.85rem', opacity: 0.7, lineHeight: 1.5, margin: 0, color: 'var(--text-secondary)' }}>
+          <p style={{ fontSize: '0.85rem', opacity: 0.7, lineHeight: 1.5, margin: 0, color: 'var(--color-text-secondary)' }}>
             Ejecuta el escáner de inactividad de usuarios. El sistema analizará el historial de compras y actividad de todos los usuarios registrados y generará incentivos de manera automática en sus centros de cupones.
           </p>
           
           <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', borderRadius: '4px' }}>
             <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
               <Badge variant="danger" style={{ marginTop: '2px' }}>REGRESO TRIUNFAL</Badge>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
                 <strong>Inactividad de Compra (90 días):</strong> Clientes que han comprado boletos en el pasado pero no en los últimos 90 días. Reciben un cupón del <strong>15% de descuento</strong>.
               </div>
             </div>
             <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
               <Badge variant="warning" style={{ marginTop: '2px' }}>PRIMER PASO</Badge>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
                 <strong>Registro sin Compras (30 días):</strong> Usuarios registrados hace más de 30 días que nunca han comprado un boleto. Reciben <strong>100% de descuento en el cargo por servicio</strong>.
               </div>
             </div>
             <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
               <Badge variant="info" style={{ marginTop: '2px' }}>DESPIERTA CUENTA</Badge>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
                 <strong>Inactividad de Acceso (60 días):</strong> Usuarios que no han iniciado sesión en los últimos 60 días. Reciben un cupón de <strong>$200 de descuento directo</strong>.
               </div>
             </div>
           </div>
 
           {campaignResult && (
-            <div style={{ maxHeight: '200px', overflowY: 'auto', border: '1px solid rgba(0,255,0,0.2)', background: 'rgba(0,255,0,0.03)', padding: '1rem', borderRadius: '4px', fontSize: '0.75rem', fontFamily: 'monospace', color: 'var(--text-secondary)' }}>
+            <div style={{ maxHeight: '200px', overflowY: 'auto', border: '1px solid rgba(0,255,0,0.2)', background: 'rgba(0,255,0,0.03)', padding: '1rem', borderRadius: '4px', fontSize: '0.75rem', fontFamily: 'monospace', color: 'var(--color-text-secondary)' }}>
               <div style={{ color: '#4ade80', fontWeight: 'bold', marginBottom: '8px' }}>
                 ✓ Campaña completada con éxito.
               </div>

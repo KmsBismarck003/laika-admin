@@ -86,7 +86,7 @@ const Config = () => {
           {showSkeleton ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '8px 0' }}>
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: i < 3 ? '1px solid var(--border-color)' : 'none' }}>
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: i < 3 ? '1px solid var(--color-border)' : 'none' }}>
                   <div style={{ flex: 1 }}>
                     <Skeleton type="text" width={`${40 + i * 12}%`} height="14px" style={{ marginBottom: '6px' }} />
                     <Skeleton type="text" width={`${55 + i * 5}%`} height="10px" />
@@ -97,10 +97,10 @@ const Config = () => {
             </div>
           ) : (
             <div className="config-grid" style={{ display: 'grid', gap: '2rem' }}>
-              <div className="config-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
+              <div className="config-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', borderBottom: '1px solid var(--color-border)' }}>
                 <div className="config-info">
-                  <strong style={{ color: 'var(--text-primary)' }}>Modo Mantenimiento</strong>
-                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Deshabilita el acceso de usuarios al sistema</p>
+                  <strong style={{ color: 'var(--color-text)' }}>Modo Mantenimiento</strong>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-secondary)' }}>Deshabilita el acceso de usuarios al sistema</p>
                 </div>
                 <label className="toggle-switch">
                   <input
@@ -112,10 +112,10 @@ const Config = () => {
                 </label>
               </div>
 
-              <div className="config-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
+              <div className="config-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', borderBottom: '1px solid var(--color-border)' }}>
                 <div className="config-info">
-                  <strong style={{ color: 'var(--text-primary)' }}>Registro de Usuarios</strong>
-                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Permite que nuevos usuarios se registren</p>
+                  <strong style={{ color: 'var(--color-text)' }}>Registro de Usuarios</strong>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-secondary)' }}>Permite que nuevos usuarios se registren</p>
                 </div>
                 <label className="toggle-switch">
                   <input
@@ -127,13 +127,13 @@ const Config = () => {
                 </label>
               </div>
 
-              <div className="config-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
+              <div className="config-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', borderBottom: '1px solid var(--color-border)' }}>
                 <div className="config-info">
-                  <strong style={{ color: 'var(--text-primary)' }}>Tiempo de Sesión (minutos)</strong>
+                  <strong style={{ color: 'var(--color-text)' }}>Tiempo de Sesión (minutos)</strong>
                 </div>
                 <input
                   type="number"
-                  style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', padding: '0.5rem', borderRadius: '4px', width: '80px', textAlign: 'center' }}
+                  style={{ background: 'var(--color-surface-hover)', border: '1px solid var(--color-border)', color: 'var(--color-text)', padding: '0.5rem', borderRadius: '4px', width: '80px', textAlign: 'center' }}
                   value={systemConfig.sessionTimeout}
                   onChange={(e) => handleConfigChange('sessionTimeout', parseInt(e.target.value))}
                   min="5"
@@ -143,11 +143,11 @@ const Config = () => {
 
               <div className="config-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div className="config-info">
-                  <strong style={{ color: 'var(--text-primary)' }}>Boletos Máximos por Usuario</strong>
+                  <strong style={{ color: 'var(--color-text)' }}>Boletos Máximos por Usuario</strong>
                 </div>
                 <input
                   type="number"
-                  style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', padding: '0.5rem', borderRadius: '4px', width: '80px', textAlign: 'center' }}
+                  style={{ background: 'var(--color-surface-hover)', border: '1px solid var(--color-border)', color: 'var(--color-text)', padding: '0.5rem', borderRadius: '4px', width: '80px', textAlign: 'center' }}
                   value={systemConfig.maxTicketsPerUser}
                   onChange={(e) => handleConfigChange('maxTicketsPerUser', parseInt(e.target.value))}
                   min="1"

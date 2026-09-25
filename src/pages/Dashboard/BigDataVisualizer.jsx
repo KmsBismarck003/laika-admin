@@ -125,15 +125,15 @@ const BigDataVisualizer = ({ managerId = null }) => {
             setHelpModalTitle('Ayuda - Predicción de Ingresos');
             setHelpModalContent(
                 <div style={{ padding: '0.5rem', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', lineHeight: '1.6' }}>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: '1.6' }}>
                         Esta herramienta calcula <b>cuánto dinero recaudará cada uno de tus eventos al finalizar</b> basándose en las ventas actuales y el historial. Compara varios métodos para darte la proyección más exacta.
                     </p>
-                    <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#1e293b', margin: '8px 0 2px 0' }}>¿Qué es la precisión (Score R²)?</h4>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', lineHeight: '1.6' }}>
+                    <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--color-text)', margin: '8px 0 2px 0' }}>¿Qué es la precisión (Score R²)?</h4>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: '1.6' }}>
                         Es un porcentaje (de 0 a 100%) que indica qué tan confiable es el cálculo. Si la precisión es del 90%, significa que la predicción final de ingresos es altamente confiable y tiene un margen de error histórico de solo el 10%.
                     </p>
-                    <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#1e293b', margin: '8px 0 2px 0' }}>¿Cómo usar esta información?</h4>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', lineHeight: '1.6' }}>
+                    <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--color-text)', margin: '8px 0 2px 0' }}>¿Cómo usar esta información?</h4>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: '1.6' }}>
                         Te sirve para planificar pagos a proveedores antes del evento, o bien para lanzar campañas publicitarias si ves que el <b>Estimado Final</b> proyectado está muy por debajo de la ganancia máxima posible.
                     </p>
                 </div>
@@ -142,11 +142,11 @@ const BigDataVisualizer = ({ managerId = null }) => {
             setHelpModalTitle('Ayuda - Estrategia de Precios');
             setHelpModalContent(
                 <div style={{ padding: '0.5rem', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', lineHeight: '1.6' }}>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: '1.6' }}>
                         La Inteligencia Artificial evalúa de forma automática la cantidad de boletos que se han vendido (ocupación) y te recomienda acciones comerciales al instante para que no tengas que hacer cálculos manuales.
                     </p>
-                    <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#1e293b', margin: '8px 0 2px 0' }}>Las sugerencias automáticas del sistema son:</h4>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', lineHeight: '1.6' }}>
+                    <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--color-text)', margin: '8px 0 2px 0' }}>Las sugerencias automáticas del sistema son:</h4>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: '1.6' }}>
                         • <b>Tarifa Dinámica (Ocupación mayor al 60%):</b> El evento tiene alta demanda. Se recomienda subir los precios un 15% para maximizar tus ingresos en las últimas entradas.<br/>
                         • <b>Estrategia de Promoción (Ocupación menor al 30%):</b> El evento se vende lento. Se recomienda lanzar 2x1 o cupones de descuento para motivar las compras y llenar el lugar.<br/>
                         • <b>Precio Estable (Ocupación entre 30% y 60%):</b> El ritmo de venta es saludable. Se sugiere mantener los precios normales.
@@ -157,11 +157,11 @@ const BigDataVisualizer = ({ managerId = null }) => {
             setHelpModalTitle('Ayuda - Pasos y Estadísticas');
             setHelpModalContent(
                 <div style={{ padding: '0.5rem', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', lineHeight: '1.6' }}>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: '1.6' }}>
                         Muestra de forma transparente cómo se procesan y analizan los datos de tu club. Además, ofrece herramientas de mantenimiento y métricas básicas de tus finanzas.
                     </p>
-                    <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#1e293b', margin: '8px 0 2px 0' }}>¿Cómo te ayuda este apartado?</h4>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', lineHeight: '1.6' }}>
+                    <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--color-text)', margin: '8px 0 2px 0' }}>¿Cómo te ayuda este apartado?</h4>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: '1.6' }}>
                         • <b>Limpieza de Datos (Paso 2):</b> Presiona el botón para eliminar registros repetidos o vacíos, asegurando que tus reportes sean 100% correctos.<br/>
                         • <b>Métricas de Control (Abajo):</b> Te muestra tu promedio de ventas, el ingreso medio y la estabilidad de tu flujo de efectivo (si tus eventos ganan montos parecidos o si varían drásticamente).
                     </p>
@@ -171,10 +171,10 @@ const BigDataVisualizer = ({ managerId = null }) => {
         setHelpModalOpen(true);
     };
 
-    const [openFiltersPanel, setOpenFiltersPanel] = useState(false);
-    const [openColorPanel, setOpenColorPanel] = useState(false);
-    const [openMetricsPanel, setOpenMetricsPanel] = useState(false);
-    const [openLogPanel, setOpenLogPanel] = useState(false);
+    const [openFiltersPanel, setOpenFiltersPanel] = useState(true);
+    const [openColorPanel, setOpenColorPanel] = useState(true);
+    const [openMetricsPanel, setOpenMetricsPanel] = useState(true);
+    const [openLogPanel, setOpenLogPanel] = useState(true);
 
     const theme = {
         bg: '#FFFFFF',
@@ -592,7 +592,7 @@ const BigDataVisualizer = ({ managerId = null }) => {
     }
 
     return (
-        <div className="analytics-premium" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)', padding: '1.5rem 2rem', minHeight: '100vh', fontFamily: 'Inter, system-ui, sans-serif' }}>
+        <div className="analytics-premium" style={{ background: 'var(--color-bg)', color: 'var(--color-text)', padding: '1.5rem 2rem', minHeight: '100vh', minWidth: 0, fontFamily: 'Inter, system-ui, sans-serif' }}>
             
             <BigDataHeader 
                 managerId={managerId}
@@ -612,19 +612,20 @@ const BigDataVisualizer = ({ managerId = null }) => {
                 setShowGlossary={setShowGlossary} 
             />
 
-            <div style={{ 
+            <div className="analytics-grid-layout layout-sql bigdata-layout" style={{ 
                 display: 'grid', 
                 gridTemplateColumns: analysisMode === '3D_EXPLORATION' 
-                    ? 'minmax(280px, 300px) 1fr minmax(260px, 280px)' 
+                    ? 'minmax(280px, 300px) minmax(0,1fr) minmax(260px, 280px)' 
                     : (analysisMode === 'ML_REGRESSION' || analysisMode === 'ML_DECISION_TREE')
-                        ? 'minmax(280px, 300px) 1fr'
-                        : '1fr', 
-                gap: '1.5rem' 
+                        ? 'minmax(280px, 300px) minmax(0,1fr)'
+                        : 'minmax(0,1fr)', 
+                gap: '1.5rem',
+                minWidth: 0
             }}>
                 
                 {/* PANEL IZQUIERDO: FILTROS */}
                 {(analysisMode === '3D_EXPLORATION' || analysisMode === 'ML_REGRESSION' || analysisMode === 'ML_DECISION_TREE') && (
-                <aside style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <aside className="filter-sidebar-wrapper bigdata-side-stack" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', minWidth: 0, overflow: 'visible' }}>
                     <BigDataFilters 
                         openFiltersPanel={openFiltersPanel}
                         setOpenFiltersPanel={setOpenFiltersPanel}
@@ -644,39 +645,46 @@ const BigDataVisualizer = ({ managerId = null }) => {
                 )}
 
                 {/* PANEL CENTRAL: MONITOR 3D Y MÉTRICAS */}
-                <main style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                    <Card style={{ padding: 0, overflow: 'hidden', background: 'var(--bg-card)', border: '1px solid var(--border-color)', backdropFilter: 'blur(20px)', borderRadius: '24px', boxShadow: '0 12px 40px rgba(0,0,0,0.06)' }}>
-                        <div style={{ padding: '1.2rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.03)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-primary)', border: '1px solid #E5E7EB' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                <div style={{ background: '#000000', padding: '6px', borderRadius: '8px', color: '#FFFFFF' }}><BarChart3 size={16}/></div>
-                                <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>RENDER SKYLINE <span style={{ color: '#94a3b8', fontWeight: 500 }}>v8.2</span></span>
+                <main style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', minWidth: 0, overflow: 'hidden' }}>
+                    <Card style={{ padding: 0, overflow: 'hidden', background: 'var(--color-surface)', border: '1px solid var(--color-border)', backdropFilter: 'blur(20px)', borderRadius: '24px', boxShadow: '0 12px 40px rgba(0,0,0,0.06)', minWidth: 0 }}>
+                        <div style={{ padding: '1.2rem 1.5rem', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', background: 'var(--color-surface)', minWidth: 0 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0, flexWrap: 'wrap' }}>
+                                <div className="bigdata-icon" style={{ background: 'var(--color-primary)', padding: '6px', borderRadius: '8px', color: 'var(--color-primary-fg)' }}><BarChart3 size={16}/></div>
+                                <span className="bigdata-title" style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--color-text)' }}>RENDER SKYLINE <span className="bigdata-subtitle" style={{ color: 'var(--color-text-secondary)', fontWeight: 500 }}>v8.2</span></span>
                             </div>
-                            <div style={{ display: 'flex', gap: '1.2rem' }}>
+                            <div style={{ display: 'flex', gap: '1.2rem', flexWrap: 'wrap', minWidth: 0 }}>
                                 <div className="tool-hint-premium"><Maximize2 size={12}/> Zoom Habilitado</div>
                                 <div className="tool-hint-premium"><Box size={12}/> {buildingShape.charAt(0).toUpperCase() + buildingShape.slice(1)}</div>
                             </div>
                         </div>
                         
-                        <div style={{ minHeight: '416px', height: (analysisMode === 'CLASS_KDD' || analysisMode === 'B2B_PROSPECTING' || analysisMode === 'ML_USER_DEMAND' || analysisMode === 'MERCH_INSIGHTS') ? 'auto' : '416px', background: '#f8fafc', position: 'relative', overflowY: 'auto' }}>
+                        <div style={{ minHeight: '416px', height: (analysisMode === 'CLASS_KDD' || analysisMode === 'B2B_PROSPECTING' || analysisMode === 'ML_USER_DEMAND' || analysisMode === 'MERCH_INSIGHTS') ? 'auto' : '416px', background: 'var(--color-surface-hover)', position: 'relative', overflowY: 'auto', overflowX: 'hidden', minWidth: 0 }}>
                             {/* CAJA DE LEYENDA PARA LOS CUADRADITOS DE COLORES */}
                             {colorMode === 'solid' && analysisMode === '3D_EXPLORATION' && (
                                 <div style={{ 
                                     position: 'absolute', top: '15px', right: '15px', 
-                                    background: 'rgba(255,255,255,0.95)', padding: '10px 15px', 
+                                    background: 'var(--color-surface)', padding: '10px 15px', 
                                     borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.08)', 
-                                    border: '1px solid #E2E8F0', zIndex: 10,
-                                    maxHeight: '250px', overflowY: 'auto'
+                                    border: '1px solid var(--color-border)', zIndex: 10,
+                                    maxHeight: '250px', overflowY: 'auto', overflowX: 'hidden', minWidth: 0, maxWidth: 'calc(100% - 30px)'
                                 }}>
-                                    <h4 style={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', marginBottom: '8px', color: '#475569', borderBottom: '1px solid #EDF2F7', paddingBottom: '4px' }}>Leyenda</h4>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                    <h4 className="bigdata-subtitle" style={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', marginBottom: '8px', color: 'var(--color-text-secondary)', borderBottom: '1px solid var(--color-border)', paddingBottom: '4px' }}>Leyenda</h4>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', minWidth: 0 }}>
                                         {canonicalData.slice(0, 15).map((d, index) => (
-                                            <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.7rem', fontWeight: 700 }}>
-                                                <div style={{ width: '12px', height: '12px', borderRadius: '3px', background: solidColors[index % solidColors.length] }}></div>
-                                                <span style={{ color: '#1E293B' }}>{d.producto}</span>
+                                            <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.7rem', fontWeight: 700, minWidth: 0 }}>
+                                                <div style={{ width: '12px', height: '12px', borderRadius: '3px', background: solidColors[index % solidColors.length], flexShrink: 0 }}></div>
+                                                <span className="bigdata-title" style={{ color: 'var(--color-text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{d.producto}</span>
                                             </div>
                                         ))}
-                                        {canonicalData.length > 15 && <div style={{ fontSize: '0.65rem', color: '#64748B', fontStyle: 'italic' }}>Y {canonicalData.length - 15} más...</div>}
+                                        {canonicalData.length > 15 && <div className="bigdata-desc" style={{ fontSize: '0.65rem', color: 'var(--color-text-secondary)', fontStyle: 'italic' }}>Y {canonicalData.length - 15} más...</div>}
                                     </div>
+                                </div>
+                            )}
+
+                            {(loading || mlLoading) && (
+                                <div className="loader-overlay-premium">
+                                    <div className="spinner"></div>
+                                    <span style={{ fontWeight: 600, color: 'var(--color-text)', letterSpacing: '1px' }}>PROCESANDO DATOS...</span>
                                 </div>
                             )}
 
@@ -709,7 +717,7 @@ const BigDataVisualizer = ({ managerId = null }) => {
                                     />
                                 </div>
                             ) : (analysisMode === 'ML_PCA' || analysisMode === 'ML_RECOMMENDATIONS' || analysisMode === 'ML_ELBOW' || analysisMode === 'ML_ANOMALY' || analysisMode === 'ML_MARKET_GAPS') ? (
-                                <div key="smart-recs-container" className="b2b-scrollable-container" style={{ padding: '1.8rem', background: '#ffffff', borderRadius: '24px', maxHeight: '650px', overflowY: 'auto' }}>
+                                <div key="smart-recs-container" className="b2b-scrollable-container bigdata-panel-body" style={{ padding: '1.8rem', background: 'var(--color-surface)', borderRadius: '24px', maxHeight: '650px', overflowY: 'auto', overflowX: 'hidden', minWidth: 0 }}>
                                     <SmartRecommendations analysisMode={analysisMode} mlData={mlData} />
                                 </div>
                             ) : analysisMode === 'ML_REGRESSION' ? (
@@ -719,13 +727,15 @@ const BigDataVisualizer = ({ managerId = null }) => {
                             ) : analysisMode === 'B2B_PROSPECTING' ? (
                                 <div 
                                     key="b2b-prospecting-container" 
-                                    className="b2b-scrollable-container" 
+                                    className="b2b-scrollable-container bigdata-panel-body" 
                                     style={{ 
                                         padding: '1.8rem', 
-                                        background: '#ffffff', 
+                                        background: 'var(--color-surface)', 
                                         borderRadius: '24px', 
                                         maxHeight: '650px', 
-                                        overflowY: 'auto' 
+                                        overflowY: 'auto',
+                                        overflowX: 'hidden',
+                                        minWidth: 0
                                     }}
                                 >
                                     <B2BProspecting />
@@ -733,13 +743,15 @@ const BigDataVisualizer = ({ managerId = null }) => {
                             ) : analysisMode === 'ML_USER_DEMAND' ? (
                                 <div 
                                     key="ml-user-demand-container" 
-                                    className="b2b-scrollable-container" 
+                                    className="b2b-scrollable-container bigdata-panel-body" 
                                     style={{ 
                                         padding: '1.8rem', 
-                                        background: '#ffffff', 
+                                        background: 'var(--color-surface)', 
                                         borderRadius: '24px', 
                                         maxHeight: '650px', 
-                                        overflowY: 'auto' 
+                                        overflowY: 'auto',
+                                        overflowX: 'hidden',
+                                        minWidth: 0
                                     }}
                                 >
                                     <UserDemandAnalytics managerId={managerId} />
@@ -747,19 +759,21 @@ const BigDataVisualizer = ({ managerId = null }) => {
                             ) : analysisMode === 'MERCH_INSIGHTS' ? (
                                 <div
                                     key="merch-insights-container"
-                                    className="b2b-scrollable-container"
+                                    className="b2b-scrollable-container bigdata-panel-body"
                                     style={{
                                         padding: '1.8rem',
-                                        background: '#ffffff',
+                                        background: 'var(--color-surface)',
                                         borderRadius: '24px',
                                         maxHeight: '700px',
-                                        overflowY: 'auto'
+                                        overflowY: 'auto',
+                                        overflowX: 'hidden',
+                                        minWidth: 0
                                     }}
                                 >
                                     <MerchandiseSalesInsights />
                                 </div>
                             ) : (
-                                <div key="class-kdd-container" className="kdd-panel-content" style={{ padding: '1.8rem', color: '#1e293b', background: '#ffffff' }}>
+                                <div key="class-kdd-container" className="kdd-panel-content bigdata-panel-body bigdata-desc" style={{ padding: '1.8rem', color: 'var(--color-text-secondary)', background: 'var(--color-surface)', overflowX: 'hidden', minWidth: 0 }}>
                                     <DatabaseSanitizationStatus mlData={mlData} />
                                 </div>
                             )}
@@ -778,7 +792,7 @@ const BigDataVisualizer = ({ managerId = null }) => {
 
                 {/* PANEL DERECHO: HERRAMIENTAS Y LOG */}
                 {analysisMode === '3D_EXPLORATION' && (
-                <aside style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <aside className="settings-sidebar-wrapper bigdata-side-stack" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', minWidth: 0, overflow: 'visible' }}>
                     <BigDataTools 
                         openColorPanel={openColorPanel}
                         setOpenColorPanel={setOpenColorPanel}
@@ -859,12 +873,12 @@ const BigDataVisualizer = ({ managerId = null }) => {
                 
                 .slider-group { display: flex; flex-direction: column; gap: 8px; }
                 .slider-header { display: flex; justify-content: space-between; align-items: center; }
-                .slider-header label { font-size: 0.7rem; font-weight: 600; color: #475569; }
+                .slider-header label { font-size: 0.7rem; font-weight: 600; color: var(--color-text-secondary); }
                 .slider-val { font-size: 0.7rem; font-weight: 700; color: #000000; background: #000000; padding: 2px 8px; border-radius: 10px; }
                 .slider-premium { width: 100%; accent-color: #000000; height: 6px; border-radius: 3px; background: #e2e8f0; appearance: none; outline: none; }
                 .slider-premium::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #000000; cursor: pointer; border: 2px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
                 
-                .btn-wireframe { background: #f1f5f9; border: 1px solid #cbd5e1; color: #475569; border-radius: 12px; padding: 8px; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 4px; }
+                .btn-wireframe { background: #f1f5f9; border: 1px solid #cbd5e1; color: var(--color-text-secondary); border-radius: 12px; padding: 8px; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 4px; }
                 .btn-wireframe.active { background: #000000; color: #fff; border-color: #000000; }
                 
                 .tool-hint-premium { color: #64748b; font-size: 0.7rem; font-weight: 600; display: flex; align-items: center; gap: 6px; background: #f1f5f9; padding: 4px 10px; border-radius: 12px; }

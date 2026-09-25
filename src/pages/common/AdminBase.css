@@ -7,5 +7,34 @@
 .admin-section{padding:0}
 .text-muted{color:var(--color-text-muted)} .text-center{text-align:center}
 /* Grids y tablas unificadas */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-@media(max-width:1100px){.stats-grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:600px){.stats-grid{grid-template-columns:1fr} .admin-dashboard-page{padding:16px}}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px;min-width:0}
+@media(max-width:1100px){.stats-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}} @media(max-width:600px){.stats-grid{grid-template-columns:1fr} .admin-dashboard-page{padding:16px}}
+/* === Grupo A: Vista general / BigData / B2B — solo visual, tokens var(--color-*) === */
+.dashboard-shortcuts,.dashboard-footer-grid,.b2b-grid,.bigdata-metrics-grid{min-width:0}
+.b2b-title{color:var(--color-text)}
+.b2b-subtitle,.b2b-muted{color:var(--color-text-secondary)}
+.b2b-section-title{color:var(--color-text)}
+.b2b-panel{background:var(--color-surface);border:1px solid var(--color-border);color:var(--color-text);min-width:0;overflow:hidden}
+.b2b-grid{overflow-x:clip}
+.b2b-form{min-width:0}
+.b2b-label{color:var(--color-text-secondary)}
+.b2b-select{background:var(--color-surface);border:1px solid var(--color-border);color:var(--color-text)}
+.b2b-select option{background:var(--color-surface);color:var(--color-text)}
+.b2b-user-name{color:var(--color-text)}
+.b2b-user-list{min-width:0}
+/* Iconos: contraste en ambos temas (lucide hereda currentColor, no se toca el componente) */
+.b2b-panel svg,.b2b-grid svg,.glass-panel svg{color:currentColor}
+.admin-custom-table svg{color:currentColor}
+.b2b-icon-btn{color:var(--color-text-secondary);display:inline-flex;align-items:center;justify-content:center}
+.b2b-icon-btn svg{color:currentColor;flex-shrink:0}
+[data-theme="dark"] .b2b-icon-btn{color:var(--color-text)}
+.bigdata-icon{color:var(--color-text-secondary)}
+.bigdata-icon svg{color:currentColor;flex-shrink:0}
+[data-theme="dark"] .bigdata-icon{color:var(--color-text)}
+@media(max-width:1024px){
+  .b2b-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
+  .admin-dashboard-page{padding:20px}
+}
+@media(max-width:640px){
+  .b2b-grid{grid-template-columns:1fr;gap:1rem}
+}

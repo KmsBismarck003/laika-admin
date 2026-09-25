@@ -43,11 +43,11 @@ const ContractModal = ({ isOpen, onClose, onSubmit, organizations, contract = nu
 
     return (
         <Modal isOpen={isOpen} title={contract ? "Editar Contrato / Paquete" : "Nuevo Contrato / Paquete"} onClose={onClose}>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-                <div className="input-group">
-                    <label style={{ display: 'block', marginBottom: '0.4rem', fontSize: '0.9rem', color: '#a0aec0' }}>Cliente / Organización</label>
+            <form onSubmit={handleSubmit} className="b2b-form" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', minWidth: 0 }}>
+                <div className="input-group" style={{ minWidth: 0 }}>
+                    <label className="b2b-label" style={{ display: 'block', marginBottom: '0.4rem', fontSize: '0.9rem', color: 'var(--color-text-secondary)' }}>Cliente / Organización</label>
                     <select 
-                        className="laika-input" 
+                        className="laika-input b2b-select" 
                         required 
                         value={form.organizationId} 
                         onChange={e => setForm({ ...form, organizationId: e.target.value })}
@@ -55,10 +55,11 @@ const ContractModal = ({ isOpen, onClose, onSubmit, organizations, contract = nu
                             width: '100%',
                             padding: '0.75rem',
                             borderRadius: '8px',
-                            background: 'rgba(26, 32, 44, 0.8)',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                            color: '#fff',
-                            outline: 'none'
+                            background: 'var(--color-surface)',
+                            border: '1px solid var(--color-border)',
+                            color: 'var(--color-text)',
+                            outline: 'none',
+                            minWidth: 0
                         }}
                     >
                         <option value="">-- Seleccionar --</option>
@@ -72,7 +73,7 @@ const ContractModal = ({ isOpen, onClose, onSubmit, organizations, contract = nu
                     onChange={e => setForm({ ...form, name: e.target.value })} 
                 />
                 
-                <div style={{ display: 'flex', gap: '1rem' }}>
+                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', minWidth: 0 }}>
                     <Input 
                         label="Fecha Inicio" 
                         type="date" 
@@ -89,10 +90,10 @@ const ContractModal = ({ isOpen, onClose, onSubmit, organizations, contract = nu
                     />
                 </div>
 
-                <div className="input-group">
-                    <label style={{ display: 'block', marginBottom: '0.4rem', fontSize: '0.9rem', color: '#a0aec0' }}>Estado del Contrato</label>
+                <div className="input-group" style={{ minWidth: 0 }}>
+                    <label className="b2b-label" style={{ display: 'block', marginBottom: '0.4rem', fontSize: '0.9rem', color: 'var(--color-text-secondary)' }}>Estado del Contrato</label>
                     <select 
-                        className="laika-input" 
+                        className="laika-input b2b-select" 
                         required 
                         value={form.status} 
                         onChange={e => setForm({ ...form, status: e.target.value })}
@@ -100,10 +101,11 @@ const ContractModal = ({ isOpen, onClose, onSubmit, organizations, contract = nu
                             width: '100%',
                             padding: '0.75rem',
                             borderRadius: '8px',
-                            background: 'rgba(26, 32, 44, 0.8)',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                            color: '#fff',
-                            outline: 'none'
+                            background: 'var(--color-surface)',
+                            border: '1px solid var(--color-border)',
+                            color: 'var(--color-text)',
+                            outline: 'none',
+                            minWidth: 0
                         }}
                     >
                         <option value="ACTIVE">Activo (ACTIVE)</option>
@@ -112,7 +114,7 @@ const ContractModal = ({ isOpen, onClose, onSubmit, organizations, contract = nu
                     </select>
                 </div>
 
-                <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', color: '#e2e8f0', margin: '0.5rem 0' }}>
+                <label className="b2b-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', color: 'var(--color-text)', margin: '0.5rem 0', minWidth: 0 }}>
                     <input 
                         type="checkbox" 
                         checked={form.isUnlimited} 

@@ -164,7 +164,7 @@ const Ads = () => {
       key: 'image_url',
       header: 'Imagen',
       render: (url) => (
-        <div style={{ width: '100px', height: '60px', borderRadius: '8px', overflow: 'hidden', bg: '#000' }}>
+        <div style={{ width: '100px', height: '60px', borderRadius: '8px', overflow: 'hidden', backgroundColor: 'var(--color-surface-elevated)', border: '1px solid var(--color-border)' }}>
           <img src={getImageUrl(url)} alt="Ad" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
       )
@@ -192,19 +192,19 @@ const Ads = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
               <Badge variant="primary">🎯 Evento: {ev ? ev.name : `ID ${row.event_id}`}</Badge>
               {ev && !ev.ads_enabled && (
-                <span style={{ fontSize: '0.7rem', color: 'var(--error-color)', fontWeight: 600 }}>⚠️ Publicidad deshabilitada en evento</span>
+                <span style={{ fontSize: '0.7rem', color: 'var(--color-danger)', fontWeight: 600 }}>⚠️ Publicidad deshabilitada en evento</span>
               )}
             </div>
           )
         }
         if (row.link_url) {
           return (
-            <a href={row.link_url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-color)', fontSize: '0.8rem', textDecoration: 'underline' }}>
+            <a href={row.link_url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-info)', fontSize: '0.8rem', textDecoration: 'underline' }}>
               🔗 {row.link_url.length > 30 ? `${row.link_url.substring(0, 30)}...` : row.link_url}
             </a>
           )
         }
-        return <span style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>Sin destino</span>
+        return <span style={{ color: 'var(--color-text-secondary)', fontSize: '0.8rem' }}>Sin destino</span>
       }
     },
     {
@@ -253,7 +253,7 @@ const Ads = () => {
         {isLoading ? (
           <Skeleton width="130px" height="34px" style={{ borderRadius: '6px' }} />
         ) : (
-          <Button onClick={() => handleOpenModal()} variant="primary">
+          <Button onClick={() => handleOpenModal()} variant="primary" style={{ background: 'var(--color-primary)', color: 'var(--color-primary-fg)', borderColor: 'var(--color-primary)', fontWeight: 800 }}>
             + Nuevo Anuncio
           </Button>
         )}
@@ -262,8 +262,8 @@ const Ads = () => {
       <Card className="glass-panel" style={{ padding: 0, overflow: 'hidden' }}>
         {isLoading ? (
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead><tr style={{ background: 'var(--bg-secondary)', borderBottom: '2px solid var(--border-color)' }}>
-              {['IMAGEN', 'TÍTULO', 'POSICIÓN', 'ESTADO', 'CLICS', 'ACCIONES'].map(h => <th key={h} style={{ padding: '14px 16px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>{h}</th>)}
+            <thead><tr style={{ background: 'var(--color-surface-hover)', borderBottom: '2px solid var(--color-border)' }}>
+              {['IMAGEN', 'TÍTULO', 'POSICIÓN', 'ESTADO', 'CLICS', 'ACCIONES'].map(h => <th key={h} style={{ padding: '14px 16px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', color: 'var(--color-text-secondary)', textTransform: 'uppercase' }}>{h}</th>)}
             </tr></thead>
             <tbody>{Array.from({ length: 6 }).map((_, i) => <SkeletonRow key={i} columns={6} />)}</tbody>
           </table>
@@ -306,10 +306,10 @@ const Ads = () => {
                 </div>
 
                 {/* Dynamic Recommended Dimensions Banner */}
-                <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px dashed rgba(255,255,255,0.15)', padding: '10px 14px', borderRadius: '8px', fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.2rem', marginTop: '0.5rem' }}>
-                  <span style={{ fontSize: '1.1rem' }}>📏</span>
+                <div style={{ background: 'var(--color-surface-hover)', border: '1px dashed var(--color-border-strong)', padding: '10px 14px', borderRadius: '8px', fontSize: '0.8rem', color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.2rem', marginTop: '0.5rem' }}>
+                  <span style={{ fontSize: '1.1rem', color: 'var(--color-text)' }}>📏</span>
                   <div>
-                    <strong>Medidas sugeridas:</strong> <span style={{ color: 'var(--accent-color)', fontWeight: 600 }}>{formData.position === 'main' ? '1098x342 px (Horizontal / Principal)' : '160x600 px (Vertical / Lateral)'}</span>
+                    <strong style={{ color: 'var(--color-text)' }}>Medidas sugeridas:</strong> <span style={{ color: 'var(--color-text)', fontWeight: 600 }}>{formData.position === 'main' ? '1098x342 px (Horizontal / Principal)' : '160x600 px (Vertical / Lateral)'}</span>
                   </div>
                 </div>
 
@@ -335,7 +335,7 @@ const Ads = () => {
                 </div>
 
                 {formData.is_event_ad ? (
-                  <div className="form-group mb-3" style={{ background: 'rgba(255,255,255,0.02)', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <div className="form-group mb-3" style={{ background: 'var(--color-surface-hover)', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-border)' }}>
                     <label className="input-label">Seleccionar Evento Existente</label>
                     <select
                       className="input"
@@ -357,8 +357,8 @@ const Ads = () => {
                       ))}
                     </select>
                     {formData.link_url && (
-                      <p className="help-text" style={{ fontSize: '0.75rem', color: 'var(--accent-color)', fontWeight: 500 }}>
-                        🔗 Redirección automática: <span style={{ color: 'var(--text-secondary)' }}>{formData.link_url}</span>
+                      <p className="help-text" style={{ fontSize: '0.75rem', color: 'var(--color-info)', fontWeight: 500 }}>
+                        🔗 Redirección automática: <span style={{ color: 'var(--color-text-secondary)' }}>{formData.link_url}</span>
                       </p>
                     )}
                   </div>
@@ -370,7 +370,7 @@ const Ads = () => {
                       onChange={e => setFormData({ ...formData, link_url: e.target.value })}
                       placeholder="https://ejemplo.com/otro-sitio"
                     />
-                    <p className="help-text" style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', marginTop: '0.2rem' }}>
+                    <p className="help-text" style={{ fontSize: '0.7rem', color: 'var(--color-text-secondary)', marginTop: '0.2rem' }}>
                       URL o link personalizado al que se dirigirá al hacer clic.
                     </p>
                   </div>
@@ -399,7 +399,7 @@ const Ads = () => {
                       }}
                       accept="image/*"
                     />
-                    <p className="help-text" style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.3rem' }}>
+                    <p className="help-text" style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', marginTop: '0.3rem' }}>
                       O ingresa una URL manualmente:
                     </p>
                     <Input
@@ -412,10 +412,10 @@ const Ads = () => {
                 </div>
 
                 <div className="image-preview-container mt-3" style={{ position: 'relative' }}>
-                  <p className="help-text" style={{ fontSize: '0.7rem', marginBottom: '0.3rem', color: 'var(--accent-color)', fontWeight: 600 }}>
+                  <p className="help-text" style={{ fontSize: '0.7rem', marginBottom: '0.3rem', color: 'var(--color-info)', fontWeight: 600 }}>
                     💡 Tip: Arrastra la imagen al monitor de la derecha para elegir posición.
                   </p>
-                  <div className="preview-box" style={{ width: '100%', height: '140px', borderRadius: '12px', background: '#222', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '1px solid #333' }}>
+                  <div className="preview-box" style={{ width: '100%', height: '140px', borderRadius: '12px', background: 'var(--color-surface-elevated)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
                     {formData.image_url ? (
                       <img
                         src={getImageUrl(formData.image_url)}
@@ -431,7 +431,7 @@ const Ads = () => {
                         style={{ width: '100%', height: '100%', objectFit: 'contain', cursor: 'grab' }}
                       />
                     ) : (
-                      <span style={{ color: '#555', fontSize: '0.8rem' }}>Sin imagen</span>
+                      <span style={{ color: 'var(--color-text-muted)', fontSize: '0.8rem' }}>Sin imagen</span>
                     )}
                   </div>
                 </div>
@@ -464,18 +464,18 @@ const Ads = () => {
 
               {editingAd && (
                 <div className="clicks-info-section" style={{ marginTop: '2rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem' }}>
-                    <h3 style={{ fontSize: '1rem', fontWeight: 600 }}>Usuarios que interactuaron</h3>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid var(--color-border)', paddingBottom: '0.5rem' }}>
+                    <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--color-text)' }}>Usuarios que interactuaron</h3>
                     <Badge variant="primary">{clicksData.length} Clics</Badge>
                   </div>
 
                   <div className="whatsapp-style-list" style={{ maxHeight: '300px', overflowY: 'auto', paddingRight: '0.5rem' }}>
                     {loadingClicks ? (
-                      <p style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '1rem' }}>Cargando...</p>
+                      <p style={{ textAlign: 'center', color: 'var(--color-text-secondary)', padding: '1rem' }}>Cargando...</p>
                     ) : clicksData.length > 0 ? (
                       clicksData.map((click, idx) => (
-                        <div key={idx} className="wa-user-item" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', padding: '0.8rem', borderRadius: '12px', background: 'rgba(255,255,255,0.03)', marginBottom: '0.5rem', transition: 'background 0.2s' }}>
-                          <div className="wa-avatar" style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#333', overflow: 'hidden', flexShrink: 0 }}>
+                        <div key={idx} className="wa-user-item" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', padding: '0.8rem', borderRadius: '12px', background: 'var(--color-surface-hover)', border: '1px solid var(--color-border)', marginBottom: '0.5rem', transition: 'background 0.2s' }}>
+                          <div className="wa-avatar" style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--color-surface-elevated)', border: '1px solid var(--color-border)', overflow: 'hidden', flexShrink: 0 }}>
                             <img
                               src={getImageUrl(click.profile_image) || 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'}
                               alt={click.full_name}
@@ -483,20 +483,20 @@ const Ads = () => {
                             />
                           </div>
                           <div className="wa-info" style={{ flex: 1, minWidth: 0 }}>
-                            <div style={{ fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            <div style={{ fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', color: 'var(--color-text)' }}>
                               {click.full_name || 'Usuario Anónimo'}
                             </div>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                            <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
                               {click.email || 'Sin correo asociado'}
                             </div>
                           </div>
-                          <div className="wa-time" style={{ fontSize: '0.7rem', color: 'var(--accent-color)', fontWeight: 500 }}>
+                          <div className="wa-time" style={{ fontSize: '0.7rem', color: 'var(--color-text-secondary)', fontWeight: 500 }}>
                             {new Date(click.clicked_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </div>
                         </div>
                       ))
                     ) : (
-                      <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+                      <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-text-secondary)', fontSize: '0.85rem' }}>
                         Aún no hay clics registrados para este anuncio.
                       </div>
                     )}

@@ -52,10 +52,10 @@ const AdModalEditor = ({
             </div>
 
             {/* Dynamic Recommended Dimensions Banner */}
-            <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px dashed rgba(255,255,255,0.15)', padding: '10px 14px', borderRadius: '8px', fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.2rem', marginTop: '0.5rem' }}>
-              <span style={{ fontSize: '1.1rem' }}>📏</span>
+            <div style={{ background: 'var(--color-surface-hover)', border: '1px dashed var(--color-border-strong)', padding: '10px 14px', borderRadius: '8px', fontSize: '0.8rem', color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.2rem', marginTop: '0.5rem' }}>
+              <span style={{ fontSize: '1.1rem', color: 'var(--color-text)' }}>📏</span>
               <div>
-                <strong>Medidas sugeridas:</strong> <span style={{ color: 'var(--accent-color)', fontWeight: 600 }}>{formData.position === 'main' ? '1098x342 px (Horizontal / Principal)' : '160x600 px (Vertical / Lateral)'}</span>
+                <strong style={{ color: 'var(--color-text)' }}>Medidas sugeridas:</strong> <span style={{ color: 'var(--color-text)', fontWeight: 600 }}>{formData.position === 'main' ? '1098x342 px (Horizontal / Principal)' : '160x600 px (Vertical / Lateral)'}</span>
               </div>
             </div>
 
@@ -81,7 +81,7 @@ const AdModalEditor = ({
             </div>
 
             {formData.is_event_ad ? (
-              <div className="form-group mb-3" style={{ background: 'rgba(255,255,255,0.02)', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <div className="form-group mb-3" style={{ background: 'var(--color-surface-hover)', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-border)' }}>
                 <label className="input-label">Seleccionar Evento Existente</label>
                 <select
                   className="input"
@@ -103,8 +103,8 @@ const AdModalEditor = ({
                   ))}
                 </select>
                 {formData.link_url && (
-                  <p className="help-text" style={{ fontSize: '0.75rem', color: 'var(--accent-color)', fontWeight: 500 }}>
-                    🔗 Redirección automática: <span style={{ color: 'var(--text-secondary)' }}>{formData.link_url}</span>
+                  <p className="help-text" style={{ fontSize: '0.75rem', color: 'var(--color-info)', fontWeight: 500 }}>
+                    🔗 Redirección automática: <span style={{ color: 'var(--color-text-secondary)' }}>{formData.link_url}</span>
                   </p>
                 )}
               </div>
@@ -116,7 +116,7 @@ const AdModalEditor = ({
                   onChange={e => setFormData({ ...formData, link_url: e.target.value })}
                   placeholder="https://ejemplo.com/otro-sitio"
                 />
-                <p className="help-text" style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', marginTop: '0.2rem' }}>
+                <p className="help-text" style={{ fontSize: '0.7rem', color: 'var(--color-text-secondary)', marginTop: '0.2rem' }}>
                   URL o link personalizado al que se dirigirá al hacer clic.
                 </p>
               </div>
@@ -145,7 +145,7 @@ const AdModalEditor = ({
                   }}
                   accept="image/*"
                 />
-                <p className="help-text" style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.3rem' }}>
+                <p className="help-text" style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', marginTop: '0.3rem' }}>
                   O ingresa una URL manualmente:
                 </p>
                 <Input
@@ -158,19 +158,19 @@ const AdModalEditor = ({
             </div>
 
             <div className="image-preview-container mt-3" style={{ position: 'relative' }}>
-              <p className="help-text" style={{ fontSize: '0.7rem', marginBottom: '0.3rem', color: 'var(--accent-color)', fontWeight: 600 }}>
+              <p className="help-text" style={{ fontSize: '0.7rem', marginBottom: '0.3rem', color: 'var(--color-info)', fontWeight: 600 }}>
                 💡 Tip: Arrastra la imagen al monitor de la derecha para elegir posición.
               </p>
               <div className="preview-box" style={{ 
                   width: '100%', 
                   height: '140px', 
                   borderRadius: '12px', 
-                  backgroundColor: '#222', 
+                  backgroundColor: 'var(--color-surface-elevated)', 
                   display: 'flex', 
                   alignItems: 'center', 
                   justifyContent: 'center', 
                   overflow: 'hidden', 
-                  border: '1px solid #333' 
+                  border: '1px solid var(--color-border)' 
               }}>
                 {formData.image_url ? (
                   <img
@@ -187,7 +187,7 @@ const AdModalEditor = ({
                     style={{ width: '100%', height: '100%', objectFit: 'contain', cursor: 'grab' }}
                   />
                 ) : (
-                  <span style={{ color: '#555', fontSize: '0.8rem' }}>Sin imagen</span>
+                  <span style={{ color: 'var(--color-text-muted)', fontSize: '0.8rem' }}>Sin imagen</span>
                 )}
               </div>
             </div>

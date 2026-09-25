@@ -40,9 +40,9 @@ const FilterSidebar = ({
     const [isPaletteOpen, setIsPaletteOpen] = useState(false);
 
     return (
-        <aside style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+        <aside className="bigdata-side-stack" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', minWidth: 0, overflowY: 'auto', overflowX: 'hidden', maxHeight: '100%' }}>
             {/* Navegación de Módulos (Acordeón) */}
-            <Card className="glass-card" style={{ padding: '1.2rem', borderRadius: '20px' }}>
+            <Card className="glass-card bigdata-panel-card" style={{ padding: '1.2rem', borderRadius: '20px', background: 'var(--color-surface)', border: '1px solid var(--color-border)', minWidth: 0, overflow: 'hidden' }}>
                 <div 
                     onClick={() => setIsModulesOpen(!isModulesOpen)}
                     style={{ 
@@ -52,18 +52,19 @@ const FilterSidebar = ({
                         justifyContent: 'space-between',
                         gap: '8px',
                         cursor: 'pointer',
-                        userSelect: 'none'
+                        userSelect: 'none',
+                        minWidth: 0
                     }}
                 >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <div style={{ width: '3px', height: '14px', background: '#000' }}></div>
-                        <h3 style={{ fontSize: '0.7rem', fontWeight: 900, color: '#000', margin: 0, letterSpacing: '0.05em' }}>MÓDULOS</h3>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
+                        <div style={{ width: '3px', height: '14px', background: 'var(--color-text)', flexShrink: 0 }}></div>
+                        <h3 className="bigdata-title" style={{ fontSize: '0.7rem', fontWeight: 900, color: 'var(--color-text)', margin: 0, letterSpacing: '0.05em' }}>MÓDULOS</h3>
                     </div>
-                    {isModulesOpen ? <ChevronUp size={14} color="#64748b" /> : <ChevronDown size={14} color="#64748b" />}
+                    {isModulesOpen ? <ChevronUp size={14} color="currentColor" style={{ color: 'var(--color-text-secondary)' }} /> : <ChevronDown size={14} color="currentColor" style={{ color: 'var(--color-text-secondary)' }} />}
                 </div>
                 
                 {isModulesOpen && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', animation: 'slideDown 0.3s ease-out' }}>
+                    <div className="bigdata-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '4px', animation: 'slideDown 0.3s ease-out', overflow: 'auto', maxHeight: '260px', minWidth: 0 }}>
                         {DATA_SOURCES.map(source => (
                             <button
                                 key={source.id}
@@ -75,14 +76,15 @@ const FilterSidebar = ({
                                     justifyContent: 'space-between',
                                     width: '100%',
                                     padding: '10px 14px',
-                                    border: 'none',
-                                    background: selectedTable === source.id ? '#000' : 'transparent',
+                                    border: '1px solid var(--color-border)',
+                                    background: selectedTable === source.id ? 'var(--color-primary)' : 'transparent',
                                     borderRadius: '12px',
                                     fontSize: '0.75rem',
                                     fontWeight: selectedTable === source.id ? 800 : 500,
-                                    color: selectedTable === source.id ? '#fff' : '#64748b',
+                                    color: selectedTable === source.id ? 'var(--color-primary-fg)' : 'var(--color-text-secondary)',
                                     cursor: 'pointer',
                                     transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    minWidth: 0
                                 }}
                             >
                                 {source.label}
@@ -93,7 +95,7 @@ const FilterSidebar = ({
                 )}
             </Card>
 
-            <Card className="glass-card" style={{ padding: '1.2rem', borderRadius: '20px' }}>
+            <Card className="glass-card bigdata-panel-card" style={{ padding: '1.2rem', borderRadius: '20px', background: 'var(--color-surface)', border: '1px solid var(--color-border)', minWidth: 0, overflow: 'hidden' }}>
                 <div 
                     onClick={() => setIsControlHubOpen(!isControlHubOpen)}
                     style={{ 
@@ -102,18 +104,19 @@ const FilterSidebar = ({
                         justifyContent: 'space-between', 
                         marginBottom: isControlHubOpen ? '1.2rem' : '0',
                         cursor: 'pointer',
-                        userSelect: 'none'
+                        userSelect: 'none',
+                        minWidth: 0
                     }}
                 >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <Filter size={16} color="#000" />
-                        <h3 style={{ fontSize: '0.75rem', fontWeight: 800, color: '#000', margin: 0 }}>CONTROL HUB</h3>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
+                        <Filter size={16} color="currentColor" style={{ color: 'var(--color-text)' }} />
+                        <h3 className="bigdata-title" style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-text)', margin: 0 }}>CONTROL HUB</h3>
                     </div>
-                    {isControlHubOpen ? <ChevronUp size={14} color="#64748b" /> : <ChevronDown size={14} color="#64748b" />}
+                    {isControlHubOpen ? <ChevronUp size={14} color="currentColor" style={{ color: 'var(--color-text-secondary)' }} /> : <ChevronDown size={14} color="currentColor" style={{ color: 'var(--color-text-secondary)' }} />}
                 </div>
                 
                 {isControlHubOpen && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', animation: 'slideDown 0.3s ease-out' }}>
+                    <div className="bigdata-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', animation: 'slideDown 0.3s ease-out', overflow: 'auto', maxHeight: '480px', minWidth: 0 }}>
                         
                         {/* --- CONFIGURACIÓN DE VISTA --- */}
                         {analysisMode === '2D_EXPLORATION' && (
@@ -191,8 +194,8 @@ const FilterSidebar = ({
                         )}
 
                         {/* --- ACCIONES FINALES --- */}
-                        <div style={{ marginTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            <button onClick={executeAnalysis} className="btn-primary" style={{ width: '100%', justifyContent: 'center', background: '#000' }}>
+                        <div style={{ marginTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '8px', minWidth: 0 }}>
+                            <button onClick={executeAnalysis} className="btn-primary" style={{ width: '100%', justifyContent: 'center', background: 'var(--color-primary)', color: 'var(--color-primary-fg)' }}>
                                 <RefreshCw size={14} /> ACTUALIZAR DATOS
                             </button>
                             <button onClick={handleExportExcel} className="btn-secondary" style={{ width: '100%', justifyContent: 'center', borderRadius: '12px' }}>
@@ -205,7 +208,7 @@ const FilterSidebar = ({
 
             {/* Selector de Esquema de Color (Solo en 2D) */}
             {analysisMode === '2D_EXPLORATION' && (
-                <Card style={{ padding: '1.2rem', borderRadius: '20px', background: '#fff', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
+                <Card className="bigdata-panel-card" style={{ padding: '1.2rem', borderRadius: '20px', background: 'var(--color-surface)', border: '1px solid var(--color-border)', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', minWidth: 0, overflow: 'hidden' }}>
                     <div 
                         onClick={() => setIsPaletteOpen(!isPaletteOpen)}
                         style={{ 
@@ -214,14 +217,15 @@ const FilterSidebar = ({
                             justifyContent: 'space-between',
                             marginBottom: isPaletteOpen ? '1rem' : '0',
                             cursor: 'pointer',
-                            userSelect: 'none'
+                            userSelect: 'none',
+                            minWidth: 0
                         }}
                     >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <Palette size={16} color="#000" />
-                            <h3 style={{ fontSize: '0.7rem', fontWeight: 800, color: '#000', margin: 0, opacity: 0.8 }}>COLOR PALETTE</h3>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
+                            <Palette size={16} color="currentColor" style={{ color: 'var(--color-text)' }} />
+                            <h3 className="bigdata-title" style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--color-text)', margin: 0, opacity: 0.9 }}>COLOR PALETTE</h3>
                         </div>
-                        {isPaletteOpen ? <ChevronUp size={14} color="#64748b" /> : <ChevronDown size={14} color="#64748b" />}
+                        {isPaletteOpen ? <ChevronUp size={14} color="currentColor" style={{ color: 'var(--color-text-secondary)' }} /> : <ChevronDown size={14} color="currentColor" style={{ color: 'var(--color-text-secondary)' }} />}
                     </div>
 
                     {isPaletteOpen && (
@@ -241,11 +245,11 @@ const FilterSidebar = ({
                                     key={p} 
                                     onClick={() => setColorPalette(p)} 
                                     style={{
-                                        background: colorPalette === p ? '#f8fafc' : 'transparent',
-                                        border: colorPalette === p ? '1px solid #000' : '1px solid #e2e8f0',
+                                        background: colorPalette === p ? 'var(--color-surface-hover)' : 'transparent',
+                                        border: colorPalette === p ? '1px solid var(--color-border-strong)' : '1px solid var(--color-border)',
                                         borderRadius: '10px', 
                                         padding: '8px 12px', 
-                                        color: '#000', 
+                                        color: 'var(--color-text)', 
                                         display: 'flex', 
                                         justifyContent: 'space-between', 
                                         alignItems: 'center', 

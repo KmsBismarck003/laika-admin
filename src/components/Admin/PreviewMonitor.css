@@ -1,26 +1,29 @@
 .preview-monitor.simple {
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-md);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     height: auto; /* Changed from 100% to fit content better */
     min-height: 400px; /* Reduced from 500px */
+    color: var(--color-text);
+    opacity: 1;
 }
 
 .monitor-screen {
     flex: 1;
     position: relative;
-    background: #f8f9fa;
+    background: var(--color-bg);
     overflow: auto;
     /* Allow scrolling if preview is very large */
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1rem;
+    border-top: 1px solid var(--color-border);
 }
 
 .monitor-content {
@@ -29,6 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--color-text);
 }
 
 .preview-card-wrapper {
@@ -44,25 +48,28 @@
 .mock-home-layout {
     width: 100%;
     height: 320px; /* Reduced from 400px */
-    background: #f0f0f0;
+    background: var(--color-surface-hover);
+    border: 1px solid var(--color-border);
     padding: 8px;
     display: flex;
     flex-direction: column;
     gap: 8px;
     border-radius: 4px;
+    box-shadow: var(--shadow-sm);
 }
 
 .mock-navbar {
     height: 20px;
-    background: #000;
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
     display: flex;
     align-items: center;
     padding: 0 10px;
 }
 
 .mock-nav-menu {
-    color: #fff;
-    opacity: 0.5;
+    color: var(--color-text-secondary);
+    opacity: 1;
 }
 
 .mock-content-grid {
@@ -77,16 +84,17 @@
 }
 
 .mock-slot {
-    background: #ddd;
-    border: 1px dashed #bbb;
+    background: var(--color-surface);
+    border: 1px dashed var(--color-border-strong);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     position: relative;
+    color: var(--color-text-secondary);
 }
 
-/* Mock Ad Info Card (Scaled down for monitor) */
+/* Mock Ad Info Card (Scaled down for monitor) — contenido simulado, se mantiene overlay oscuro legible */
 .mock-ad-info {
     position: absolute;
     top: 6px;
@@ -130,11 +138,11 @@
 .mock-ad-btn {
     width: 14px;
     height: 14px;
-    background: var(--accent-color, #ffaa00);
+    background: var(--color-primary);
+    color: var(--color-primary-fg);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: black;
 }
 
 .mock-ad-info.side .mock-ad-btn {
@@ -152,7 +160,7 @@
     position: absolute;
     top: 5px;
     right: 5px;
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--color-surface-hover);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     width: 20px;
@@ -161,20 +169,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
     z-index: 5;
 }
 
 .mock-slot.highlight {
-    background: #fff;
-    border: 2px solid var(--accent-color);
-    box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.3);
+    background: var(--color-surface);
+    border: 2px solid var(--color-info);
+    box-shadow: var(--shadow-md);
 }
 
 .mock-slot.drop-active {
-    background: rgba(var(--accent-rgb), 0.1);
-    border: 2px dashed var(--accent-color);
+    background: var(--color-info-bg);
+    border: 2px dashed var(--color-info);
     transform: scale(1.02);
     z-index: 10;
 }
@@ -184,15 +193,15 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: var(--accent-color);
-    color: #000;
+    background: var(--color-primary);
+    color: var(--color-primary-fg);
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.7rem;
     font-weight: 800;
     white-space: nowrap;
     pointer-events: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-md);
     animation: pulse 1.5s infinite;
 }
 
@@ -237,7 +246,8 @@
 }
 
 .mock-card {
-    background: #e0e0e0;
+    background: var(--color-surface-hover);
+    border: 1px solid var(--color-border);
     height: 60px; /* Reduced from 80px */
 }
 
@@ -252,6 +262,9 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
 }
 
 .preview-glass-overlay {
@@ -291,7 +304,8 @@
     height: 180px;
     overflow: hidden;
     position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--color-border-strong);
+    border-radius: 4px;
 }
 
 .preview-poster img {
@@ -415,8 +429,23 @@
     width: 6px;
 }
 .monitor-screen::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0.1);
+    background: var(--color-surface-hover);
 }
 .monitor-screen::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.1);
+    background: var(--color-border-strong);
+}
+
+/* Dark: refuerza borde + sombra para distinguir preview claro */
+[data-theme="dark"] .preview-monitor.simple {
+    background: var(--color-surface);
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-md);
+}
+[data-theme="dark"] .monitor-screen {
+    background: var(--color-bg);
+}
+[data-theme="dark"] .mock-home-layout,
+[data-theme="dark"] .mock-slot,
+[data-theme="dark"] .mock-card {
+    border-color: var(--color-border-strong);
 }

@@ -517,11 +517,11 @@ const RestoreAudit = () => {
       <div className="ra-form-section">
         <h3><Icon name="checkCircle" className="mr-2 inline-block" /> Validaciones Funcionales</h3>
         {checks.map(({ key, label }) => (
-          <div key={key} style={{ marginBottom: '1rem', padding: '12px', background: 'var(--bg-input, rgba(255,255,255,0.02))', borderRadius: '10px', border: '1px solid var(--border-color, rgba(255,255,255,0.06))' }}>
+          <div key={key} style={{ marginBottom: '1rem', padding: '12px', background: 'var(--color-surface)', borderRadius: '10px', border: '1px solid var(--color-border)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap' }}>
-              <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-primary)' }}>{label}</span>
+              <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--color-text)' }}>{label}</span>
               <select value={formData[`${key}_result`]} onChange={e => handleChange(`${key}_result`, e.target.value)}
-                style={{ padding: '6px 10px', borderRadius: '6px', border: '1px solid var(--border-color)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.85rem' }}>
+                style={{ padding: '6px 10px', borderRadius: '6px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.85rem' }}>
                 <option value="pendiente">Pendiente</option>
                 <option value="exito">Éxito</option>
                 <option value="fallo">Fallo</option>
@@ -529,7 +529,7 @@ const RestoreAudit = () => {
             </div>
             <input type="text" value={formData[`${key}_observations`]} onChange={e => handleChange(`${key}_observations`, e.target.value)}
               placeholder={`Observaciones de ${label.toLowerCase()}...`}
-              style={{ width: '100%', marginTop: '8px', padding: '8px 10px', borderRadius: '6px', border: '1px solid var(--border-color, rgba(255,255,255,0.08))', background: 'var(--bg-input, rgba(255,255,255,0.03))', color: 'var(--text-primary)', fontSize: '0.85rem', boxSizing: 'border-box' }} />
+              style={{ width: '100%', marginTop: '8px', padding: '8px 10px', borderRadius: '6px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.85rem', boxSizing: 'border-box' }} />
           </div>
         ))}
         <div className="ra-btn-row">

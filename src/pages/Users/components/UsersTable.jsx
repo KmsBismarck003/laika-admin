@@ -104,6 +104,7 @@ const UsersTable = ({
                     <span style={{ 
                         fontWeight: 800, 
                         fontSize: '0.85rem',
+                        color: 'var(--color-text)',
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis'
@@ -112,7 +113,7 @@ const UsersTable = ({
                     </span>
                     <span style={{ 
                         fontSize: '0.7rem', 
-                        color: '#888', 
+                        color: 'var(--color-text-secondary)', 
                         fontWeight: 600,
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
@@ -151,8 +152,8 @@ const UsersTable = ({
             render: (_, row) => {
                 if (row.role === 'admin') {
                     return (
-                        <div className="user-mgmt__protected-badge" style={{ fontSize: '0.65rem', fontWeight: 900, color: '#e74c3c' }}>
-                            <Icon name="shield" size={12} /> <span style={{ marginLeft: '5px' }}>SISTEMA PROTEGIDO</span>
+                        <div className="user-mgmt__protected-badge" style={{ fontSize: '0.65rem', fontWeight: 900, color: 'var(--color-text)' }}>
+                            <Icon name="shield" size={12} style={{ color: 'currentColor' }} /> <span style={{ marginLeft: '5px' }}>SISTEMA PROTEGIDO</span>
                         </div>
                     );
                 }

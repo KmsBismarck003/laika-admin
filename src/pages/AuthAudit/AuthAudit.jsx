@@ -132,13 +132,14 @@ const AuthAudit = () => {
     /* ── Estilos inline compactos ── */
     const selectStyle = {
         padding: '0.4rem 0.6rem',
-        border: '1.5px solid var(--border-color, #e5e7eb)',
+        border: '1px solid var(--color-border)',
         borderRadius: '6px',
         fontSize: '0.78rem',
         fontWeight: 600,
         textTransform: 'uppercase',
         letterSpacing: '0.04em',
-        background: '#fff',
+        background: 'var(--color-surface)',
+        color: 'var(--color-text)',
         cursor: 'pointer',
         outline: 'none',
         height: '34px'
@@ -166,8 +167,9 @@ const AuthAudit = () => {
                 gap: '0.5rem',
                 alignItems: 'center',
                 marginBottom: '0.75rem',
-                background: '#fff',
-                border: '1px solid var(--border-color, #e5e7eb)',
+                background: 'var(--color-surface)',
+                color: 'var(--color-text)',
+                border: '1px solid var(--color-border)',
                 borderRadius: '8px',
                 padding: '0.4rem 0.6rem'
             }}>
@@ -198,9 +200,9 @@ const AuthAudit = () => {
                 {loading ? (
                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                         <thead>
-                            <tr style={{ background: 'var(--bg-secondary)', borderBottom: '2px solid var(--border-color)' }}>
+                            <tr style={{ background: 'var(--color-surface-hover)', borderBottom: '1px solid var(--color-border)' }}>
                                 {['FECHA Y HORA', 'USUARIO', 'EVENTO', 'IP', 'DISPOSITIVO', 'INTENTOS', 'RESUMEN'].map(h => (
-                                    <th key={h} style={{ padding: '10px 12px', textAlign: 'left', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.05em', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>{h}</th>
+                                    <th key={h} style={{ padding: '10px 12px', textAlign: 'left', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.05em', color: 'var(--color-text)', background: 'var(--color-surface-hover)', textTransform: 'uppercase' }}>{h}</th>
                                 ))}
                             </tr>
                         </thead>
@@ -234,23 +236,23 @@ const AuthAudit = () => {
                                     const device = parseDevice(log.user_agent)
                                     return (
                                         <tr key={log.id ?? i}>
-                                            <td style={{ whiteSpace: 'nowrap', fontSize: '0.82rem', color: '#111' }}>
+                                            <td style={{ whiteSpace: 'nowrap', fontSize: '0.82rem', color: 'var(--color-text)' }}>
                                                 {formatDate(log.created_at)}
                                             </td>
                                             <td>
                                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                                     <div style={{
                                                         width: 32, height: 32, borderRadius: '50%',
-                                                        background: '#f3f4f6', display: 'flex',
+                                                        background: 'var(--color-surface-hover)', display: 'flex',
                                                         alignItems: 'center', justifyContent: 'center',
-                                                        fontSize: '0.85rem', fontWeight: 700, color: '#6b7280',
-                                                        flexShrink: 0
+                                                        fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-text-secondary)',
+                                                        flexShrink: 0, border: '1px solid var(--color-border)'
                                                     }}>
                                                         {(log.user_name || log.email || '?')[0].toUpperCase()}
                                                     </div>
                                                     <div style={{ lineHeight: 1.3 }}>
-                                                        <div style={{ fontWeight: 600, fontSize: '0.85rem', color: '#000' }}>{log.user_name || '—'}</div>
-                                                        <div style={{ fontSize: '0.75rem', color: '#555' }}>{log.email || '—'}</div>
+                                                        <div style={{ fontWeight: 600, fontSize: '0.85rem', color: 'var(--color-text)' }}>{log.user_name || '—'}</div>
+                                                        <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>{log.email || '—'}</div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -259,16 +261,16 @@ const AuthAudit = () => {
                                                     {(EVENT_LABEL[log.event_type] || log.event_type || '—').toUpperCase()}
                                                 </Badge>
                                             </td>
-                                            <td style={{ fontFamily: 'monospace', fontSize: '0.82rem', color: '#111' }}>
+                                            <td style={{ fontFamily: 'monospace', fontSize: '0.82rem', color: 'var(--color-text)' }}>
                                                 {log.ip_address || '—'}
                                             </td>
                                             <td>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--color-text)' }}>
                                                     {device.icon}
                                                     <div style={{ lineHeight: 1.2 }}>
-                                                        <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#000' }}>{device.os}</div>
+                                                        <div style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--color-text)' }}>{device.os}</div>
                                                         {device.browser && (
-                                                            <div style={{ fontSize: '0.72rem', color: '#555' }}>{device.browser}</div>
+                                                            <div style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)' }}>{device.browser}</div>
                                                         )}
                                                     </div>
                                                 </div>
@@ -277,13 +279,13 @@ const AuthAudit = () => {
                                                 <span style={{
                                                     display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                                                     width: 26, height: 26, borderRadius: '50%',
-                                                    border: '1.5px solid var(--border-color, #e5e7eb)',
-                                                    fontSize: '0.75rem', fontWeight: 700, color: '#374151'
+                                                    border: '1px solid var(--color-border)',
+                                                    fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-text)'
                                                 }}>
                                                     1
                                                 </span>
                                             </td>
-                                            <td style={{ fontSize: '0.82rem', color: '#444', maxWidth: 220 }}>
+                                            <td style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', maxWidth: 220 }}>
                                                 {log.summary || '—'}
                                             </td>
                                         </tr>
@@ -299,10 +301,10 @@ const AuthAudit = () => {
                     <div style={{
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         gap: '1rem', padding: '0.75rem 1rem',
-                        borderTop: '1px solid var(--border-color, #e5e7eb)'
+                        borderTop: '1px solid var(--color-border)'
                     }}>
                         <Button variant='outline' size='sm' disabled={currentPage === 1} onClick={() => setCurrentPage(p => p - 1)}>← Anterior</Button>
-                        <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Pág. {currentPage} / {totalPages}</span>
+                        <span style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>Pág. {currentPage} / {totalPages}</span>
                         <Button variant='outline' size='sm' disabled={currentPage === totalPages} onClick={() => setCurrentPage(p => p + 1)}>Siguiente →</Button>
                     </div>
                 )}

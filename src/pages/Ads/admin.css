@@ -1,3 +1,22 @@
-﻿/* Unificado - usa tokens de src/styles/variables.css + src/pages/common/AdminBase.css */
+﻿/* Ads — theme-aware overrides. Usa tokens de src/styles/variables.css */
 .admin-dashboard-page{background:var(--color-bg);color:var(--color-text)}
-
+.admin-ads-page{background:var(--color-bg);color:var(--color-text);padding:24px 28px;min-height:100vh}
+.admin-ads-page .page-header h1{color:var(--color-text)}
+.admin-ads-page .page-header .subtitle{color:var(--color-text-secondary)}
+.admin-ads-page .glass-panel{background:var(--color-surface);border:1px solid var(--color-border);color:var(--color-text)}
+.admin-ads-page .input-label{color:var(--color-text)}
+.admin-ads-page .help-text{color:var(--color-text-secondary)}
+.admin-ads-page svg{color:var(--color-text-secondary)}
+.admin-ads-page .btn--primary,.admin-ads-page .btn-primary{background:var(--color-primary);color:var(--color-primary-fg);border-color:var(--color-primary)}
+[data-theme="dark"] .admin-ads-page svg{color:var(--color-text)}
+/* Badges semánticos en tabla Posición / Estado / Clics */
+.admin-ads-page .badge--info,.admin-ads-page .badge-info{background:var(--color-info-bg);color:var(--color-info);border:1px solid var(--color-info)}
+[data-theme="dark"] .admin-ads-page .badge--info,[data-theme="dark"] .admin-ads-page .badge-info{color:var(--color-text);border-color:var(--color-border-strong)}
+.admin-ads-page .badge--primary,.admin-ads-page .badge-primary{background:var(--color-info-bg);color:var(--color-info);border:1px solid var(--color-info)}
+[data-theme="dark"] .admin-ads-page .badge--primary,[data-theme="dark"] .admin-ads-page .badge-primary{color:var(--color-text)}
+.admin-ads-page .badge--success,.admin-ads-page .badge-success{background:var(--color-success-bg);color:var(--color-success);border:1px solid var(--color-success)}
+[data-theme="dark"] .admin-ads-page .badge--success,[data-theme="dark"] .admin-ads-page .badge-secondary{color:var(--color-text)}
+.admin-ads-page .badge--secondary,.admin-ads-page .badge-secondary{background:var(--color-surface-hover);color:var(--color-text-secondary);border:1px solid var(--color-border)}
+[data-theme="dark"] .admin-ads-page .badge--secondary,[data-theme="dark"] .admin-ads-page .badge-secondary{color:var(--color-text)}
+.admin-ads-page table td{color:var(--color-text)}
+.admin-ads-page table th{color:var(--color-text-secondary)}

@@ -10,8 +10,8 @@ const AuditHeader = ({ loading, filteredCount, onRefresh }) => {
                     {loading ? (
                         <Skeleton style={{ height: '12px', width: '80px', borderRadius: '0px' }} animate />
                     ) : (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#000' }} />
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text-secondary)' }}>
+                            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-text)' }} />
                             <span>{filteredCount} REGISTRO{filteredCount !== 1 ? 'S' : ''} FILTRADOS</span>
                         </div>
                     )}

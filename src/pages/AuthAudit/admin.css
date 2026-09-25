@@ -1,3 +1,6 @@
 ﻿/* Unificado - usa tokens de src/styles/variables.css + src/pages/common/AdminBase.css */
 .admin-dashboard-page{background:var(--color-bg);color:var(--color-text)}
+/* D-13: filtros y boton actualizar tematicos */
+.admin-section .audit-filters-card{background:var(--color-surface);border:1px solid var(--color-border);color:var(--color-text)}
+[data-theme="dark"] .admin-section .audit-filters-card{background:var(--color-surface-elevated)}
 
