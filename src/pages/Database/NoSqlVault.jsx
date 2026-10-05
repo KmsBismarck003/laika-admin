@@ -454,18 +454,6 @@ const NoSqlVault = ({ retentionDays = 30, refreshTrigger, onLoadingChange }) => 
             </div>
 
 
-            <style>{`
-                @keyframes flow {
-                    0% { left: -10%; }
-                    100% { left: 110%; }
-                }
-                .nosql-vault-scoped-table .table th {
-                    background-color: #111111 !important;
-                }
-                .nosql-vault-scoped-table .table th * {
-                    color: #ffffff !important;
-                }
-            `}</style>
         </BentoCard>
     );
 };

@@ -12,7 +12,7 @@
   display: flex;
   align-items: center; /* Centrado vertical */
   justify-content: center;
-  z-index: var(--z-modal-backdrop);
+  z-index: 99999;
   padding: 2rem 1rem; /* Padding uniforme */
   animation: fadeIn 0.3s ease;
 }
@@ -71,7 +71,8 @@
 
 .modal__content,
 .modal-content {
-  background: #fff !important;
+  background: var(--bg-primary, #ffffff) !important;
+  color: var(--text-primary, #000000) !important;
   border: 1px solid rgba(0, 0, 0, 0.1) !important;
   border-radius: 16px !important;
   box-shadow:

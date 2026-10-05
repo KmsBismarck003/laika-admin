@@ -197,14 +197,6 @@ const SqlVault = ({ backups, loading, onRefresh, onRestore, onDelete, onDownload
                 />
             </BentoCard>
 
-            <style>{`
-                .sql-vault-scoped-table .table th {
-                    background-color: #111111 !important;
-                }
-                .sql-vault-scoped-table .table th * {
-                    color: #ffffff !important;
-                }
-            `}</style>
         </div>
     );
 };

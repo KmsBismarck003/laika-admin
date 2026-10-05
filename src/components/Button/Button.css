@@ -31,16 +31,16 @@
 /* Primary */
 .btn--primary,
 .btn-primary {
-  background: var(--primary);
-  color: #ffffff;
-  border-color: var(--primary);
+  background: var(--color-primary);
+  color: var(--color-primary-fg);
+  border-color: var(--color-primary);
 }
 
 [data-theme='dark'] .btn--primary,
 [data-theme='dark'] .btn-primary {
-  color: #000000 !important;
-  background-color: #ffffff !important;
-  border-color: #ffffff !important;
+  color: var(--color-primary-fg) !important;
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
   text-shadow: none !important;
   opacity: 1 !important;
   font-weight: 800 !important;
@@ -48,8 +48,7 @@
 
 .btn--primary:hover:not(:disabled),
 .btn-primary:hover:not(:disabled) {
-  background: var(--primary-hover);
-  border-color: var(--primary-hover);
+  opacity: 0.9;
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -63,29 +62,28 @@
 .btn--secondary,
 .btn-secondary {
   background: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
 }
 
 .btn--secondary:hover:not(:disabled),
 .btn-secondary:hover:not(:disabled) {
-  background: var(--bg-tertiary);
-  border-color: var(--border-emphasis);
+  background: var(--color-surface-hover);
+  border-color: var(--color-border-strong);
   transform: translateY(-2px);
 }
 
 /* Danger */
 .btn--danger,
 .btn-danger {
-  background: var(--error);
+  background: var(--color-danger);
   color: #ffffff;
-  border-color: var(--error);
+  border-color: var(--color-danger);
 }
 
 .btn--danger:hover:not(:disabled),
 .btn-danger:hover:not(:disabled) {
-  background: var(--error-dark);
-  border-color: var(--error-dark);
+  opacity: 0.9;
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -93,15 +91,14 @@
 /* Success */
 .btn--success,
 .btn-success {
-  background: var(--success);
+  background: var(--color-success);
   color: #ffffff;
-  border-color: var(--success);
+  border-color: var(--color-success);
 }
 
 .btn--success:hover:not(:disabled),
 .btn-success:hover:not(:disabled) {
-  background: var(--success-dark);
-  border-color: var(--success-dark);
+  opacity: 0.9;
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -109,15 +106,14 @@
 /* Warning */
 .btn--warning,
 .btn-warning {
-  background: var(--warning);
-  color: #000000;
-  border-color: var(--warning);
+  background: var(--color-warning);
+  color: #ffffff;
+  border-color: var(--color-warning);
 }
 
 .btn--warning:hover:not(:disabled),
 .btn-warning:hover:not(:disabled) {
-  background: var(--warning-dark);
-  border-color: var(--warning-dark);
+  opacity: 0.9;
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -125,15 +121,14 @@
 /* Info */
 .btn--info,
 .btn-info {
-  background: var(--info);
+  background: var(--color-info);
   color: #ffffff;
-  border-color: var(--info);
+  border-color: var(--color-info);
 }
 
 .btn--info:hover:not(:disabled),
 .btn-info:hover:not(:disabled) {
-  background: var(--info-dark);
-  border-color: var(--info-dark);
+  opacity: 0.9;
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -142,13 +137,13 @@
 .btn--outline,
 .btn-outline {
   background: transparent;
-  border: 1px solid var(--primary);
-  color: var(--primary);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
 }
 
 .btn--outline:hover:not(:disabled),
 .btn-outline:hover:not(:disabled) {
-  background: var(--primary-light);
+  background: var(--color-surface-hover);
   transform: translateY(-2px);
 }
 
@@ -157,13 +152,13 @@
 .btn-ghost {
   background: transparent;
   border: 1px solid transparent;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .btn--ghost:hover:not(:disabled),
 .btn-ghost:hover:not(:disabled) {
-  background: var(--bg-tertiary);
-  color: var(--text-primary);
+  background: var(--color-surface-hover);
+  color: var(--color-text);
 }
 
 /* ============================================

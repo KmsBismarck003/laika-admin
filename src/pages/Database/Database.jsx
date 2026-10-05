@@ -472,52 +472,70 @@ const Database = () => {
   const lastBackup = backups.length > 0 ? new Date(backups[0].created_at || backups[0].timestamp).toLocaleDateString('es-MX') : 'N/A'
 
   return (
-    <div className="admin-database-page" style={{ transform: 'scale(0.9)', transformOrigin: 'top left', width: '111.11%' }}>
-      <div className="page-header">
-        <h1 style={{ fontSize: '1.4rem', color: 'var(--text-primary)' }}>Gestión de Base de Datos</h1>
+    <div className="admin-database-page">
+      <div className="manager-header">
+        <div className="manager-title">
+          <h1>Gestión de Base de Datos</h1>
+          <p>Administración, respaldos, bóvedas y optimización</p>
+        </div>
+        
+        {(loadingBackups || noSqlLoading) ? (
+          <Skeleton style={{ height: '34px', width: '170px', borderRadius: '8px' }} animate />
+        ) : (
+          <div style={{ display: 'flex', background: 'var(--color-surface-hover)', padding: '4px', borderRadius: 'var(--radius)', border: '1px solid var(--color-border)' }}>
+            <Button 
+                  size="small" 
+                  variant={activeView === 'sql' ? 'primary' : 'ghost'}
+                  onClick={() => setActiveView('sql')}
+            >
+              SQL
+            </Button>
+            <Button 
+                  size="small" 
+                  variant={activeView === 'nosql' ? 'primary' : 'ghost'}
+                  onClick={() => setActiveView('nosql')}
+            >
+              NOSQL
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Banner de Estado */}
-      <BentoGrid style={{ marginBottom: '2rem' }}>
-        <BentoCard variant="stat">
-          <div className="bento-stat-content">
-            <div>
-              <div className="bento-stat-label">Respaldos Disponibles</div>
-              <div className="bento-stat-value">
-                {(loadingBackups || noSqlLoading) ? <Skeleton type="text" width="40px" height="30px" /> : backups.length}
-              </div>
-            </div>
-            <div className="bento-stat-icon">
-               <Icon name="database" size={24} />
-            </div>
+      <BentoGrid className="manager-stats-grid">
+        <BentoCard variant="stat" className="manager-stat-card">
+          <div className="stat-info">
+            <span className="stat-label">Respaldos Disponibles</span>
+            <span className="stat-value">
+              {(loadingBackups || noSqlLoading) ? <Skeleton type="text" width="40px" height="30px" /> : backups.length}
+            </span>
+          </div>
+          <div className="stat-icon-wrapper">
+             <Icon name="database" size={24} />
           </div>
         </BentoCard>
         
-        <BentoCard variant="stat">
-          <div className="bento-stat-content">
-            <div>
-              <div className="bento-stat-label">Almacenados (MB)</div>
-              <div className="bento-stat-value">
-                {(loadingBackups || noSqlLoading) ? <Skeleton type="text" width="50px" height="30px" /> : totalSize}
-              </div>
-            </div>
-            <div className="bento-stat-icon">
-               <Icon name="hardDrive" size={24} />
-            </div>
+        <BentoCard variant="stat" className="manager-stat-card">
+          <div className="stat-info">
+            <span className="stat-label">Almacenados (MB)</span>
+            <span className="stat-value">
+              {(loadingBackups || noSqlLoading) ? <Skeleton type="text" width="50px" height="30px" /> : totalSize}
+            </span>
+          </div>
+          <div className="stat-icon-wrapper">
+             <Icon name="hardDrive" size={24} />
           </div>
         </BentoCard>
 
-        <BentoCard variant="stat">
-          <div className="bento-stat-content">
-            <div>
-              <div className="bento-stat-label">Último Respaldo</div>
-              <div className="bento-stat-value" style={{ fontSize: '1.5rem' }}>
-                {(loadingBackups || noSqlLoading) ? <Skeleton type="text" width="70px" height="24px" /> : lastBackup}
-              </div>
-            </div>
-            <div className="bento-stat-icon">
-               <Icon name="clock" size={24} />
-            </div>
+        <BentoCard variant="stat" className="manager-stat-card">
+          <div className="stat-info">
+            <span className="stat-label">Último Respaldo</span>
+            <span className="stat-value" style={{ fontSize: '1.25rem' }}>
+              {(loadingBackups || noSqlLoading) ? <Skeleton type="text" width="70px" height="24px" /> : lastBackup}
+            </span>
+          </div>
+          <div className="stat-icon-wrapper">
+             <Icon name="clock" size={24} />
           </div>
         </BentoCard>
       </BentoGrid>
@@ -527,79 +545,41 @@ const Database = () => {
           type={alert.type}
           message={alert.message}
           onClose={() => setAlert(null)}
+          style={{ marginBottom: '1.5rem' }}
         />
       )}
 
-      <div className="actions-bar" style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ display: 'flex', gap: '10px' }}>
+      <BentoCard style={{ marginBottom: '2rem', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
+        <div className="manager-actions" style={{ flex: 1 }}>
           {(loadingBackups || noSqlLoading) ? (
             <>
-              <Skeleton style={{ height: '38px', width: '160px', borderRadius: '6px' }} animate />
-              <Skeleton style={{ height: '38px', width: '160px', borderRadius: '6px' }} animate />
-              <Skeleton style={{ height: '38px', width: '120px', borderRadius: '6px' }} animate />
-              <Skeleton style={{ height: '38px', width: '120px', borderRadius: '6px' }} animate />
+              <Skeleton style={{ height: '38px', width: '160px', borderRadius: 'var(--radius)' }} animate />
+              <Skeleton style={{ height: '38px', width: '160px', borderRadius: 'var(--radius)' }} animate />
+              <Skeleton style={{ height: '38px', width: '120px', borderRadius: 'var(--radius)' }} animate />
+              <Skeleton style={{ height: '38px', width: '120px', borderRadius: 'var(--radius)' }} animate />
             </>
           ) : (
             <>
               {activeView?.toLowerCase() === 'sql' && (
                 <>
-                  <Button onClick={() => setShowBackupModal(true)} style={{ background: '#111111', color: '#ffffff', border: '1px solid #ffffff' }}>Gestionar Respaldos</Button>
-                  <Button variant="info" style={{ color: '#ffffff', background: '#2980b9' }} onClick={() => setShowAutoBackupModal(true)}>Config. Automática</Button>
-                  <Button variant="warning" onClick={handleOptimizeDB} style={{ color: '#ffffff', background: '#f39c12' }}>Optimizar BD</Button>
-                  <Button variant="danger" onClick={handleClearCache} style={{ background: '#e74c3c', color: '#ffffff' }}>Limpiar Caché</Button>
+                  <Button variant="primary" icon={<Icon name="database" size={16} />} onClick={() => setShowBackupModal(true)}>Gestionar Respaldos</Button>
+                  <Button variant="info" icon={<Icon name="clock" size={16} />} onClick={() => setShowAutoBackupModal(true)}>Config. Automática</Button>
+                  <Button variant="warning" icon={<Icon name="zap" size={16} />} onClick={handleOptimizeDB}>Optimizar BD</Button>
+                  <Button variant="danger" icon={<Icon name="trash" size={16} />} onClick={handleClearCache}>Limpiar Caché</Button>
                 </>
               )}
               {activeView?.toLowerCase() === 'nosql' && (
                 <>
-                  <Button onClick={() => setShowNoSqlBackupModal(true)} style={{ background: '#111111', color: '#ffffff', border: '1px solid #ffffff' }}>Gestionar Respaldos</Button>
-                  <Button variant="info" style={{ color: '#ffffff', background: '#2980b9' }} onClick={() => setShowAutoBackupModal(true)}>Config. Automática</Button>
-                  <Button variant="warning" onClick={handleOptimizeNoSqlDB} style={{ color: '#ffffff', background: '#f39c12' }}>Optimizar BD</Button>
-                  <Button variant="danger" onClick={handleClearCache} style={{ background: '#e74c3c', color: '#ffffff' }}>Limpiar Caché</Button>
+                  <Button variant="primary" icon={<Icon name="cloud" size={16} />} onClick={() => setShowNoSqlBackupModal(true)}>Gestionar Respaldos</Button>
+                  <Button variant="info" icon={<Icon name="clock" size={16} />} onClick={() => setShowAutoBackupModal(true)}>Config. Automática</Button>
+                  <Button variant="warning" icon={<Icon name="zap" size={16} />} onClick={handleOptimizeNoSqlDB}>Optimizar Nodos</Button>
+                  <Button variant="danger" icon={<Icon name="trash" size={16} />} onClick={handleClearCache}>Limpiar Caché</Button>
                 </>
               )}
             </>
           )}
         </div>
-
-        {(loadingBackups || noSqlLoading) ? (
-          <Skeleton style={{ height: '34px', width: '170px', borderRadius: '8px' }} animate />
-        ) : (
-          <div className="view-toggle-premium" style={{ display: 'flex', background: '#e0e0e0', padding: '4px', borderRadius: '8px', border: '1px solid #ccc' }}>
-            <Button 
-                  size="small" 
-                  onClick={() => setActiveView('sql')}
-                  style={{ 
-                    fontSize: '0.7rem', 
-                    fontWeight: 900, 
-                    minWidth: '80px', 
-                    background: activeView?.toLowerCase() === 'sql' ? '#111111' : 'transparent',
-                    color: activeView?.toLowerCase() === 'sql' ? '#ffffff' : '#444444',
-                    border: 'none',
-                    borderRadius: '6px',
-                    transition: 'all 0.2s'
-                  }}
-            >
-              SQL
-            </Button>
-            <Button 
-                  size="small" 
-                  onClick={() => setActiveView('nosql')}
-                  style={{ 
-                    fontSize: '0.7rem', 
-                    fontWeight: 900, 
-                    minWidth: '80px', 
-                    background: activeView?.toLowerCase() === 'nosql' ? '#111111' : 'transparent',
-                    color: activeView?.toLowerCase() === 'nosql' ? '#ffffff' : '#444444',
-                    border: 'none',
-                    borderRadius: '6px',
-                    transition: 'all 0.2s'
-                  }}
-            >
-              NOSQL
-            </Button>
-          </div>
-        )}
-      </div>
+      </BentoCard>
       
       {activeView === 'sql' ? (
         <>
@@ -632,10 +612,10 @@ const Database = () => {
         onClose={() => setShowBackupModal(false)}
         title="Crear Respaldo"
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <Button onClick={() => handleCreateBackup('completo')}>Respaldo Completo</Button>
-          <Button variant="secondary" onClick={() => handleCreateBackup('incremental')}>Respaldo Incremental</Button>
-          <Button variant="info" onClick={() => {
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '1rem' }}>
+          <Button variant="primary" fullWidth onClick={() => handleCreateBackup('completo')}>Respaldo Completo</Button>
+          <Button variant="secondary" fullWidth onClick={() => handleCreateBackup('incremental')}>Respaldo Incremental</Button>
+          <Button variant="outline" fullWidth onClick={() => {
             setShowBackupModal(false)
             setShowSelectiveModal(true)
             fetchTables()
@@ -649,9 +629,9 @@ const Database = () => {
         onClose={() => setShowNoSqlBackupModal(false)}
         title="Crear Respaldo NoSQL"
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <Button onClick={() => handleCreateNoSqlBackup('atlas')}>Sincronizar Cloud Atlas</Button>
-          <Button variant="secondary" onClick={() => handleCreateNoSqlBackup('disk')}>Respaldo a Disco (JSON)</Button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '1rem' }}>
+          <Button variant="primary" fullWidth onClick={() => handleCreateNoSqlBackup('atlas')}>Sincronizar Cloud Atlas</Button>
+          <Button variant="secondary" fullWidth onClick={() => handleCreateNoSqlBackup('disk')}>Respaldo a Disco (JSON)</Button>
         </div>
       </Modal>
 
@@ -670,8 +650,8 @@ const Database = () => {
           </div>
         ) : (
           <div style={{ maxHeight: '300px', overflowY: 'auto', border: '1px solid #333', padding: '10px', marginBottom: '10px' }}>
-            {tables.map(table => (
-              <label key={table.name} style={{ display: 'flex', gap: '10px', padding: '5px' }}>
+            {tables.map((table, idx) => (
+              <label key={`${table.name}-${idx}`} style={{ display: 'flex', gap: '10px', padding: '5px' }}>
                 <input
                   type="checkbox"
                   checked={selectedTables.includes(table.name)}

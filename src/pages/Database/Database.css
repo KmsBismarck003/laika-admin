@@ -1,4 +1,4 @@
-﻿/* migrado a tokens var(--color-*) */
+/* migrado a tokens var(--color-*) */
 /* DATABASE MANAGEMENT STYLES - MINIMALIST WHITE INDUSTRIAL */
 
 .admin-database-page {
@@ -101,14 +101,14 @@
 .sql-vault-scoped-table thead tr,
 .nosql-vault-scoped-table thead,
 .nosql-vault-scoped-table thead tr {
-    background-color: var(--color-text) !important;
+    background-color: #111111 !important;
 }
 
 .sql-vault-scoped-table thead th,
 .nosql-vault-scoped-table thead th {
-    background-color: var(--color-text) !important;
-    color: var(--color-text) !important;
-    border-bottom: 2px solid var(--color-text) !important;
+    background-color: #111111 !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #111111 !important;
     font-weight: 900 !important;
     font-size: 0.7rem !important;
     letter-spacing: 0.05em !important;
@@ -118,8 +118,15 @@
 
 /* Ensuring icons inside header are also white */
 .sql-vault-scoped-table thead th svg,
-.nosql-vault-scoped-table thead th svg {
-    color: var(--color-text) !important;
+.nosql-vault-scoped-table thead th svg,
+.sql-vault-scoped-table thead th *,
+.nosql-vault-scoped-table thead th * {
+    color: #ffffff !important;
+}
+
+@keyframes flow {
+    0% { left: -10%; }
+    100% { left: 110%; }
 }
 
 @media (max-width: 768px) {
