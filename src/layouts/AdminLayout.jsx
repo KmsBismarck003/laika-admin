@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   BarChart3,
   FileText,
+  FileSignature,
   Briefcase,
   Calendar,
   History,
@@ -53,6 +54,7 @@ const ADMIN_NAVIGATION_SECTIONS = [
     label: 'Ventas y Eventos',
     items: [
       { path: '/admin/b2b', label: 'B2B (Contratos)', icon: Briefcase },
+      { path: '/admin/manager-contracts', label: 'Contratos de Gestores', icon: FileSignature },
       { path: '/admin/events', label: 'Gestión de Eventos', icon: Calendar },
       { path: '/admin/history', label: 'Historial Eventos', icon: History },
       { path: '/admin/sales', label: 'Reportes de Ventas', icon: DollarSign },

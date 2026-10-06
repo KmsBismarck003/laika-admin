@@ -11,6 +11,7 @@ const Users = lazy(() => import('../pages/Users/Users'));
 const Events = lazy(() => import('../pages/Events/Events'));
 const EventHistory = lazy(() => import('../pages/EventHistory/EventHistory'));
 const B2BManager = lazy(() => import('../pages/B2B/B2BManager'));
+const ManagerContracts = lazy(() => import('../pages/ManagerContracts/ManagerContracts'));
 const Config = lazy(() => import('../pages/Config/Config'));
 const LuckySeatConfig = lazy(() => import('../pages/Config/LuckySeatConfig'));
 const Database = lazy(() => import('../pages/Database/Database'));
@@ -57,6 +58,7 @@ export const AppRoutes = () => {
           <Route path="/admin/events" element={<Events />} />
           <Route path="/admin/history" element={<EventHistory />} />
           <Route path="/admin/b2b" element={<B2BManager />} />
+          <Route path="/admin/manager-contracts" element={<ManagerContracts />} />
           <Route path="/admin/sales" element={<SalesReports />} />
           <Route path="/admin/venues" element={<Venues />} />
           <Route path="/admin/venue-map" element={<AdminVenueMap />} />

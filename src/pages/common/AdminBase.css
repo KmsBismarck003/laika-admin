@@ -1,10 +1,18 @@
 /* AdminBase - Sistema unificado para TODO src/pages | Usa tokens de src/styles/variables.css */
 .admin-dashboard-page{background:var(--color-bg);padding:24px 28px;min-height:100vh;width:100%;font-family:var(--font-sans);color:var(--color-text)}
-.admin-header{margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.admin-header{margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:14px 18px;box-shadow:var(--shadow-sm)}
 .admin-title{font-size:1.25rem;font-weight:800;letter-spacing:-0.02em;margin:0;text-transform:uppercase;color:var(--color-text)}
-.admin-subtitle{font-size:0.8rem;color:var(--color-text-muted);margin-top:4px}
+.admin-subtitle{font-size:0.8rem;color:var(--color-text-secondary);margin-top:4px}
 .admin-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:16px;color:var(--color-text)}
-.admin-section{padding:0}
+.admin-card + .admin-card{margin-top:16px}
+.admin-section{padding:0;background:transparent}
+/* Apartados internos: cada bloque dentro de una vista lleva tono secundario */
+.admin-card .admin-section,.admin-card .detail-grid,.admin-card .info-grid,.admin-card .form-grid,
+.admin-card .config-item,.admin-card fieldset{background:var(--color-surface-secondary);border:1px solid var(--color-border-subtle);border-radius:var(--radius);padding:12px}
+/* KPIs: cada tarjeta del grid alterna ligeramente para ubicarlas */
+.stats-grid > *:nth-child(odd){background:var(--color-surface)}
+.stats-grid > *:nth-child(even){background:var(--color-surface-secondary)}
+.stats-grid > *{border:1px solid var(--color-border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
 .text-muted{color:var(--color-text-muted)} .text-center{text-align:center}
 /* Grids y tablas unificadas */
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px;min-width:0}
@@ -15,13 +23,14 @@
 .b2b-subtitle,.b2b-muted{color:var(--color-text-secondary)}
 .b2b-section-title{color:var(--color-text)}
 .b2b-panel{background:var(--color-surface);border:1px solid var(--color-border);color:var(--color-text);min-width:0;overflow:hidden}
+.b2b-panel .b2b-panel-header,.b2b-panel > h3:first-child{background:var(--color-surface-secondary);border-bottom:1px solid var(--color-border);margin:-1px -1px 12px;padding:10px 14px}
 .b2b-grid{overflow-x:clip}
-.b2b-form{min-width:0}
+.b2b-form{min-width:0;background:var(--color-surface-secondary);border:1px solid var(--color-border-subtle);border-radius:var(--radius);padding:12px}
 .b2b-label{color:var(--color-text-secondary)}
-.b2b-select{background:var(--color-surface);border:1px solid var(--color-border);color:var(--color-text)}
-.b2b-select option{background:var(--color-surface);color:var(--color-text)}
+.b2b-select{background:var(--color-input);border:1px solid var(--color-border);color:var(--color-text)}
+.b2b-select option{background:var(--color-surface-elevated);color:var(--color-text)}
 .b2b-user-name{color:var(--color-text)}
-.b2b-user-list{min-width:0}
+.b2b-user-list{min-width:0;background:var(--color-surface-secondary);border:1px solid var(--color-border-subtle);border-radius:var(--radius);padding:8px}
 /* Iconos: contraste en ambos temas (lucide hereda currentColor, no se toca el componente) */
 .b2b-panel svg,.b2b-grid svg,.glass-panel svg{color:currentColor}
 .admin-custom-table svg{color:currentColor}

@@ -1,6 +1,157 @@
-/* theme.css - aplica tokens */
+/* theme.css - aplica tokens + jerarquía visual global por apartado */
 * { scrollbar-width: thin; scrollbar-color: var(--color-border-strong) transparent; }
 html { color-scheme: light; } html[data-theme="dark"] { color-scheme: dark; }
 body { background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; transition: background var(--ease), color var(--ease); }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--color-text); outline-offset: 2px; }
+
+/* ── Contenedores de página: fondo distinto al de las tarjetas ── */
+.admin-dashboard-page, .admin-page { background: var(--color-bg) !important; color: var(--color-text); }
+
+/* ── Tarjetas / paneles: siempre 1-2 tonos por encima del fondo ── */
+.card, .admin-card, .b2b-panel, .glass-panel, .manager-stat-card,
+.manager-table-container, .ticket-progress-container, .revenue-main-card,
+.table-container, .card-stat {
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Cajas internas / información secundaria dentro de una tarjeta */
+.card__footer, .admin-card .info-box, .admin-card .detail-box,
+.b2b-panel .b2b-user-list, .ticket-stats-mini-grid, .revenue-breakdown .breakdown-item,
+.stat-info, .mini-stat, .form-group, .config-item, .filter-group,
+.avm-legend, .preview-container {
+  background: var(--color-surface-secondary) !important;
+  border: 1px solid var(--color-border-subtle) !important;
+  border-radius: var(--radius);
+}
+
+/* Encabezado de tarjeta / sección */
+.card__header, .modal-header, .modal__header, .admin-card > h3:first-child,
+.b2b-section-title, .manager-header {
+  background: transparent;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ── Tablas: cabecera diferenciada + zebra + hover ── */
+table thead th, .table th, .admin-table th, .manager-table th {
+  background: var(--color-table-header) !important;
+  color: var(--color-text) !important;
+  border-bottom: 1px solid var(--color-border-strong) !important;
+}
+table tbody tr:nth-child(even), .table--striped tbody tr:nth-child(even),
+.manager-table tbody tr:nth-child(even) { background: var(--color-table-stripe) !important; }
+table tbody tr:hover td, .admin-table tr:hover td, .manager-table tr:hover td { background: var(--color-surface-hover) !important; }
+table td, .table td, .admin-table td, .manager-table td {
+  border-bottom: 1px solid var(--color-border-subtle) !important;
+  color: var(--color-text) !important;
+}
+
+/* ── Formularios: inputs hundidos respecto a la tarjeta ── */
+input:not([type="checkbox"]):not([type="radio"]),
+select, textarea, .input, .b2b-select, .config-input {
+  background: var(--color-input) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text) !important;
+}
+input:focus, select:focus, textarea:focus, .input:focus {
+  background: var(--color-input-focus) !important;
+  border-color: var(--color-border-strong) !important;
+}
+select option { background: var(--color-surface-elevated); color: var(--color-text); }
+.input__label, .b2b-label, label { color: var(--color-text-secondary) !important; }
+
+/* ── Barras de filtros / toolbars: tono intermedio propio ── */
+.filters-bar, .toolbar, .actions-row, .admin-header, .manager-actions,
+.search-bar, .filter-bar {
+  background: var(--color-surface-secondary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 10px 12px;
+}
+
+/* ── Modales / dropdowns / popovers: superficie elevada ── */
+.modal-content, .modal__content, .dropdown-menu, .notification-panel,
+.notification-dropdown, .modal-elite {
+  background: var(--color-modal) !important;
+  border: 1px solid var(--color-border-strong) !important;
+  box-shadow: var(--shadow-md) !important;
+  color: var(--color-text);
+}
+.modal-header, .modal__header, .modal-footer, .modal__footer {
+  background: var(--color-modal-header) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* ── Botones secundarios / ghost: visibles sobre cualquier superficie ── */
+.btn--secondary, .btn-secondary, .btn-ghost, .btn--ghost,
+.b2b-icon-btn, .laika-admin-collapse-btn {
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text) !important;
+}
+.btn--secondary:hover, .btn-secondary:hover, .btn-ghost:hover, .btn--ghost:hover {
+  background: var(--color-surface-hover) !important;
+  border-color: var(--color-border-strong) !important;
+}
+
+/* ── Badges / pills / alertas: borde + fondo tonal, no plano ── */
+.badge, .status-badge, .pill, .laika-admin-status-pill,
+.alert-success, .alert-error, .alert-warning, .alert-info {
+  border: 1px solid var(--color-border);
+}
+.alert-success { background: var(--color-success-bg) !important; border-color: var(--color-success-border) !important; color: var(--color-success) !important; }
+.alert-error { background: var(--color-danger-bg) !important; border-color: var(--color-danger-border) !important; color: var(--color-danger) !important; }
+.alert-warning { background: var(--color-warning-bg) !important; border-color: var(--color-warning-border) !important; color: var(--color-warning) !important; }
+.alert-info { background: var(--color-info-bg) !important; border-color: var(--color-info-border) !important; color: var(--color-info) !important; }
+
+/* ── Stats / KPI: icono con fondo tonal para ubicar cada cifra ── */
+.stat-icon-wrapper, .card-stat__icon, .bigdata-icon, .b2b-icon {
+  background: var(--color-surface-hover) !important;
+  border: 1px solid var(--color-border-subtle) !important;
+  border-radius: 10px;
+}
+
+/* ── Tabs activos: pestaña hundida vs contenido elevado ── */
+.tab-button.active, .manager-tabs .active, .tabs .active {
+  background: var(--color-surface-secondary);
+  border: 1px solid var(--color-border);
+  border-bottom-color: transparent;
+  border-radius: 8px 8px 0 0;
+}
+
+/* ══ Parche compatibilidad: clases legacy con #fff / grises fijos ══ */
+.stat-card, .dashboard-card, .section-card, .panel, .widget,
+.push-card, .merch-card, .email-card, .db-card, .auth-card, .config-card,
+.rec-card, .wizard-card, .backup-card, .admin-sections .card {
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text);
+}
+.stat-icon, .stat-icon-wrapper, .card-stat__icon, .rec-card__icon,
+.metric-icon, .kpi-icon {
+  background: var(--color-surface-hover) !important;
+  border: 1px solid var(--color-border-subtle) !important;
+}
+.section-actions, .card-actions, .toolbar-actions { background: transparent; border: none; padding: 0; }
+.card-title, .section-title, .panel-title { color: var(--color-text) !important; }
+.card-subtitle, .section-subtitle { color: var(--color-text-secondary) !important; }
+
+/* Textos fijos oscuros que en dark se volverían invisibles */
+[data-theme="dark"] .card-title,
+[data-theme="dark"] .section-title,
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3,
+[data-theme="dark"] .stat-value, [data-theme="dark"] .card-stat__value,
+[data-theme="dark"] .table td, [data-theme="dark"] table td { color: var(--color-text) !important; }
+[data-theme="dark"] .stat-label, [data-theme="dark"] .card-stat__label,
+[data-theme="dark"] .text-muted { color: var(--color-text-secondary) !important; }
+/* Contenedores claros embebidos (wizard, visores, previews) en dark */
+[data-theme="dark"] .wizard-step, [data-theme="dark"] .preview-container,
+[data-theme="dark"] .push-preview, [data-theme="dark"] .email-preview,
+[data-theme="dark"] .interactive-wizard, [data-theme="dark"] .decision-wizard {
+  background: var(--color-surface-secondary) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-text);
+}

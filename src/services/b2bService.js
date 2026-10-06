@@ -19,6 +19,9 @@ export const b2bAPI = {
   getContracts: async () => {
     return apiClient.get('/admin/b2b/contracts');
   },
+  getContractById: async (contractId) => {
+    return apiClient.get(`/admin/b2b/contracts/${contractId}`);
+  },
   getContractsByOrg: async (orgId) => {
     return apiClient.get(`/admin/b2b/organizations/${orgId}/contracts`);
   },
@@ -27,6 +30,12 @@ export const b2bAPI = {
   },
   updateContract: async (contractId, data) => {
     return apiClient.put(`/admin/b2b/contracts/${contractId}`, data);
+  },
+  upgradePackage: async (contractId, data) => {
+    return apiClient.put(`/admin/b2b/contracts/${contractId}`, data);
+  },
+  renewContract: async (data) => {
+    return apiClient.post('/admin/b2b/contracts', data);
   },
   deleteContract: async (contractId) => {
     return apiClient.delete(`/admin/b2b/contracts/${contractId}`);
@@ -44,6 +53,31 @@ export const b2bAPI = {
   },
   unassignContractManager: async (contractId, userId) => {
     return apiClient.delete(`/admin/b2b/contracts/${contractId}/managers/${userId}`);
+  },
+
+  // Contract Events (cobertura de personal por evento)
+  // Intenta el endpoint dedicado; si el backend no lo expone (404),
+  // recurre a /events/all filtrado por gestor/organizacion del contrato.
+  getContractEvents: async (contractId, { managerId = null, organizationId = null } = {}) => {
+    try {
+      return await apiClient.get(`/admin/b2b/contracts/${contractId}/events`);
+    } catch (err) {
+      if (err?.status !== 404) throw err;
+      const all = await apiClient.get('/events/all', { limit: 100 });
+      const list = Array.isArray(all) ? all : (all?.events || all?.data || []);
+      if (!managerId && !organizationId) return [];
+      return list.filter((event) => {
+        const eventManager = event.manager_id ?? event.managerId ?? event.created_by ?? event.createdBy;
+        const eventOrg = event.organization_id ?? event.organizationId ?? event.org_id;
+        if (managerId && eventManager !== undefined && eventManager !== null) {
+          if (String(eventManager) === String(managerId)) return true;
+        }
+        if (organizationId && eventOrg !== undefined && eventOrg !== null) {
+          if (String(eventOrg) === String(organizationId)) return true;
+        }
+        return false;
+      });
+    }
   }
 };
 

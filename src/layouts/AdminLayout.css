@@ -1,34 +1,40 @@
-/* AdminLayout - Minimalista neutro + lucide-react */
+/* AdminLayout - Jerarquía de tonos por zona (sidebar / topbar / contenido) */
 .laika-admin-layout{display:flex;min-height:100vh;background:var(--color-bg);color:var(--color-text)}
-.laika-admin-sidebar{width:var(--sidebar-w);background:var(--color-surface);border-right:1px solid var(--color-border);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;z-index:var(--z-sidebar);transition:width var(--ease)}
+.laika-admin-sidebar{width:var(--sidebar-w);background:var(--color-sidebar);border-right:1px solid var(--color-border);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;z-index:var(--z-sidebar);transition:width var(--ease);box-shadow:var(--shadow-sm)}
 .laika-admin-sidebar.collapsed{width:var(--sidebar-collapsed-w)}
-.laika-admin-sidebar-header{height:var(--topbar-h);display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid var(--color-border)}
+.laika-admin-sidebar-header{height:var(--topbar-h);display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid var(--color-border);background:var(--color-surface-secondary)}
 .laika-admin-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
 .laika-admin-brand-icon{width:32px;height:32px;border-radius:8px;background:var(--color-primary);color:var(--color-primary-fg);display:grid;place-items:center;flex-shrink:0}
 .laika-admin-brand-title{font-weight:700;letter-spacing:-0.02em;font-size:0.9rem}
 .laika-admin-brand-badge{font-size:0.65rem;color:var(--color-text-muted);letter-spacing:0.06em;text-transform:uppercase}
-.laika-admin-collapse-btn{background:transparent;border:1px solid transparent;color:var(--color-text-secondary);padding:6px;border-radius:8px;display:grid;place-items:center}
-.laika-admin-collapse-btn:hover{background:var(--color-surface-hover);color:var(--color-text)}
+.laika-admin-collapse-btn{background:var(--color-surface);border:1px solid var(--color-border);color:var(--color-text-secondary);padding:6px;border-radius:8px;display:grid;place-items:center}
+.laika-admin-collapse-btn:hover{background:var(--color-surface-hover);color:var(--color-text);border-color:var(--color-border-strong)}
+.laika-admin-user-profile{display:flex;align-items:center;gap:10px;min-width:0}
+.laika-admin-logout-btn{background:var(--color-surface);border:1px solid var(--color-border);color:var(--color-text-secondary);border-radius:8px;padding:7px;display:grid;place-items:center}
+.laika-admin-logout-btn:hover{background:var(--color-danger-bg);color:var(--color-danger);border-color:var(--color-danger-border)}
 .laika-admin-sidebar-search{padding:12px 12px 8px}
 .laika-admin-search-box{position:relative;display:flex;align-items:center}
 .laika-admin-search-icon{position:absolute;left:10px;color:var(--color-text-muted)}
-.laika-admin-search-input{width:100%;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius);padding:8px 10px 8px 32px;font-size:var(--text-sm);color:var(--color-text);outline:none}
-.laika-admin-search-input:focus{border-color:var(--color-border-strong)}
+.laika-admin-search-input{width:100%;background:var(--color-input);border:1px solid var(--color-border);border-radius:var(--radius);padding:8px 10px 8px 32px;font-size:var(--text-sm);color:var(--color-text);outline:none;transition:border-color var(--ease),background var(--ease)}
+.laika-admin-search-input::placeholder{color:var(--color-text-muted)}
+.laika-admin-search-input:focus{border-color:var(--color-border-strong);background:var(--color-input-focus)}
 .laika-admin-sidebar-nav{flex:1;overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:16px}
-.laika-admin-section-label{font-size:0.68rem;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:var(--color-text-muted);padding:4px 8px}
-.laika-admin-nav-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--radius);color:var(--color-text-secondary);text-decoration:none;font-size:var(--text-sm);font-weight:500;transition:all var(--ease)}
-.laika-admin-nav-item:hover{background:var(--color-surface-hover);color:var(--color-text)}
-.laika-admin-nav-item.active{background:var(--color-primary);color:var(--color-primary-fg)}
-.laika-admin-sidebar-footer{padding:12px;border-top:1px solid var(--color-border);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.laika-admin-nav-section{background:transparent;border-radius:var(--radius)}
+.laika-admin-section-label{font-size:0.68rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--color-text-muted);padding:6px 8px;background:var(--color-surface-secondary);border:1px solid var(--color-border-subtle);border-radius:8px;margin-bottom:6px}
+.laika-admin-nav-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--radius);color:var(--color-text-secondary);text-decoration:none;font-size:var(--text-sm);font-weight:500;transition:all var(--ease);border:1px solid transparent}
+.laika-admin-nav-item:hover{background:var(--color-surface-hover);color:var(--color-text);border-color:var(--color-border-subtle)}
+.laika-admin-nav-item.active{background:var(--color-primary);color:var(--color-primary-fg);box-shadow:var(--shadow-sm)}
+.laika-admin-sidebar-footer{padding:12px;border-top:1px solid var(--color-border);display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--color-surface-secondary)}
 .laika-admin-user-avatar{width:32px;height:32px;border-radius:50%;background:var(--color-primary);color:var(--color-primary-fg);display:grid;place-items:center;font-weight:700;font-size:0.8rem}
 .laika-admin-user-name{font-size:var(--text-sm);font-weight:600}
 .laika-admin-user-role{font-size:0.68rem;color:var(--color-text-muted)}
 .laika-admin-main{flex:1;min-width:0;display:flex;flex-direction:column}
-.laika-admin-topbar{height:var(--topbar-h);background:var(--color-surface);border-bottom:1px solid var(--color-border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:var(--z-topbar)}
+.laika-admin-topbar{height:var(--topbar-h);background:var(--color-topbar);border-bottom:1px solid var(--color-border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:var(--z-topbar);box-shadow:var(--shadow-sm)}
 .laika-admin-breadcrumb{display:flex;align-items:center;gap:8px;font-size:var(--text-sm)}
-.laika-admin-breadcrumb-current{font-weight:600}
+.laika-admin-breadcrumb-root{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--color-text-secondary);background:var(--color-surface-secondary);border:1px solid var(--color-border-subtle);border-radius:var(--radius-full);padding:3px 10px;font-weight:600}
+.laika-admin-breadcrumb-current{font-weight:700;background:var(--color-surface-hover);border:1px solid var(--color-border);border-radius:var(--radius-full);padding:3px 10px}
 .laika-admin-topbar-actions{display:flex;align-items:center;gap:10px}
-.laika-admin-status-pill{display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:var(--radius-full);border:1px solid var(--color-border);font-size:0.7rem;font-weight:600;background:var(--color-surface)}
+.laika-admin-status-pill{display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:var(--radius-full);border:1px solid var(--color-border);font-size:0.7rem;font-weight:600;background:var(--color-surface-secondary)}
 .laika-admin-status-dot{width:6px;height:6px;border-radius:50%;background:#16a34a}
 .laika-admin-content{padding:24px;max-width:1600px;width:100%;margin:0 auto}
 .laika-admin-mobile-toggle{display:none;background:transparent;border:1px solid var(--color-border);border-radius:8px;padding:6px}
