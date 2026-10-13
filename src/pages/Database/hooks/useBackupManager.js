@@ -1,10 +1,12 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import api from '@/services/api';
+import { useNotification } from '@/context/NotificationContext';
 
 /**
  * useBackupManager — Hook para gestionar la lista de respaldos y configuración de retención.
  */
-export function useBackupManager(showNotification) {
+export function useBackupManager() {
+  const { error: notifyError } = useNotification();
   const [loadingBackups, setLoadingBackups] = useState(false);
   const [backups, setBackups] = useState([]);
   const [retentionDays, setRetentionDays] = useState(30);
@@ -27,21 +29,24 @@ export function useBackupManager(showNotification) {
         setRetentionDays(configResponse.config.retentionDays);
       }
     } catch (error) {
-      if (showNotification) showNotification('Error al cargar lista de respaldos', 'Falla de conexión', 'error');
+      notifyError('Error al cargar lista de respaldos');
     } finally {
       setLoadingBackups(false);
     }
-  }, [showNotification]);
+  }, [notifyError]);
 
   useEffect(() => {
     fetchBackupsList();
   }, [fetchBackupsList]);
 
-  const filteredBackups = useMemo(() => backups.filter(b => parseFloat(b.size_mb) > 0), [backups]);
+  const filteredBackups = useMemo(
+    () => backups.filter(b => !(parseFloat(b.size_mb) <= 0 && b.status === 'completed')),
+    [backups]
+  );
   const currentBackups = useMemo(() => filteredBackups.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage), [filteredBackups, currentPage]);
   const totalPages = useMemo(() => Math.ceil(filteredBackups.length / itemsPerPage), [filteredBackups]);
   const totalSize = useMemo(() => backups.reduce((acc, b) => acc + (parseFloat(b.size_mb) || 0), 0).toFixed(2), [backups]);
-  const lastBackup = useMemo(() => backups.length > 0 ? new Date(backups[0].created_at).toLocaleDateString('es-MX') : 'N/A', [backups]);
+  const lastBackup = useMemo(() => backups.length > 0 ? new Date(backups[0].created_at || backups[0].timestamp).toLocaleDateString('es-MX') : 'N/A', [backups]);
 
   return {
     loadingBackups,

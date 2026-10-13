@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { analyticsAPI } from '@/services/miscService';
 import api from '@/services/api'; // Integración con Backend Admin
-import { BentoCard, Button, Icon, Badge, Table, Dropdown, Pagination } from '@/components';
+import { BentoCard, Button, Icon, Badge, Table, Dropdown, Pagination, ConfirmationModal } from '@/components';
 import Skeleton from '@/components/Skeleton/Skeleton';
+import { extractDateFromId } from './components/DatabaseUtils';
 import { Cloud, RefreshCw, Trash2, Download, Zap, Database, Clock, Filter, FileText } from 'lucide-react';
 import { useNotification } from '@/context';
 
-const extractDateFromId = (id) => {
-    if (!id) return null;
-    const parts = id.split('_');
-    if (parts.length >= 4) {
-        const dateStr = parts[2]; 
-        const timeStr = parts[3]; 
-        if (dateStr.length === 8 && timeStr.length === 6) {
-            return `${dateStr.substring(0, 4)}-${dateStr.substring(4, 6)}-${dateStr.substring(6, 8)}T${timeStr.substring(0, 2)}:${timeStr.substring(2, 4)}:${timeStr.substring(4, 6)}`;
-        }
-    }
-    return null;
-};
-
 const NoSqlVault = ({ retentionDays = 30, refreshTrigger, onLoadingChange }) => {
     const { success, error: showError } = useNotification();
+    const [pendingConfirm, setPendingConfirm] = useState(null);
 
     const calculateTimeRemaining = (createdAt) => {
         if (!createdAt) return { text: 'N/A', color: 'secondary' };
@@ -85,7 +74,6 @@ const NoSqlVault = ({ retentionDays = 30, refreshTrigger, onLoadingChange }) => 
             const statusData = await analyticsAPI.getNoSqlVaultStatus().catch(() => ({ provider: 'MongoDB Atlas' }));
             setStatus({ provider: statusData.provider, count: combined.length });
         } catch (error) {
-            console.error('❌ Error general fetching snapshots:', error);
             showError('Error al conectar con el servicio de Snapshots');
         } finally {
             setLoading(false);
@@ -139,8 +127,14 @@ const NoSqlVault = ({ retentionDays = 30, refreshTrigger, onLoadingChange }) => 
         }
     };
 
-    const handleDelete = async (id, isDiskFile) => {
-        if (!window.confirm(`¿Estás seguro de que deseas eliminar permanentemente el snapshot ${id}?`)) return;
+    const requestDelete = (id, isDiskFile) => {
+        setPendingConfirm({ action: 'delete', id, isDiskFile });
+    };
+
+    const executeDelete = async () => {
+        if (!pendingConfirm) return;
+        const { id, isDiskFile } = pendingConfirm;
+        setPendingConfirm(null);
         try {
             if (isDiskFile) {
                 await api.database.deleteBackup(id);
@@ -168,13 +162,14 @@ const NoSqlVault = ({ retentionDays = 30, refreshTrigger, onLoadingChange }) => 
         success('Iniciando descarga de JSON...');
     };
 
-    const handleRestore = async (id, isDiskFile) => {
-        const warningText = isDiskFile
-            ? `⚠️ ADVERTENCIA: La restauración de ${id} SOBREESCRIBIRÁ colecciones en MongoDB Atlas (Bóveda Cloud). ¿Deseas continuar?`
-            : `⚠️ ADVERTENCIA CRÍTICA: Restaurar este snapshot sobreescribirá datos. ¿Deseas continuar?`;
-            
-        if (!window.confirm(warningText)) return;
-        
+    const requestRestore = (id, isDiskFile) => {
+        setPendingConfirm({ action: 'restore', id, isDiskFile });
+    };
+
+    const executeRestore = async () => {
+        if (!pendingConfirm) return;
+        const { id, isDiskFile } = pendingConfirm;
+        setPendingConfirm(null);
         setSyncing(true);
         try {
             if (isDiskFile) {
@@ -193,7 +188,6 @@ const NoSqlVault = ({ retentionDays = 30, refreshTrigger, onLoadingChange }) => 
                 }
             }
         } catch (err) {
-            console.error('Error in restore:', err);
             showError('Error de red al intentar restaurar');
         } finally {
             setSyncing(false);
@@ -274,7 +268,7 @@ const NoSqlVault = ({ retentionDays = 30, refreshTrigger, onLoadingChange }) => 
                             <Button 
                                 size="small" 
                                 variant="warning" 
-                                onClick={() => handleRestore(row.id, row.is_disk_file)}
+                                onClick={() => requestRestore(row.id, row.is_disk_file)}
                                 style={{ padding: '2px 8px', height: '26px', color: '#ffffff', fontSize: '0.8rem' }}
                                 title={row.is_disk_file ? "Restaurar a MongoDB Atlas" : "Restaurar a MySQL"}
                                 disabled={syncing}
@@ -285,7 +279,7 @@ const NoSqlVault = ({ retentionDays = 30, refreshTrigger, onLoadingChange }) => 
                             <Button 
                                 size="small" 
                                 variant="danger" 
-                                onClick={() => handleDelete(row.id, row.is_disk_file)}
+                                onClick={() => requestDelete(row.id, row.is_disk_file)}
                                 style={{ padding: '2px 8px', height: '26px', fontSize: '0.8rem' }}
                                 title="Eliminar de la Bóveda"
                                 disabled={syncing}
@@ -453,6 +447,21 @@ const NoSqlVault = ({ retentionDays = 30, refreshTrigger, onLoadingChange }) => 
                 )}
             </div>
 
+            <ConfirmationModal
+                isOpen={pendingConfirm !== null}
+                onClose={() => setPendingConfirm(null)}
+                onConfirm={() => {
+                    if (pendingConfirm?.action === 'delete') executeDelete();
+                    else executeRestore();
+                }}
+                title={pendingConfirm?.action === 'delete' ? 'Eliminar snapshot' : 'Restaurar snapshot'}
+                message={pendingConfirm?.action === 'delete'
+                    ? `¿Estás seguro de eliminar permanentemente el snapshot ${pendingConfirm?.id}? No podrás recuperarlo.`
+                    : `ADVERTENCIA: restaurar ${pendingConfirm?.id} SOBREESCRIBIRÁ datos. Esta operación es irreversible.`}
+                confirmText={pendingConfirm?.action === 'delete' ? 'ELIMINAR SNAPSHOT' : 'RESTAURAR SNAPSHOT'}
+                variant="danger"
+                loading={syncing}
+            />
 
         </BentoCard>
     );

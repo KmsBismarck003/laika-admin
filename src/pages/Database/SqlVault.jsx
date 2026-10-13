@@ -63,7 +63,8 @@ const SqlVault = ({ backups, loading, onRefresh, onRestore, onDelete, onDownload
             header: 'Tipo',
             render: value => {
                 const variants = { completo: 'info', incremental: 'warning', selectivo: 'primary' };
-                return <Badge variant={variants[value] || 'default'} rounded>{value.toUpperCase()}</Badge>;
+                const label = value || 'SIN TIPO';
+                return <Badge variant={variants[value] || 'default'} rounded>{String(label).toUpperCase()}</Badge>;
             },
             width: '10%'
         },
@@ -116,12 +117,12 @@ const SqlVault = ({ backups, loading, onRefresh, onRestore, onDelete, onDownload
         {
             key: 'type',
             header: 'Tipo Programado',
-            render: value => <Badge variant="warning">{value.toUpperCase()}</Badge>
+            render: value => <Badge variant="warning">{String(value || 'N/A').toUpperCase()}</Badge>
         },
         {
             key: 'status',
             header: 'Estado',
-            render: value => <Badge variant="info" dot>{value.toUpperCase()}</Badge>
+            render: value => <Badge variant="info" dot>{String(value || 'N/A').toUpperCase()}</Badge>
         }
     ];
 

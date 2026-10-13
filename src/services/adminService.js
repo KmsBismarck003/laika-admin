@@ -5,7 +5,7 @@
 import { apiClient } from './apiClient';
 
 export const databaseAPI = {
-  createBackup: (type, options = {}) => apiClient.post('/database/backup', { type, ...options }),
+  createBackup: (type, options = {}) => apiClient.post('/database/backup', { type, backup_type: type, ...options }),
   listBackups: () => apiClient.get('/database/backups'),
   restore: backupId => apiClient.post('/database/restore', { backup_id: backupId }),
   deleteBackup: backupId => apiClient.delete(`/database/backups/${backupId}`),
@@ -18,9 +18,42 @@ export const databaseAPI = {
   getStats: () => apiClient.get('/database/stats'),
   clearCache: () => apiClient.post('/database/clear-cache'),
   optimize: () => apiClient.post('/database/optimize'),
-  getAutomaticBackupConfig: () => apiClient.get('/database/automatic-backup/config'),
-  updateAutomaticBackupConfig: config => apiClient.put('/database/automatic-backup/config', config),
-  getScheduledBackups: () => apiClient.get('/database/automatic-backup/scheduled'),
+  getAutomaticBackupConfig: async () => {
+    const response = await apiClient.get('/database/automatic-backup/config');
+    const raw = response?.config || response || {};
+    return {
+      ...response,
+      config: {
+        ...raw,
+        backupType: raw.backupType ?? raw.backup_type ?? 'completo',
+        retentionDays: raw.retentionDays ?? raw.retention_days ?? 30,
+        maxBackups: raw.maxBackups ?? raw.max_backups ?? 10,
+        notifyOnSuccess: raw.notifyOnSuccess ?? raw.notify_on_success ?? true,
+        notifyOnError: raw.notifyOnError ?? raw.notify_on_error ?? true,
+        dayOfWeek: raw.dayOfWeek ?? raw.day_of_week ?? 0,
+        dayOfMonth: raw.dayOfMonth ?? raw.day_of_month ?? 1,
+      },
+      lastBackup: response?.lastBackup ?? response?.last_backup ?? null,
+      nextBackup: response?.nextBackup ?? response?.next_backup ?? null,
+    };
+  },
+  updateAutomaticBackupConfig: config => apiClient.put('/database/automatic-backup/config', {
+    ...config,
+    backup_type: config.backupType,
+    retention_days: config.retentionDays,
+    max_backups: config.maxBackups,
+    notify_on_success: config.notifyOnSuccess,
+    notify_on_error: config.notifyOnError,
+    day_of_week: config.dayOfWeek,
+    day_of_month: config.dayOfMonth,
+  }),
+  getScheduledBackups: async () => {
+    const response = await apiClient.get('/database/automatic-backup/scheduled');
+    const scheduled = Array.isArray(response)
+      ? response
+      : (response?.scheduled || response?.data || []);
+    return { ...response, scheduled };
+  },
   cancelScheduledBackup: scheduleId => apiClient.delete(`/database/automatic-backup/scheduled/${scheduleId}`),
   triggerBackupNow: () => apiClient.post('/database/automatic-backup/trigger'),
   cleanupOldBackups: () => apiClient.post('/database/automatic-backup/cleanup')
