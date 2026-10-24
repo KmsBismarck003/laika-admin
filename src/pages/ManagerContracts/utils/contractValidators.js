@@ -14,6 +14,12 @@ const normalizeContract = (contract = {}) => ({
   endDate: contract.endDate ?? '',
   maxEvents: contract.maxEvents ?? 0,
   isUnlimited: Boolean(contract.isUnlimited),
+  maxFunctionsPerEvent: contract.maxFunctionsPerEvent ?? 1,
+  merchEnabled: Boolean(contract.merchEnabled),
+  seatingMapEnabled: Boolean(contract.seatingMapEnabled),
+  metricsEnabled: Boolean(contract.metricsEnabled),
+  adsEnabled: Boolean(contract.adsEnabled),
+  maxAdsPerEvent: contract.maxAdsPerEvent ?? 0,
 });
 
 export const validateEdit = (form = {}) => {

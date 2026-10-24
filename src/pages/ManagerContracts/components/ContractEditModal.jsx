@@ -1,7 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Input, Modal } from '@/components';
+import PackageFeaturesConfig from './PackageFeaturesConfig';
 
-const emptyForm = { name: '', status: 'ACTIVE', startDate: '', endDate: '', maxEvents: 0, isUnlimited: false };
+const emptyForm = {
+  name: '',
+  status: 'ACTIVE',
+  startDate: '',
+  endDate: '',
+  maxEvents: 0,
+  isUnlimited: false,
+  maxFunctionsPerEvent: 1,
+  merchEnabled: false,
+  seatingMapEnabled: false,
+  metricsEnabled: false,
+  adsEnabled: false,
+  maxAdsPerEvent: 0,
+};
 
 const ContractEditModal = ({ isOpen, onClose, contract, onSubmit, processing, fieldErrors = {} }) => {
   const [form, setForm] = useState(emptyForm);
@@ -16,6 +30,12 @@ const ContractEditModal = ({ isOpen, onClose, contract, onSubmit, processing, fi
         endDate: contract.endDate || '',
         maxEvents: contract.maxEvents || 0,
         isUnlimited: Boolean(contract.isUnlimited),
+        maxFunctionsPerEvent: contract.maxFunctionsPerEvent ?? 1,
+        merchEnabled: Boolean(contract.merchEnabled),
+        seatingMapEnabled: Boolean(contract.seatingMapEnabled),
+        metricsEnabled: Boolean(contract.metricsEnabled),
+        adsEnabled: Boolean(contract.adsEnabled),
+        maxAdsPerEvent: contract.maxAdsPerEvent ?? 0,
       });
     } else {
       setForm(emptyForm);
@@ -65,7 +85,7 @@ const ContractEditModal = ({ isOpen, onClose, contract, onSubmit, processing, fi
 
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-text)' }}>
           <input type="checkbox" checked={form.isUnlimited} onChange={(e) => set({ isUnlimited: e.target.checked })} />
-          Paquete ilimitado
+          Paquete de eventos ilimitado
         </label>
 
         {!form.isUnlimited && (
@@ -74,6 +94,9 @@ const ContractEditModal = ({ isOpen, onClose, contract, onSubmit, processing, fi
             {fieldErrors.maxEvents && <span className="mgrc-error">{fieldErrors.maxEvents}</span>}
           </div>
         )}
+
+        {/* Sección de configuración personalizada del paquete */}
+        <PackageFeaturesConfig form={form} onChange={set} disabled={processing} />
 
         <Button type="submit" variant="primary" disabled={processing}>
           {processing ? 'Guardando...' : 'Guardar cambios'}

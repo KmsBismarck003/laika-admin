@@ -56,17 +56,15 @@ export const b2bAPI = {
   },
 
   // Contract Events (cobertura de personal por evento)
-  // Intenta el endpoint dedicado; si el backend no lo expone (404),
-  // recurre a /events/all filtrado por gestor/organizacion del contrato.
   getContractEvents: async (contractId, { managerId = null, organizationId = null } = {}) => {
     try {
-      return await apiClient.get(`/admin/b2b/contracts/${contractId}/events`);
-    } catch (err) {
-      if (err?.status !== 404) throw err;
       const all = await apiClient.get('/events/all', { limit: 100 });
       const list = Array.isArray(all) ? all : (all?.events || all?.data || []);
-      if (!managerId && !organizationId) return [];
       return list.filter((event) => {
+        const eventContract = event.contract_id ?? event.contractId;
+        if (contractId && eventContract !== undefined && eventContract !== null) {
+          if (String(eventContract) === String(contractId)) return true;
+        }
         const eventManager = event.manager_id ?? event.managerId ?? event.created_by ?? event.createdBy;
         const eventOrg = event.organization_id ?? event.organizationId ?? event.org_id;
         if (managerId && eventManager !== undefined && eventManager !== null) {
@@ -77,6 +75,9 @@ export const b2bAPI = {
         }
         return false;
       });
+    } catch (err) {
+      console.warn('Error al cargar eventos del contrato:', err);
+      return [];
     }
   }
 };

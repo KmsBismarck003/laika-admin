@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Input, Modal } from '@/components';
 import ContractDetailCard from './ContractDetailCard';
+import PackageFeaturesConfig from './PackageFeaturesConfig';
 
 const PackageUpgradeModal = ({ isOpen, onClose, contract, onSubmit, processing, fieldErrors = {} }) => {
-  const [form, setForm] = useState({ name: '', maxEvents: 0, isUnlimited: false });
+  const [form, setForm] = useState({
+    name: '',
+    maxEvents: 0,
+    isUnlimited: false,
+    maxFunctionsPerEvent: 1,
+    merchEnabled: false,
+    seatingMapEnabled: false,
+    metricsEnabled: false,
+    adsEnabled: false,
+    maxAdsPerEvent: 0,
+  });
 
   useEffect(() => {
     if (!isOpen || !contract) return;
@@ -11,6 +22,12 @@ const PackageUpgradeModal = ({ isOpen, onClose, contract, onSubmit, processing, 
       name: contract.name || '',
       maxEvents: contract.maxEvents || 0,
       isUnlimited: Boolean(contract.isUnlimited),
+      maxFunctionsPerEvent: contract.maxFunctionsPerEvent ?? 1,
+      merchEnabled: Boolean(contract.merchEnabled),
+      seatingMapEnabled: Boolean(contract.seatingMapEnabled),
+      metricsEnabled: Boolean(contract.metricsEnabled),
+      adsEnabled: Boolean(contract.adsEnabled),
+      maxAdsPerEvent: contract.maxAdsPerEvent ?? 0,
     });
   }, [isOpen, contract]);
 
@@ -27,8 +44,7 @@ const PackageUpgradeModal = ({ isOpen, onClose, contract, onSubmit, processing, 
     <Modal isOpen={isOpen} onClose={onClose} title={`Mejorar paquete - Folio ${contract?.id ?? ''}`}>
       <form className="mgrc-form" onSubmit={handleSubmit}>
         <p className="mgrc-notice">
-          Mejorar paquete solo permite aumentar capacidad o activar ilimitado sobre el mismo folio.
-          No permite reducir limites.
+          Mejorar paquete permite aumentar la capacidad de eventos o activar ilimitado y habilitar nuevos módulos sobre el mismo folio.
         </p>
 
         <ContractDetailCard contract={contract} />
@@ -37,7 +53,7 @@ const PackageUpgradeModal = ({ isOpen, onClose, contract, onSubmit, processing, 
 
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-text)' }}>
           <input type="checkbox" checked={form.isUnlimited} onChange={(e) => set({ isUnlimited: e.target.checked })} />
-          Paquete ilimitado
+          Paquete de eventos ilimitado
         </label>
 
         {!form.isUnlimited && (
@@ -46,6 +62,9 @@ const PackageUpgradeModal = ({ isOpen, onClose, contract, onSubmit, processing, 
             {fieldErrors.maxEvents && <span className="mgrc-error">{fieldErrors.maxEvents}</span>}
           </div>
         )}
+
+        {/* Módulos y herramientas personalizables */}
+        <PackageFeaturesConfig form={form} onChange={set} disabled={processing} />
 
         <Button type="submit" variant="primary" disabled={processing}>
           {processing ? 'Aplicando...' : 'Aplicar mejora'}

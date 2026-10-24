@@ -50,10 +50,37 @@ const ContractDetailCard = ({ contract }) => {
           <span className="mgrc-field-value">{formatDate(contract.endDate)}</span>
         </div>
         <div className="mgrc-field">
-          <span className="mgrc-field-label">Paquete</span>
+          <span className="mgrc-field-label">Cupo Eventos</span>
           <span className="mgrc-field-value">
-            {contract.isUnlimited ? 'Ilimitado' : `${contract.maxEvents ?? 0} eventos max.`}
+            {contract.isUnlimited ? 'Ilimitado' : `${contract.maxEvents ?? 0} eventos`}
           </span>
+        </div>
+        <div className="mgrc-field">
+          <span className="mgrc-field-label">Fechas / Evento</span>
+          <span className="mgrc-field-value">
+            Hasta {contract.maxFunctionsPerEvent ?? 1} {contract.maxFunctionsPerEvent === 1 ? 'fecha' : 'fechas'}
+          </span>
+        </div>
+      </div>
+
+      {/* Módulos activos del paquete */}
+      <div style={{ marginTop: '0.85rem' }}>
+        <span className="mgrc-field-label" style={{ display: 'block', marginBottom: '0.4rem' }}>
+          Módulos y Herramientas Habilitadas
+        </span>
+        <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+          <Badge variant={contract.merchEnabled ? 'primary' : 'default'} rounded>
+            🛍️ {contract.merchEnabled ? 'LaikaShop Activo' : 'Sin LaikaShop'}
+          </Badge>
+          <Badge variant={contract.seatingMapEnabled ? 'primary' : 'default'} rounded>
+            🗺️ {contract.seatingMapEnabled ? 'Mapa Asientos Activo' : 'Sin Mapa Asientos'}
+          </Badge>
+          <Badge variant={contract.metricsEnabled ? 'primary' : 'default'} rounded>
+            📊 {contract.metricsEnabled ? 'Métricas Activas' : 'Sin Analítica'}
+          </Badge>
+          <Badge variant={contract.adsEnabled ? 'primary' : 'default'} rounded>
+            📢 {contract.adsEnabled ? `Publicidad (${contract.maxAdsPerEvent ?? 0} máx)` : 'Sin Publicidad'}
+          </Badge>
         </div>
       </div>
     </div>

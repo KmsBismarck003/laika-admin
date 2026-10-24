@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Input, Button } from '@/components';
+import PackageFeaturesConfig from '../../ManagerContracts/components/PackageFeaturesConfig';
+
+const emptyForm = {
+    organizationId: '',
+    name: '',
+    status: 'ACTIVE',
+    startDate: '',
+    endDate: '',
+    maxEvents: 0,
+    isUnlimited: false,
+    maxFunctionsPerEvent: 1,
+    merchEnabled: false,
+    seatingMapEnabled: false,
+    metricsEnabled: false,
+    adsEnabled: false,
+    maxAdsPerEvent: 0
+};
 
 const ContractModal = ({ isOpen, onClose, onSubmit, organizations, contract = null }) => {
-    const [form, setForm] = useState({
-        organizationId: '',
-        name: '',
-        status: 'ACTIVE',
-        startDate: '',
-        endDate: '',
-        maxEvents: 0,
-        isUnlimited: false
-    });
+    const [form, setForm] = useState(emptyForm);
 
     useEffect(() => {
         if (contract) {
@@ -21,18 +30,16 @@ const ContractModal = ({ isOpen, onClose, onSubmit, organizations, contract = nu
                 startDate: contract.startDate || '',
                 endDate: contract.endDate || '',
                 maxEvents: contract.maxEvents || 0,
-                isUnlimited: contract.isUnlimited || false
+                isUnlimited: contract.isUnlimited || false,
+                maxFunctionsPerEvent: contract.maxFunctionsPerEvent ?? 1,
+                merchEnabled: Boolean(contract.merchEnabled),
+                seatingMapEnabled: Boolean(contract.seatingMapEnabled),
+                metricsEnabled: Boolean(contract.metricsEnabled),
+                adsEnabled: Boolean(contract.adsEnabled),
+                maxAdsPerEvent: contract.maxAdsPerEvent ?? 0
             });
         } else {
-            setForm({
-                organizationId: '',
-                name: '',
-                status: 'ACTIVE',
-                startDate: '',
-                endDate: '',
-                maxEvents: 0,
-                isUnlimited: false
-            });
+            setForm(emptyForm);
         }
     }, [contract, isOpen]);
 
@@ -132,6 +139,12 @@ const ContractModal = ({ isOpen, onClose, onSubmit, organizations, contract = nu
                         onChange={e => setForm({ ...form, maxEvents: parseInt(e.target.value) || 0 })} 
                     />
                 )}
+
+                {/* Personalización de Paquete y Módulos */}
+                <PackageFeaturesConfig 
+                    form={form} 
+                    onChange={(patch) => setForm(prev => ({ ...prev, ...patch }))} 
+                />
 
                 <Button type="submit" variant="primary">
                     {contract ? "Guardar Cambios" : "Activar Contrato"}

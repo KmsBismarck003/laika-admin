@@ -10,6 +10,12 @@ const toPayload = (form) => ({
   endDate: form.endDate,
   maxEvents: form.isUnlimited ? 0 : Number(form.maxEvents),
   isUnlimited: Boolean(form.isUnlimited),
+  maxFunctionsPerEvent: Number(form.maxFunctionsPerEvent || 1),
+  merchEnabled: Boolean(form.merchEnabled),
+  seatingMapEnabled: Boolean(form.seatingMapEnabled),
+  metricsEnabled: Boolean(form.metricsEnabled),
+  adsEnabled: Boolean(form.adsEnabled),
+  maxAdsPerEvent: form.adsEnabled ? Number(form.maxAdsPerEvent || 0) : 0,
 });
 
 const useContractActions = (refresh) => {
