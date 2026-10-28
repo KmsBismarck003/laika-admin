@@ -1,101 +1,169 @@
 import React from 'react';
-import { ShieldCheck, Target, CreditCard, Save } from 'lucide-react';
-import { Button } from '@/components';
+import { Icon } from '@/components';
 
-const MerchEditModal = ({ editingSettings, setEditingSettings, handleSaveSettings }) => {
-    if (!editingSettings) return null;
+/**
+ * MerchEditModal — Modal Bento Box para ajustar configuraciones comerciales de tienda
+ */
+export const MerchEditModal = ({
+  editingSettings,
+  setEditingSettings,
+  handleSaveSettings
+}) => {
+  if (!editingSettings) return null;
 
-    return (
-        <div className="industrial-modal-overlay">
-            <div className="industrial-modal">
-                <div className="modal-header">
-                    <h2><ShieldCheck size={20} /> CONFIGURACIÓN DE PERMISOS</h2>
-                    <button className="close-btn" onClick={() => setEditingSettings(null)}>&times;</button>
-                </div>
-                
-                <form onSubmit={handleSaveSettings} className="industrial-form">
-                    <div className="form-info-panel">
-                        <span className="label">GESTOR:</span>
-                        <span className="value">{editingSettings.first_name} {editingSettings.last_name}</span>
-                    </div>
+  const settings = editingSettings.settings || {};
 
-                    <div className="form-grid">
-                        <div className="form-group-industrial">
-                            <label>TIENDA HABILITADA</label>
-                            <label className="tech-checkbox">
-                                <input 
-                                    type="checkbox"
-                                    checked={editingSettings.settings.is_enabled}
-                                    onChange={(e) => setEditingSettings(prev => ({
-                                        ...prev, 
-                                        settings: { ...prev.settings, is_enabled: e.target.checked }
-                                    }))}
-                                />
-                                <span className="checkmark" />
-                                <span className="check-label">{editingSettings.settings.is_enabled ? 'SÍ, ACTIVAR ACCESO' : 'NO, BLOQUEAR'}</span>
-                            </label>
-                        </div>
-
-                        <div className="form-group-industrial">
-                            <label>CUOTA DE ACTIVACIÓN</label>
-                            <label className="tech-checkbox">
-                                <input 
-                                    type="checkbox"
-                                    checked={editingSettings.settings.activation_fee_paid}
-                                    onChange={(e) => setEditingSettings(prev => ({
-                                        ...prev, 
-                                        settings: { ...prev.settings, activation_fee_paid: e.target.checked }
-                                    }))}
-                                />
-                                <span className="checkmark" />
-                                <span className="check-label">{editingSettings.settings.activation_fee_paid ? 'PAGADA' : 'PENDIENTE'}</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div className="form-grid">
-                        <div className="form-group-industrial">
-                            <label>LÍMITE DE PRODUCTOS</label>
-                            <div className="input-with-icon">
-                                <Target size={16} />
-                                <input 
-                                    type="number" 
-                                    value={editingSettings.settings.product_limit || 50}
-                                    onChange={(e) => setEditingSettings(prev => ({
-                                        ...prev, 
-                                        settings: { ...prev.settings, product_limit: e.target.value }
-                                    }))}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="form-group-industrial">
-                            <label>COMISIÓN LAIKA (%)</label>
-                            <div className="input-with-icon">
-                                <CreditCard size={16} />
-                                <input 
-                                    type="number" 
-                                    step="0.1"
-                                    value={editingSettings.settings.commission_percentage || 10}
-                                    onChange={(e) => setEditingSettings(prev => ({
-                                        ...prev, 
-                                        settings: { ...prev.settings, commission_percentage: e.target.value }
-                                    }))}
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="modal-footer">
-                        <Button variant="secondary" onClick={() => setEditingSettings(null)}>DESCARTAR</Button>
-                        <Button type="submit" variant="primary">
-                            <Save size={16} /> APLICAR CAMBIOS PRO
-                        </Button>
-                    </div>
-                </form>
-            </div>
+  return (
+    <div
+      className="bento-modal-overlay"
+      onClick={() => setEditingSettings(null)}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        className="bento-modal-card"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="bento-modal-header">
+          <h3>
+            <Icon name="shield" size={18} />
+            <span>Configuración Comercial de Tienda</span>
+          </h3>
+          <button
+            type="button"
+            className="bento-modal-close-btn"
+            onClick={() => setEditingSettings(null)}
+            aria-label="Cerrar modal"
+          >
+            <Icon name="close" size={18} />
+          </button>
         </div>
-    );
-};
 
-export default MerchEditModal;
+        <form onSubmit={handleSaveSettings}>
+          <div className="bento-modal-body">
+            <div className="bento-gestor-badge-row">
+              <Icon name="user" size={16} style={{ color: 'var(--color-text-muted)' }} />
+              <div>
+                <strong>{editingSettings.first_name} {editingSettings.last_name}</strong>
+                <span style={{ marginLeft: '0.4rem', color: 'var(--color-text-secondary)', fontSize: '0.8rem' }}>
+                  ({editingSettings.email})
+                </span>
+              </div>
+            </div>
+
+            <div className="bento-form-grid-2">
+              <div className="bento-form-group">
+                <span className="bento-form-label">Acceso a Tienda</span>
+                <label className="bento-toggle-label">
+                  <input
+                    type="checkbox"
+                    checked={Boolean(settings.is_enabled)}
+                    onChange={(e) =>
+                      setEditingSettings((prev) => ({
+                        ...prev,
+                        settings: { ...prev.settings, is_enabled: e.target.checked }
+                      }))
+                    }
+                  />
+                  <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--color-text)' }}>
+                    {settings.is_enabled ? 'Tienda Habilitada' : 'Tienda Bloqueada'}
+                  </span>
+                </label>
+              </div>
+
+              <div className="bento-form-group">
+                <span className="bento-form-label">Cuota de Activación</span>
+                <label className="bento-toggle-label">
+                  <input
+                    type="checkbox"
+                    checked={Boolean(settings.activation_fee_paid)}
+                    onChange={(e) =>
+                      setEditingSettings((prev) => ({
+                        ...prev,
+                        settings: { ...prev.settings, activation_fee_paid: e.target.checked }
+                      }))
+                    }
+                  />
+                  <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--color-text)' }}>
+                    {settings.activation_fee_paid ? 'Cuota Pagada' : 'Pendiente de Pago'}
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div className="bento-form-grid-2">
+              <div className="bento-form-group">
+                <label className="bento-form-label" htmlFor="productLimitInput">
+                  Límite de Productos
+                </label>
+                <div className="bento-input-wrapper">
+                  <Icon name="layers" size={16} className="bento-input-icon" />
+                  <input
+                    id="productLimitInput"
+                    type="number"
+                    min="1"
+                    max="1000"
+                    className="bento-form-input"
+                    value={settings.product_limit ?? 50}
+                    onChange={(e) =>
+                      setEditingSettings((prev) => ({
+                        ...prev,
+                        settings: { ...prev.settings, product_limit: e.target.value }
+                      }))
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className="bento-form-group">
+                <label className="bento-form-label" htmlFor="commissionInput">
+                  Comisión Laika (%)
+                </label>
+                <div className="bento-input-wrapper">
+                  <Icon name="percent" size={16} className="bento-input-icon" />
+                  <input
+                    id="commissionInput"
+                    type="number"
+                    step="0.5"
+                    min="0"
+                    max="100"
+                    className="bento-form-input"
+                    value={settings.commission_percentage ?? 10}
+                    onChange={(e) =>
+                      setEditingSettings((prev) => ({
+                        ...prev,
+                        settings: { ...prev.settings, commission_percentage: e.target.value }
+                      }))
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bento-modal-footer">
+            <button
+              type="button"
+              className="merch-action-btn"
+              onClick={() => setEditingSettings(null)}
+            >
+              Descartar
+            </button>
+            <button
+              type="submit"
+              className="merch-action-btn"
+              style={{
+                background: 'var(--color-primary)',
+                color: 'var(--color-primary-fg)',
+                border: 'none'
+              }}
+            >
+              <Icon name="check" size={16} />
+              <span>Guardar Configuración</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};

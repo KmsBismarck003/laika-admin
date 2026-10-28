@@ -1,441 +1,1030 @@
-/* ============================================
-   MONETIZACIÓN Y PERMISOS - INDUSTRIAL STYLE
-   (Replicated from Database View Aesthetic)
-   ============================================ */
+/* ==========================================================================
+   MERCHANDISE APPROVAL & STORES CONTROL — BENTO BOX DESIGN SYSTEM (TIER-1)
+   Soporte Total Dark/Light Theme con Tokens Semánticos — Cero Colores Fijos
+   ========================================================================== */
 
-.merch-approval-container.industrial-page {
-    padding: 2.5rem 3rem;
-    background: #f8f8f8;
-    min-height: 100vh;
-    font-family: 'Inter', sans-serif;
-    color: #000;
+.merch-approval-page {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1.5rem 1.75rem 3rem 1.75rem;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  animation: merchFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* --- HEADER & STATS --- */
-.page-header-industrial {
-    margin-bottom: 2.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 2rem;
+@keyframes merchFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.header-main h1 {
-    font-size: 1.6rem;
-    font-weight: 900;
-    letter-spacing: -0.04em;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
+/* --------------------------------------------------------------------------
+   CABECERA BENTO & SELECTOR DE PESTAÑAS
+   -------------------------------------------------------------------------- */
+.merch-header-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.header-main h1 .icon-zap {
-    color: #000;
+.merch-header-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.25rem;
 }
 
-.header-main p {
-    font-size: 0.7rem;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-weight: 800;
-    margin: 0.5rem 0 0 0;
+.merch-title-group h1 {
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.025em;
+  margin: 0 0 0.35rem 0;
+  line-height: 1.15;
 }
 
-.stats-row-industrial {
-    display: flex;
-    gap: 1rem;
+.merch-subtitle {
+  color: var(--color-text-secondary);
+  font-size: 0.925rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.glass-stat-panel {
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 10px 25px -10px rgba(0,0,0,0.2);
-    padding: 0.6rem 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    min-width: 160px;
-    transition: transform 0.3s ease;
+/* Barra de pestañas Bento */
+.merch-tabs-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem;
+  border-radius: 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  width: fit-content;
+  flex-wrap: wrap;
 }
 
-.glass-stat-panel:hover {
-    transform: translateY(-2px);
+.merch-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glass-stat-panel.highlight {
-    background: #000;
-    color: #fff;
+.merch-tab-btn:hover {
+  color: var(--color-text);
+  background: var(--color-surface-hover);
 }
 
-.glass-stat-panel .stat-value {
-    font-size: 1.6rem;
-    font-weight: 900;
-    letter-spacing: -0.02em;
+.merch-tab-btn.active {
+  background: var(--color-primary);
+  color: var(--color-primary-fg);
+  box-shadow: var(--shadow-sm);
 }
 
-.glass-stat-panel .stat-info {
-    display: flex;
+.tab-counter-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.725rem;
+  font-weight: 700;
+  background: var(--color-surface-secondary);
+  color: var(--color-text);
+}
+
+.merch-tab-btn.active .tab-counter-badge {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--color-primary-fg);
+}
+
+.tab-counter-badge.pulse-warning {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+}
+
+/* --------------------------------------------------------------------------
+   FILTROS Y BUSCADOR BENTO
+   -------------------------------------------------------------------------- */
+.merch-filters-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 0.75rem 1rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+}
+
+.merch-search-box {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  align-items: center;
+}
+
+.merch-search-icon {
+  position: absolute;
+  left: 0.9rem;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.merch-search-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 1rem 0 2.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-input);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.merch-search-input:focus {
+  border-color: var(--color-border-strong);
+  box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.15);
+}
+
+.merch-select {
+  height: 42px;
+  padding: 0 2rem 0 0.85rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-input);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.18s ease;
+}
+
+.merch-select:focus {
+  border-color: var(--color-border-strong);
+}
+
+.merch-action-btn {
+  height: 42px;
+  padding: 0 1.15rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  transition: background 0.18s ease, transform 0.15s ease;
+}
+
+.merch-action-btn:hover {
+  background: var(--color-surface-hover);
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   MÉTRICAS BENTO GRID (KPIS DE MONETIZACIÓN & MERCANCÍA)
+   -------------------------------------------------------------------------- */
+.merch-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+  width: 100%;
+}
+
+.merch-kpi-cell {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 1.35rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.85rem;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease,
+              border-color 0.2s ease;
+}
+
+.merch-kpi-cell:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-strong);
+}
+
+.merch-kpi-cell--span-3 { grid-column: span 3; }
+.merch-kpi-cell--span-4 { grid-column: span 4; }
+.merch-kpi-cell--span-6 { grid-column: span 6; }
+.merch-kpi-cell--span-12 { grid-column: span 12; }
+
+.merch-kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.merch-kpi-label {
+  font-size: 0.785rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.merch-kpi-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-secondary);
+  color: var(--color-text);
+  border: 1px solid var(--color-border-subtle);
+  flex-shrink: 0;
+}
+
+.merch-kpi-icon-box.warning {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.merch-kpi-icon-box.success {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.merch-kpi-icon-box.info {
+  background: rgba(59, 130, 246, 0.12);
+  color: #3b82f6;
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.merch-kpi-icon-box.purple {
+  background: rgba(168, 85, 247, 0.12);
+  color: #a855f7;
+  border-color: rgba(168, 85, 247, 0.2);
+}
+
+.merch-kpi-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+.merch-kpi-number {
+  font-size: clamp(1.8rem, 2.5vw, 2.3rem);
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.merch-kpi-caption {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   SOLICITUDES DE APROBACIÓN DE PRODUCTOS (BENTO PRODUCT CARDS)
+   -------------------------------------------------------------------------- */
+.merch-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.merch-product-bento-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease;
+}
+
+.merch-product-bento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-strong);
+}
+
+.product-media-box {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: var(--color-surface-secondary);
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.product-media-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.merch-product-bento-card:hover .product-media-img {
+  transform: scale(1.05);
+}
+
+.product-media-overlay-badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.product-category-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.product-pending-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(245, 158, 11, 0.9);
+  color: #ffffff;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.product-body {
+  padding: 1.25rem 1.35rem 1.15rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.75rem;
+}
+
+.product-title {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.product-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+.product-details-chips {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.product-info-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  background: var(--color-surface-secondary);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.product-info-pill strong {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.product-actions-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  padding: 1rem 1.35rem 1.25rem 1.35rem;
+  border-top: 1px solid var(--color-border-subtle);
+  background: var(--color-surface);
+}
+
+.btn-approve-merch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 44px;
+  transition: all 0.18s ease;
+}
+
+.btn-approve-merch:hover:not(:disabled) {
+  background: #10b981;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-reject-merch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  background: rgba(220, 38, 38, 0.1);
+  color: var(--color-danger);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 44px;
+  transition: all 0.18s ease;
+}
+
+.btn-reject-merch:hover:not(:disabled) {
+  background: var(--color-danger);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   TABLA BENTO DE CONTROL DE TIENDAS Y GESTORES
+   -------------------------------------------------------------------------- */
+.merch-table-bento-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.merch-table-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.merch-table-title h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin: 0 0 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.merch-table-title p {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.merch-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 12px;
+}
+
+.merch-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.merch-data-table th {
+  background: var(--color-table-header, var(--color-surface-secondary));
+  color: var(--color-text-secondary);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.merch-data-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+  color: var(--color-text);
+  vertical-align: middle;
+}
+
+.merch-data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.merch-data-table tr:hover td {
+  background: var(--color-surface-hover);
+}
+
+.gestor-name-cell {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.gestor-email-cell {
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+}
+
+.btn-membership-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.775rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  min-height: 38px;
+  transition: all 0.18s ease;
+}
+
+.btn-membership-toggle.premium {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.btn-membership-toggle.premium:hover {
+  background: #f59e0b;
+  color: #ffffff;
+}
+
+.btn-membership-toggle.standard {
+  background: var(--color-surface-secondary);
+  color: var(--color-text-secondary);
+}
+
+.btn-membership-toggle.standard:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+.btn-adjust-settings {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-secondary);
+  color: var(--color-text);
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 38px;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.btn-adjust-settings:hover {
+  background: var(--color-surface-hover);
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   MODAL BENTO DE AJUSTE DE TIENDA (TIER-1)
+   -------------------------------------------------------------------------- */
+.bento-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.bento-modal-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 540px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: bentoModalIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes bentoModalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.bento-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: var(--color-surface-secondary);
+}
+
+.bento-modal-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bento-modal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 0.35rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.bento-modal-close-btn:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+.bento-modal-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.bento-gestor-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: var(--color-surface-secondary);
+  border: 1px solid var(--color-border-subtle);
+  font-size: 0.875rem;
+  color: var(--color-text);
+}
+
+.bento-form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.bento-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.bento-form-label {
+  font-size: 0.785rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.bento-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.bento-input-icon {
+  position: absolute;
+  left: 0.85rem;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.bento-form-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 0.85rem 0 2.4rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-input);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.18s ease;
+}
+
+.bento-form-input:focus {
+  border-color: var(--color-border-strong);
+}
+
+.bento-toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: var(--color-input);
+  border: 1px solid var(--color-border-subtle);
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.bento-toggle-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.bento-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--color-border-subtle);
+  background: var(--color-surface-secondary);
+}
+
+/* Modal de inspección técnica completa de producto */
+.bento-product-modal-card {
+  max-width: 820px !important;
+}
+
+.bento-product-modal-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.product-modal-media-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.product-modal-media-wrap {
+  width: 100%;
+  height: 320px;
+  border-radius: 16px;
+  background: var(--color-surface-secondary);
+  border: 1px solid var(--color-border-subtle);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.product-modal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-modal-details-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.product-modal-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.65rem;
+}
+
+.product-spec-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  background: var(--color-surface-secondary);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.product-spec-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.04em;
+}
+
+.product-spec-val {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.product-variants-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.product-variants-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.825rem;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.product-variants-table th {
+  background: var(--color-surface-secondary);
+  color: var(--color-text-secondary);
+  padding: 0.5rem 0.75rem;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: left;
+}
+
+.product-variants-table td {
+  padding: 0.55rem 0.75rem;
+  border-top: 1px solid var(--color-border-subtle);
+  color: var(--color-text);
+}
+
+.product-delivery-badge-row {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.product-delivery-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 8px;
+  font-size: 0.775rem;
+  background: var(--color-surface-secondary);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-subtle);
+}
+
+@media (max-width: 768px) {
+  .bento-product-modal-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .product-modal-media-wrap {
+    height: 220px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVIDAD UNIVERSAL (320px a Ultra-Wide 4K)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .merch-kpi-cell--span-3 { grid-column: span 6; }
+  .merch-kpi-cell--span-4 { grid-column: span 6; }
+  .merch-kpi-cell--span-6 { grid-column: span 12; }
+}
+
+@media (max-width: 768px) {
+  .merch-approval-page {
+    padding: 1rem 1rem 2rem 1rem;
+  }
+
+  .merch-products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .merch-kpi-cell--span-3,
+  .merch-kpi-cell--span-4,
+  .merch-kpi-cell--span-6 {
+    grid-column: span 12;
+  }
+
+  .merch-filters-card {
     flex-direction: column;
-}
+    align-items: stretch;
+  }
 
-.glass-stat-panel .stat-label {
-    font-size: 0.55rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    opacity: 0.6;
-}
-
-.glass-stat-panel .stat-sub {
-    font-size: 0.65rem;
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
-/* --- ACTIONS BAR --- */
-.actions-bar-industrial {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 1rem;
-}
-
-.search-wrapper {
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 0.6rem 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    flex: 1;
-    max-width: 500px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-}
-
-.search-wrapper input {
-    border: none;
-    outline: none;
+  .merch-search-box {
     width: 100%;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
+    min-width: 0;
+  }
 
-.tech-btn {
-    font-weight: 900 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.05em !important;
-    font-size: 0.7rem !important;
-    padding: 0.8rem 1.5rem !important;
-    border: 1.5px solid #000 !important;
-    box-shadow: 4px 4px 0px rgba(0,0,0,0.1) !important;
-}
-
-/* --- INDUSTRIAL TABLE --- */
-.table-wrapper-industrial {
-    overflow-x: auto;
-}
-
-.tech-table {
+  .merch-select {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
+  }
+
+  .bento-form-grid-2 {
+    grid-template-columns: 1fr;
+  }
 }
 
-.tech-table th {
-    background: #000;
-    color: #fff;
-    padding: 1rem;
-    text-align: left;
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border-bottom: 2px solid #333;
-}
+@media (max-width: 480px) {
+  .merch-tab-btn,
+  .merch-action-btn,
+  .btn-approve-merch,
+  .btn-reject-merch {
+    min-height: 44px;
+  }
 
-.tech-table td {
-    padding: 1.2rem 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    vertical-align: middle;
-}
-
-.tech-table tbody tr:hover {
-    background: rgba(0, 0, 0, 0.02);
-}
-
-.user-identity {
-    display: flex;
-    flex-direction: column;
-}
-
-.user-identity .u-name {
-    font-weight: 900;
-    font-size: 0.9rem;
-    color: #000;
-    letter-spacing: -0.01em;
-}
-
-.user-identity .u-email {
-    font-size: 0.75rem;
-    color: #888;
-}
-
-/* --- TECH SWITCH (INDUSTRIAL) --- */
-.tech-switch {
-    width: 140px;
-    height: 34px;
-    background: #eee;
-    padding: 3px;
-    cursor: pointer;
-    position: relative;
-    display: flex;
-    align-items: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid #ddd;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.tech-switch.on {
-    background: #000;
-    border-color: #000;
-}
-
-.tech-switch.loading {
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-.switch-knob {
-    width: 28px;
-    height: 26px;
-    background: #fff;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: absolute;
-    left: 4px;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-.tech-switch.on .switch-knob {
-    transform: translateX(104px);
-}
-
-.switch-status {
-    width: 100%;
-    text-align: center;
-    font-size: 0.6rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #888;
-    z-index: 1;
-    user-select: none;
-    padding-left: 20px;
-}
-
-.tech-switch.on .switch-status {
-    color: #fff;
-    padding-left: 0;
-    padding-right: 20px;
-}
-
-/* --- BADGES & INFO --- */
-.product-limit-display {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: 800;
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.commission-badge {
-    background: #f0f0f0;
-    padding: 0.3rem 0.6rem;
-    font-size: 0.7rem;
-    font-weight: 900;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    border-radius: 4px;
-}
-
-/* --- INDUSTRIAL MODAL --- */
-.industrial-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.85);
-    z-index: 2000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-}
-
-.industrial-modal {
-    background: #fff;
-    width: 550px;
-    max-width: 95%;
-    border-radius: 0px;
-    overflow: hidden;
-    animation: modalSlide 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-}
-
-@keyframes modalSlide {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.industrial-modal .modal-header {
-    background: #000;
-    color: #fff;
-    padding: 1.5rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.industrial-modal h2 {
-    font-size: 1rem;
-    font-weight: 900;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    letter-spacing: 0.05em;
-}
-
-.close-btn {
-    background: transparent;
-    border: none;
-    color: #fff;
-    font-size: 2rem;
-    line-height: 1;
-    cursor: pointer;
-    opacity: 0.6;
-    transition: opacity 0.2s;
-}
-
-.close-btn:hover { opacity: 1; }
-
-.industrial-form {
-    padding: 2rem;
-}
-
-.form-info-panel {
-    background: #f8f8f8;
-    padding: 1rem;
-    border-left: 4px solid #000;
-    margin-bottom: 2rem;
-    display: flex;
-    gap: 1rem;
-    align-items: baseline;
-}
-
-.form-info-panel .label { font-size: 0.6rem; font-weight: 800; color: #888; }
-.form-info-panel .value { font-size: 1rem; font-weight: 900; color: #000; }
-
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.form-group-industrial label {
-    display: block;
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.8rem;
-    color: #888;
-}
-
-.tech-checkbox {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    cursor: pointer;
-}
-
-.tech-checkbox input { display: none; }
-
-.checkmark {
-    width: 24px;
-    height: 24px;
-    border: 2px solid #ccc;
-    position: relative;
-    transition: all 0.2s;
-}
-
-.tech-checkbox input:checked + .checkmark {
-    background: #000;
-    border-color: #000;
-}
-
-.tech-checkbox input:checked + .checkmark::after {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 3px;
-    width: 6px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 2.5px 2.5px 0;
-    transform: rotate(45deg);
-}
-
-.check-label {
-    font-size: 0.75rem;
-    font-weight: 900;
-}
-
-.input-with-icon {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    border-bottom: 2px solid #eee;
-    padding: 0.5rem 0;
-    transition: border-color 0.3s;
-}
-
-.input-with-icon:focus-within {
-    border-color: #000;
-}
-
-.input-with-icon input {
-    border: none;
-    outline: none;
-    background: transparent;
-    width: 100%;
-    padding: 0 1rem;
-    font-family: 'Roboto Mono', monospace;
-    font-weight: 800;
-    font-size: 1rem;
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid #eee;
-}
-
-.modal-footer button {
-    text-transform: uppercase;
-    font-weight: 900;
-    letter-spacing: 0.05em;
-    font-size: 0.75rem;
+  .product-actions-bar {
+    grid-template-columns: 1fr;
+  }
 }
